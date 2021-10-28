@@ -1,12 +1,11 @@
 import {useEffect,useState} from "react";
 import logo from "./logo.svg";
 import "./App.css";
+import Nav from "./components/Nav.js";
 
 export default function App() {
   const [data, setData] = useState(null);
 
-  console.log("Bob".toLowerCase());
-  
   useEffect(() => {
     fetch("/api")
       .then((res) => res.json())
@@ -15,9 +14,11 @@ export default function App() {
 
   return (
     <div className="App">
+      <Nav/>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>{!data ? "Loading..." : data}</p>
+        <p>{process.env.REACT_APP_MONGO}</p>
       </header>
     </div>
   );
