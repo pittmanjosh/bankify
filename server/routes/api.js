@@ -12,13 +12,13 @@ Router.route('/')
     res.send({ message: process.env.REACT_APP_WORD})
   })
   .post(function (req,res) {
-    res.send('post')
+    res.send({ message: "post"})
   })
   .put(function (req,res) {
-    res.send('put')
+    res.send({ message: "put"})
   })
   .delete(function (req,res) {
-    res.send('delete')
+    res.send({ message: "delete"})
   })
   
 
