@@ -9,7 +9,7 @@ Router.use(function timeLog (req, res, next) {
 
 Router.route('/')
   .get(function (req, res) {
-    res.send('get')
+    res.send({ message: process.env.REACT_APP_WORD})
   })
   .post(function (req,res) {
     res.send('post')

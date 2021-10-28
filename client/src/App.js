@@ -7,9 +7,15 @@ export default function App() {
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    fetch("/api")
+    var requestOptions = {
+      method: 'GET',
+      redirect: 'follow'
+    };
+    
+    fetch("/api", requestOptions)
       .then((res) => res.json())
-      .then((data) => setData(data.message));
+      .then((data) => setData(data.message))
+      .catch(error => console.log('error', error));
   }, []);
 
   return (
