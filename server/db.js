@@ -1,4 +1,6 @@
 const { MongoClient } = require("mongodb");
+const dotenv = require('dotenv');
+dotenv.config();
 console.log(JSON.stringify(process.env.REACT_APP_MONGO));
 const client = new MongoClient(process.env.REACT_APP_MONGO, {
   useNewUrlParser: true,
