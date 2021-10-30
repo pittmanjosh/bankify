@@ -41,7 +41,7 @@ export default function Navigator() {
             </Nav>
           </Col>
           <Col sm={9}>
-            <Tab.Content>
+            <Tab.Content className="content-pane">
               <Tab.Pane eventKey="home">
                 <p>Home</p>
               </Tab.Pane>

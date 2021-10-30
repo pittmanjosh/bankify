@@ -10,7 +10,11 @@ export default function Register() {
   const confirmPassword = useInput("");
 
   const resetForm = () => {
-    [fname, lname, email, password, confirmPassword].forEach((x) => x.clear());
+    fname.clear();
+    lname.clear();
+    email.clear();
+    password.clear();
+    confirmPassword.clear();
   };
 
   const submitForm = (event) => {
@@ -19,22 +23,16 @@ export default function Register() {
     let userId = register(
       email.value,
       password.value,
-      confirmPassword,
-      resetForm
+      confirmPassword
     );
+    if (userId) resetForm();
   };
 
   return (
-    <Card style={{ width: "22rem" }}>
-      <Container>
+    <Container>
+      <Card style={{ maxWidth: "36rem", minWidth: "18rem" }}>
+        <Card.Header><h2>Register New Account</h2></Card.Header>
         <Form onSubmit={submitForm} className="mb-3">
-          <h2>Register Account</h2>
-          {/* <Form.Group>
-        <Form.Label>Name</Form.Label>
-        <Form.Control placeholder="First" {...fname} required/>
-        <Form.Control placeholder="Last" {...lname} required/>
-      </Form.Group> */}
-
           <Form.Group className="mb-3">
             <Form.Label className="mb-3">Name</Form.Label>
             <FloatingLabel
@@ -112,7 +110,7 @@ export default function Register() {
           </Form.Group>
           <Button type="submit">Register</Button>
         </Form>
-      </Container>
-    </Card>
+      </Card>
+    </Container>
   );
 }

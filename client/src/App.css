@@ -42,5 +42,13 @@ body {
   background-size: cover;
 }
 .tab-navigator {
-  background:radial-gradient(rgba(16, 37, 51, 0.322),rgba(0, 0, 0, 0.349))
+  margin-top: 2rem;
+  background:rgba(37, 37, 37, 0.9);
+}
+.page-card {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
+.content-pane {
+  padding: 2rem;
 }

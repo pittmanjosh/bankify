@@ -6,7 +6,7 @@ export function login(email,password) {
   return userId;
 }
 
-export function register(email,password,confirmed,resetForm) {
+export function register(email,password,confirmed) {
   if (password !== confirmed.value) {
     console.log("Passwords do not match");
     confirmed.clear();
@@ -15,7 +15,6 @@ export function register(email,password,confirmed,resetForm) {
   const userId = registerAuth(email,password);
   if (userId) {
     // createUser(userId,fname,lname,email,"0.00")
-    resetForm();
     return userId;
   } else {
     return null;
