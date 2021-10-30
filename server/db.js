@@ -1,7 +1,6 @@
 const { MongoClient } = require("mongodb");
 const dotenv = require('dotenv');
 dotenv.config();
-console.log(JSON.stringify(process.env.REACT_APP_MONGO));
 const client = new MongoClient(process.env.REACT_APP_MONGO, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -16,7 +15,7 @@ module.exports = {
         return callback(err);
       }
 
-      dbConnection = db.db("sample_airbnb");
+      dbConnection = db.db("capstone");
       console.log("Successfully connected to MongoDB.");
 
       return callback();

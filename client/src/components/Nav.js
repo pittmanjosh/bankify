@@ -1,48 +1,25 @@
-import {useState} from 'react';
-import {Navbar, Container, Nav} from 'react-bootstrap';
-import Alert from './Alert';
-import logo from '../logo.svg';
+import React from "react";
+import { Nav, Navbar, Container } from "react-bootstrap";
 
-export default function MyNav() {
-  const [alertMsg, setAlertMsg] = useState('hi');
-  const [alertType, setAlertType] = useState('danger');
-  const [alertHeading, setAlertHeading] = useState('')
-  
-  function resetAlert() {
-    setAlertMsg('');
-    setAlertHeading('');
-    setAlertType('danger');
-  }
-  function setAlert(msg,type,heading) {
-    setAlertMsg(msg);
-    setAlertType(type);
-    setAlertHeading(heading);
-  }
-
+export default function MysNav() {
   return (
-    <>
-      <Navbar collapseOnSelect expand="sm" bg="dark" variant="dark" sticky>
-        <Container className="align-content-space-between">
-          <a href="/" className="navbar-brand">
-            BadBank
-          </a>
-          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="me-auto align-content-end">
-              <a href="/api" className="nav-link">
-                All Data
-              </a>
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
-      <Alert
-        msg={alertMsg}
-        type={alertType}
-        heading={alertHeading}
-        reset={resetAlert}
-      />
-      <button onClick={()=>{(alertMsg)? resetAlert() : setAlert("hi","success","Good Job!")}}>Click Me!</button>
-    </>
+    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+      <Container>
+        <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" className="justify-content-end" />Services
+        <Navbar.Collapse id="responsive-navbar-nav">
+          <Nav className="me-auto">
+            <Nav.Link href="#features">Features</Nav.Link>
+            <Nav.Link href="#pricing">Pricing</Nav.Link>
+          </Nav>
+          <Nav className="justify-content-end">
+            <Nav.Link href="#deets">More deets</Nav.Link>
+            <Nav.Link eventKey={2} href="#memes">
+              Dank memes
+            </Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
   );
 }

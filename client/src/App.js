@@ -1,31 +1,24 @@
-import { useEffect, useState } from "react";
-import Nav from "./components/Nav.js";
+import MyNav from "./components/Nav";
+import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap";
 import { Container } from "react-bootstrap";
+import Navigator from "./components/Navigator";
+import { useContext, useState } from "react";
+import auth from "./context";
 
 export default function App() {
-  const [data, setData] = useState(null);
-
-  useEffect(() => {
-    var requestOptions = {
-      method: "GET",
-      redirect: "follow",
-    };
-
-    fetch("/api", requestOptions)
-      .then((res) => res.json())
-      .then((data) => setData(data.message))
-      .catch((error) => console.log("error", error));
-  }, []);
-
+  const [user, setUser] = useState("");
+  const AuthContext = useContext(auth);
   return (
-    <div className="App">
-      <Nav />
-      <Container>
-        <header className="App-header">
-          <p>{!data ? "Loading..." : data}</p>
-        </header>
-      </Container>
-    </div>
+    <>
+        <div className="App">
+          <MyNav />
+          {/* import css as well */}
+          <Container>
+            <Navigator />
+          </Container>
+        </div>
+    </>
   );
 }
