@@ -1,5 +1,5 @@
 import { Form, Button } from "react-bootstrap";
-import { login } from "../components/dal";
+import { login } from "../data/dal";
 import useInput from "../hooks/useInput";
 
 export default function Login() {

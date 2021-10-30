@@ -2,7 +2,7 @@ import React from "react";
 import { Tab, Row, Col, Nav, Button } from "react-bootstrap";
 import Login from "../pages/login";
 import Register from "../pages/register";
-import { logout, authenticate } from './dal';
+import { logout, authenticate } from '../data/dal';
 
 export default function Navigator() {
   return (
