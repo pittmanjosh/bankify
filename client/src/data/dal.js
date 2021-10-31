@@ -1,4 +1,4 @@
-import { loginAuth, logoutAuth, registerAuth, authState } from "../auth/fbauth";
+import { loginAuth, logoutAuth, registerAuth, authState } from "../auth/firebaseAuth";
 
 export function login(email,password) {
   // receive unique userId from firebase

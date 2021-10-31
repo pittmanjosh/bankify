@@ -5,7 +5,7 @@ import hasher from "../utils/hash";
 const app = getFirebase();
 const auth = getAuth(app);
 
-export function authState() {
+export async function authState() {
   const unsubscribe = onAuthStateChanged(auth, (user) => {
     console.log(user);
     return user;
@@ -15,28 +15,34 @@ export function authState() {
   return null;
 }
 
-export function loginAuth(email, unhashedPwd) {
+export async function loginAuth(email, unhashedPwd) {
   const hashedPwd = hasher(unhashedPwd);
   let userId = undefined;
 
-  signInWithEmailAndPassword(auth, email, hashedPwd)
+  await signInWithEmailAndPassword(auth, email, hashedPwd)
     .then((result) => {userId = result.user.uid})
     .catch((e) => console.log(e.message));
   
   return userId;
 }
 
-export function loginGoogleAuth() {
+export async function loginGoogleAuth() {
   var provider = new GoogleAuthProvider();
   provider.addScope('profile');
   provider.addScope('email');
-  const result = signInWithPopup(auth,provider);
+  let result;  
+  let error;
+
+  await signInWithPopup(auth,provider)
+    .then(x=>result = x)
+    .catch(x=>error = x)
   
-  return result;
+  return {result,error};
 }
 
-export function logoutAuth() {
-  signOut(auth).then((result) => console.log(result));
+export async function logoutAuth() {
+  await signOut(auth)
+    .then((result) => console.log(result));
 }
 
 export function registerAuth(email, unhashedPwd) {

@@ -37,92 +37,94 @@ export default function Register() {
   };
 
   return (
-    <Card style={{ maxWidth: "36rem", minWidth: "18rem" }}>
-      <Container>
+    <Container>
+      <Card style={{ maxWidth: "36rem", minWidth: "18rem" }}>
         <Card.Header>
           <h2>Register Account</h2>
         </Card.Header>
-        <Form onSubmit={submitForm} className="mb-3">
-          <Form.Group className="mb-3">
-            <Form.Label className="mb-3">Name</Form.Label>
-            <FloatingLabel
-              controlId="floatingInput"
-              label="First Name"
-              className="mb-3"
-            >
-              <input
-                placeholder="First Name"
-                autoComplete="given-name"
-                {...fname}
-                className="form-control mb-3"
-                required
-              />
-            </FloatingLabel>
-            <FloatingLabel
-              controlId="floatingInput"
-              label="Last Name"
-              className="mb-3"
-            >
-              <input
-                placeholder="Last Name"
-                autoComplete="family-name"
-                {...lname}
-                className="form-control mb-3"
-                required
-              />
-            </FloatingLabel>
-          </Form.Group>
-          <Form.Group>
-            <Form.Label>Email</Form.Label>
-            <FloatingLabel
-              controlId="floatingInput"
-              label="Email"
-              className="mb-3"
-            >
-              <input
-                type="email"
-                placeholder="Email"
-                autoComplete="email"
-                className="form-control mb-3"
-                {...email}
-                required
-              />
-            </FloatingLabel>
-          </Form.Group>
-          <Form.Group>
-            <Form.Label>Password</Form.Label>
-            <FloatingLabel
-              controlId="floatingPassword"
-              label="New Password"
-              className="mb-3"
-            >
-              <input
-                type="password"
-                placeholder="New Password"
-                autoComplete="new-password"
-                {...password}
-                className="form-control mb-3"
-                required
-              />
-            </FloatingLabel>
-            <FloatingLabel
-              controlId="floatingPassword"
-              label="Confirm Password"
-              className="mb-3"
-            >
-              <input
-                type="password"
-                placeholder="Confirm Password"
-                autoComplete="new-password"
-                {...confirmPassword}
-                className="form-control mb-3"
-                required
-              />
-            </FloatingLabel>
-          </Form.Group>
-          <Button type="submit">Register</Button>
-        </Form>
-      </Container>
-    </Card>
+        <Card.Body>
+          <Form onSubmit={submitForm} className="mb-3">
+            <Form.Group className="mb-3">
+              <Form.Label className="mb-3">Name</Form.Label>
+              <FloatingLabel
+                controlId="floatingInput"
+                label="First Name"
+                className="mb-3"
+              >
+                <input
+                  placeholder="First Name"
+                  autoComplete="given-name"
+                  {...fname}
+                  className="form-control mb-3"
+                  required
+                />
+              </FloatingLabel>
+              <FloatingLabel
+                controlId="floatingInput"
+                label="Last Name"
+                className="mb-3"
+              >
+                <input
+                  placeholder="Last Name"
+                  autoComplete="family-name"
+                  {...lname}
+                  className="form-control mb-3"
+                  required
+                />
+              </FloatingLabel>
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Email</Form.Label>
+              <FloatingLabel
+                controlId="floatingInput"
+                label="Email"
+                className="mb-3"
+              >
+                <input
+                  type="email"
+                  placeholder="Email"
+                  autoComplete="email"
+                  className="form-control mb-3"
+                  {...email}
+                  required
+                />
+              </FloatingLabel>
+            </Form.Group>
+            <Form.Group>
+              <Form.Label>Password</Form.Label>
+              <FloatingLabel
+                controlId="floatingPassword"
+                label="New Password"
+                className="mb-3"
+              >
+                <input
+                  type="password"
+                  placeholder="New Password"
+                  autoComplete="new-password"
+                  {...password}
+                  className="form-control mb-3"
+                  required
+                />
+              </FloatingLabel>
+              <FloatingLabel
+                controlId="floatingPassword"
+                label="Confirm Password"
+                className="mb-3"
+              >
+                <input
+                  type="password"
+                  placeholder="Confirm Password"
+                  autoComplete="new-password"
+                  {...confirmPassword}
+                  className="form-control mb-3"
+                  required
+                />
+              </FloatingLabel>
+            </Form.Group>
+            <Button type="submit">Register</Button>
+          </Form>
+        </Card.Body>
+      </Card>
+    </Container>
   );
 }

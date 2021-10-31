@@ -55,8 +55,8 @@ export default function DomRouter() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <Switch>
-        <Container className="justify-content-center">
+      <Switch style={{padding: "20px"}}>
+        <Container className="align-content-center">
           <Route exact path="/register">
             <Register />
           </Route>
