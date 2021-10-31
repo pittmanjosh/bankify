@@ -1,7 +1,5 @@
-import MyNav from "./Nav";
 import { Container, Navbar, Nav } from "react-bootstrap";
 import { useContext, useState } from "react";
-import BankContext from "../context";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Register from "../pages/register";
 import Login from "../pages/login";
@@ -9,9 +7,10 @@ import Home from "../pages/home";
 import Services from "../pages/services";
 import ctx from "../context";
 import Greeting from "../pages/greeting";
+import Alert from "./Alert";
 
 export default function DomRouter() {
-  const { user, setUser } = useContext(ctx);
+  const { user, setUser, alertProps } = useContext(ctx);
 
   return (
     <Router>
@@ -46,7 +45,11 @@ export default function DomRouter() {
                   <Link to="/register" className="nav-link">
                     Register
                   </Link>
-                  <Link to="/" className="nav-link" onClick={() => setUser("8")}>
+                  <Link
+                    to="/"
+                    className="nav-link"
+                    onClick={() => setUser("8")}
+                  >
                     setUser()
                   </Link>
                 </>
@@ -55,7 +58,8 @@ export default function DomRouter() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <Switch style={{padding: "20px"}}>
+      <Alert {...alertProps} />
+      <Switch style={{ padding: "20px" }}>
         <Container className="align-content-center">
           <Route exact path="/register">
             <Register />
@@ -67,7 +71,7 @@ export default function DomRouter() {
             <Services />
           </Route>
           <Route exact path="/">
-            {user ? <Home/> : <Greeting/>}
+            {user ? <Home /> : <Greeting />}
           </Route>
         </Container>
       </Switch>

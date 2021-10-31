@@ -10,7 +10,7 @@ export async function authState() {
     console.log(user);
     return user;
   });
-
+  console.log("no current user")
   unsubscribe();
   return null;
 }
