@@ -1,7 +1,7 @@
 import { Button, Card, Container, FloatingLabel, Form } from "react-bootstrap";
 import { register } from "../data/dal";
 import useInput from "../hooks/useInput";
-import {useContext} from "react";
+import { useContext } from "react";
 import ctx from "../context";
 
 export default function Register() {
@@ -25,25 +25,23 @@ export default function Register() {
     let pwdMatch = password.value === confirmPassword.value;
 
     if (!pwdMatch) {
-      confirmPassword.clear()
+      confirmPassword.clear();
       return;
     }
 
-    let userId = register(
-      email.value,
-      password.value,
-      confirmPassword
-    );
+    let userId = register(email.value, password.value, confirmPassword);
     if (userId) {
       resetForm();
-      setUser(userId)
+      setUser(userId);
     }
   };
 
   return (
-    <Container>
-      <Card style={{ maxWidth: "36rem", minWidth: "18rem" }}>
-        <Card.Header><h2>Register Account</h2></Card.Header>
+    <Card style={{ maxWidth: "36rem", minWidth: "18rem" }}>
+      <Container>
+        <Card.Header>
+          <h2>Register Account</h2>
+        </Card.Header>
         <Form onSubmit={submitForm} className="mb-3">
           <Form.Group className="mb-3">
             <Form.Label className="mb-3">Name</Form.Label>
@@ -124,7 +122,7 @@ export default function Register() {
           </Form.Group>
           <Button type="submit">Register</Button>
         </Form>
-      </Card>
-    </Container>
+      </Container>
+    </Card>
   );
 }
