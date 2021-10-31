@@ -1,8 +1,11 @@
 import { Button, Card, Container, FloatingLabel, Form } from "react-bootstrap";
 import { register } from "../data/dal";
 import useInput from "../hooks/useInput";
+import {useContext} from "react";
+import ctx from "../context";
 
 export default function Register() {
+  const { setUser } = useContext(ctx);
   const fname = useInput("");
   const lname = useInput("");
   const email = useInput("");
@@ -20,18 +23,27 @@ export default function Register() {
   const submitForm = (event) => {
     event.preventDefault();
     let pwdMatch = password.value === confirmPassword.value;
+
+    if (!pwdMatch) {
+      confirmPassword.clear()
+      return;
+    }
+
     let userId = register(
       email.value,
       password.value,
       confirmPassword
     );
-    if (userId) resetForm();
+    if (userId) {
+      resetForm();
+      setUser(userId)
+    }
   };
 
   return (
     <Container>
       <Card style={{ maxWidth: "36rem", minWidth: "18rem" }}>
-        <Card.Header><h2>Register New Account</h2></Card.Header>
+        <Card.Header><h2>Register Account</h2></Card.Header>
         <Form onSubmit={submitForm} className="mb-3">
           <Form.Group className="mb-3">
             <Form.Label className="mb-3">Name</Form.Label>
@@ -87,6 +99,7 @@ export default function Register() {
               className="mb-3"
             >
               <input
+                type="password"
                 placeholder="New Password"
                 autoComplete="new-password"
                 {...password}
@@ -100,6 +113,7 @@ export default function Register() {
               className="mb-3"
             >
               <input
+                type="password"
                 placeholder="Confirm Password"
                 autoComplete="new-password"
                 {...confirmPassword}
