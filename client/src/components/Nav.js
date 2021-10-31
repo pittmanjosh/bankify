@@ -1,20 +1,15 @@
+import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Navbar, Nav } from "react-bootstrap";
-import { useContext, useState } from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import Register from "../pages/register";
-import Login from "../pages/login";
-import Home from "../pages/home";
-import Services from "../pages/services";
+import { BrowserRouter as Link } from "react-router-dom";
+import { useContext } from "react";
 import ctx from "../context";
-import Greeting from "../pages/greeting";
-import Alert from "./Alert";
 
-export default function DomRouter() {
-  const { user, setUser, alertProps } = useContext(ctx);
+export default function MyNav() {
+  const { user, setUser } = useContext(ctx);
 
   return (
-    <Router>
-      <Navbar collapseOnSelect expand="md" bg="dark" variant="dark" sticky>
+    <>
+      {/* <Navbar collapseOnSelect expand="md" bg="dark" variant="dark" sticky> */}
         <Container className="justify-content-space-between">
           <Link to="/" className="navbar-brand nav-link">
             Bankify
@@ -57,24 +52,7 @@ export default function DomRouter() {
             </Nav>
           </Navbar.Collapse>
         </Container>
-      </Navbar>
-      <Alert {...alertProps} />
-      <Switch style={{ padding: "20px" }}>
-        <Container className="align-content-center">
-          <Route exact path="/register">
-            <Register />
-          </Route>
-          <Route exact path="/login">
-            <Login />
-          </Route>
-          <Route exact path="/services">
-            <Services />
-          </Route>
-          <Route exact path="/">
-            {user ? <Home /> : <Greeting />}
-          </Route>
-        </Container>
-      </Switch>
-    </Router>
+      {/* </Navbar> */}
+    </>
   );
 }

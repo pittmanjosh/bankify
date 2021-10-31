@@ -1,7 +1,7 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap";
-import DomRouter from "./components/DomRouter";
+import Bankify from "./components/App";
 import { useState } from "react";
 import BankContext from "./context"
 
@@ -28,7 +28,7 @@ export default function App() {
   return (
     <div className="App">
       <BankContext.Provider value={{ user, setUser, createAlert, alertProps}}>
-        <DomRouter/>
+        <Bankify/>
       </BankContext.Provider>
     </div>
   );
