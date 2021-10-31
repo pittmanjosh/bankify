@@ -48,7 +48,5 @@ export async function logoutAuth() {
 export function registerAuth(email, unhashedPwd) {
   const hashedPwd = hasher(unhashedPwd);
 
-  createUserWithEmailAndPassword(auth, email, hashedPwd)
-    .then((result) => console.log(result.user.accessToken, result.user.email))
-    .catch((e) => console.log(e.message));
+  return ()=>createUserWithEmailAndPassword(auth, email, hashedPwd)
 }

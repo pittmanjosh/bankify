@@ -1,5 +1,4 @@
 import {Alert} from 'react-bootstrap';
-import {useEffect} from 'react';
 
 export default function MyAlert({msg,type,heading,reset}) {
   if (msg) {

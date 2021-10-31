@@ -6,19 +6,18 @@ export function login(email,password) {
   return userId;
 }
 
-export function register(email,password,confirmed) {
-  if (password !== confirmed.value) {
-    console.log("Passwords do not match");
-    confirmed.clear();
-    return null;
-  }
-  const userId = registerAuth(email,password);
-  if (userId) {
-    // createUser(userId,fname,lname,email,"0.00")
-    return userId;
-  } else {
-    return null;
-  }
+export function register(email,password,props) {
+  const callback = registerAuth(email,password);
+  let {createAlert,setUser,resetForm} = props;
+  
+  callback()
+    .then(x => {
+      setUser(x);
+      createAlert("You are now registered!","success");
+      resetForm();})
+    .catch(x => {
+      setUser("");
+      createAlert(x.message,"danger","Registration Failed!");})
 }
 
 export function logout() {
@@ -28,3 +27,19 @@ export function logout() {
 export function authenticate() {
   authState()
 }
+
+// export function registerAuth(email, unhashedPwd, props) {
+//   let hashedPwd = hasher(unhashedPwd);
+//   let {createAlert,setUser,resetForm} = props;
+
+  
+
+//   createUserWithEmailAndPassword(auth, email, hashedPwd)
+//     .then(x => {
+//       setUser(x);
+//       createAlert("You are now registered!","success");
+//       resetForm();})
+//     .catch(x => {
+//       setUser("");
+//       createAlert(x.message,"danger","Registration Failed!");})
+// }

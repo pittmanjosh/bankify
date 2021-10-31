@@ -8,42 +8,16 @@ import Alert from "./Alert";
 export default function Bankify() {
   const { user, setUser, alertProps } = useContext(ctx);
 
-  const UserDependentLinks =()=>{ 
-    const SetLinks = (user) ? (
-    <>
-      <Link to="/services" className="nav-link">
-        Services
-      </Link>
-      <AllDataLink/>
-      <Link to="/" className="nav-link" onClick={() => setUser("")}>
-        Logout
-      </Link>
-    </>
-    ) : (
-      <>
-      <Link to="/login" className="nav-link">
-        Login
-      </Link>
-      <Link to="/register" className="nav-link">
-        Register
-      </Link>
-      <AllDataLink/>
-      <Link to="/" className="nav-link" onClick={() => setUser("8")}>
-        setUser()
-      </Link>
-    </>
-    );
-
-    return SetLinks;
-  }
-
   return (
     <Router>
       <MyNav>
-        <UserDependentLinks/>
+        <Link to="/" className="navbar-brand nav-link">
+          Bankify
+        </Link>
+        <UserDependentLinks user={user} setUser={setUser}/>
       </MyNav>
       <Alert {...alertProps} />
-      <Content />
+      <Content user={user} />
     </Router>
   );
 }
@@ -51,26 +25,53 @@ export default function Bankify() {
 function MyNav(props) {
   return (
     <Navbar collapseOnSelect expand="md" bg="dark" variant="dark" sticky>
-        <Container className="justify-content-space-between">
-          <Link to="/" className="navbar-brand nav-link">
-            Bankify
-          </Link>
-          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          <Navbar.Collapse
-            id="responsive-navbar-nav"
-            className="justify-content-end"
-          >
-            <Nav>
-              {props.children}
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar>
-  )
+      <Container className="justify-content-space-between">
+        {props.children[0]}
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse
+          id="responsive-navbar-nav"
+          className="justify-content-end"
+        >
+          <Nav>{props.children[1]}</Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
+  );
+}
+
+function UserDependentLinks({user,setUser}) {
+  const MyLinks = user ? (
+    <>
+      <Link to="/dashboard" className="nav-link">
+        Dashboard
+      </Link>
+      <AllDataLink />
+      <Link to="/" className="nav-link" onClick={() => setUser("")}>
+        Logout
+      </Link>
+    </>
+  ) : (
+    <>
+      <Link to="/login" className="nav-link">
+        Login
+      </Link>
+      <Link to="/register" className="nav-link">
+        Register
+      </Link>
+      <AllDataLink />
+      <Link to="/" className="nav-link" onClick={() => setUser("8")}>
+        setUser()
+      </Link>
+    </>
+  );
+
+  return MyLinks
 }
 
 function AllDataLink() {
-  return <Link to="/alldata" className="nav-link">All Data</Link>;
-};
-
-
+  return (
+    <Link to="/alldata" className="nav-link">
+      All Data
+    </Link>
+  );
+}

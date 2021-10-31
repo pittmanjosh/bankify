@@ -5,16 +5,14 @@ import { useContext } from "react";
 import ctx from "../context";
 
 export default function Register() {
-  const { setUser } = useContext(ctx);
-  const fname = useInput("");
-  const lname = useInput("");
+  const { setUser, createAlert } = useContext(ctx);
+  const name = useInput("");
   const email = useInput("");
   const password = useInput("");
   const confirmPassword = useInput("");
 
   const resetForm = () => {
-    fname.clear();
-    lname.clear();
+    name.clear();
     email.clear();
     password.clear();
     confirmPassword.clear();
@@ -26,48 +24,34 @@ export default function Register() {
 
     if (!pwdMatch) {
       confirmPassword.clear();
+      createAlert("Passwords do not match!", "danger");
       return;
     }
 
-    let userId = register(email.value, password.value, confirmPassword);
-    if (userId) {
-      resetForm();
-      setUser(userId);
-    }
+    let stateProps = {createAlert,setUser,resetForm};
+
+    register(email.value,password.value,stateProps)
   };
 
   return (
     <Container>
-      <Card style={{ maxWidth: "36rem", minWidth: "18rem" }}>
+      <Card style={{ maxWidth: "36rem", minWidth: "18rem", }}>
         <Card.Header>
           <h2>Register Account</h2>
         </Card.Header>
-        <Card.Body>
+        <Card.Body className="justify-content-center align-item-center">
           <Form onSubmit={submitForm} className="mb-3">
             <Form.Group className="mb-3">
               <Form.Label className="mb-3">Name</Form.Label>
               <FloatingLabel
                 controlId="floatingInput"
-                label="First Name"
+                label="Account Name"
                 className="mb-3"
               >
                 <input
-                  placeholder="First Name"
-                  autoComplete="given-name"
-                  {...fname}
-                  className="form-control mb-3"
-                  required
-                />
-              </FloatingLabel>
-              <FloatingLabel
-                controlId="floatingInput"
-                label="Last Name"
-                className="mb-3"
-              >
-                <input
-                  placeholder="Last Name"
-                  autoComplete="family-name"
-                  {...lname}
+                  placeholder="Account Name "
+                  autoComplete="name"
+                  {...name}
                   className="form-control mb-3"
                   required
                 />
