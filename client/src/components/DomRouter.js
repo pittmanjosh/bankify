@@ -6,10 +6,12 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Register from "../pages/register";
 import Login from "../pages/login";
 import Home from "../pages/home";
+import Services from "../pages/services";
 import ctx from "../context";
+import Greeting from "../pages/greeting";
 
 export default function DomRouter() {
-  const { user, setUser} = useContext(ctx);
+  const { user, setUser } = useContext(ctx);
 
   return (
     <Router>
@@ -24,7 +26,19 @@ export default function DomRouter() {
             className="justify-content-end"
           >
             <Nav>
-              {!user && (
+              <Link to="/" className="nav-link">
+                Home
+              </Link>
+              {user ? (
+                <>
+                  <Link to="/services" className="nav-link">
+                    Services
+                  </Link>
+                  <Link to="/" className="nav-link" onClick={() => setUser("")}>
+                    Logout
+                  </Link>
+                </>
+              ) : (
                 <>
                   <Link to="/login" className="nav-link">
                     Login
@@ -32,45 +46,28 @@ export default function DomRouter() {
                   <Link to="/register" className="nav-link">
                     Register
                   </Link>
-                  <Link
-                    to="/"
-                    onClick={() => setUser(7)}
-                    className="nav-link"
-                  >
-                    Set User
+                  <Link to="/" className="nav-link" onClick={() => setUser("8")}>
+                    setUser()
                   </Link>
                 </>
-              )}
-              {user && (
-                <Link
-                  to="/"
-                  className="nav-link"
-                  onClick={() => setUser("")}
-                >
-                  Logout
-                </Link>
               )}
             </Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      {/* <MyNav user={user} setPage={setPage} />
-          // import css as well 
-          <Container>
-          <Register />
-          <Content/>
-          </Container> 
-        */}
       <Switch>
         <Container className="justify-content-center">
-          <Route path="/register">
+          <Route exact path="/register">
             <Register />
           </Route>
-          <Route path="/login">
+          <Route exact path="/login">
             <Login />
           </Route>
-          <Route path="/">
-            <Home />
+          <Route exact path="/services">
+            <Services />
+          </Route>
+          <Route exact path="/">
+            {user ? <Home/> : <Greeting/>}
           </Route>
         </Container>
       </Switch>

@@ -1,5 +1,5 @@
 import getFirebase from "./firebase";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import hasher from "../utils/hash";
 
 const app = getFirebase();
@@ -24,6 +24,15 @@ export function loginAuth(email, unhashedPwd) {
     .catch((e) => console.log(e.message));
   
   return userId;
+}
+
+export function loginGoogleAuth() {
+  var provider = new GoogleAuthProvider();
+  provider.addScope('profile');
+  provider.addScope('email');
+  const result = signInWithPopup(auth,provider);
+  
+  return result;
 }
 
 export function logoutAuth() {

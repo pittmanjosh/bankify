@@ -1,4 +1,5 @@
 import { Button, Card, Container, FloatingLabel, Form } from "react-bootstrap";
+import { loginGoogleAuth } from "../auth/fbauth";
 import { login } from "../data/dal";
 import useInput from "../hooks/useInput";
 
@@ -19,6 +20,8 @@ export default function Login() {
         <Card.Header><h2>Login</h2></Card.Header>
         <br/>
         <Card.Body>
+          <Button onClick={loginGoogleAuth}>Sign in with Google</Button>
+          <hr/>
           <Form onSubmit={submitForm} className="mb-3">
             <Form.Group>
               <FloatingLabel
@@ -44,6 +47,7 @@ export default function Login() {
                 className="mb-3"
               >
                 <input
+                  type="password"
                   placeholder="Password"
                   autoComplete="current-password"
                   {...password}
@@ -52,7 +56,7 @@ export default function Login() {
                 />
               </FloatingLabel>
             </Form.Group>
-            <Button type="submit">Register</Button>
+            <Button type="submit">Login</Button>
           </Form>
         </Card.Body>
       </Card>
