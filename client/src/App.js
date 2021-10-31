@@ -1,7 +1,8 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap";
-import Bankify from "./components/App";
+import Bankify from "./components/Bankify";
+import { BrowserRouter as Router } from "react-router-dom";
 import { useState } from "react";
 import BankContext from "./context";
 
@@ -27,7 +28,9 @@ export default function App() {
 
   return (
     <BankContext.Provider value={{ user, setUser, createAlert, alertProps }}>
-      <Bankify />
+      <Router>
+        <Bankify />
+      </Router>
     </BankContext.Provider>
   );
 }

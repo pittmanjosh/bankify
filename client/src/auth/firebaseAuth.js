@@ -26,14 +26,22 @@ export async function loginAuth(email, unhashedPwd) {
   return userId;
 }
 
-export async function loginGoogleAuth() {
+export function loginGoogleAuth() {
   var provider = new GoogleAuthProvider();
   provider.addScope('profile');
   provider.addScope('email');
-  let result;  
-  let error;
+  /*  
+    try to register account 
+    if gets existing account error 
+      => proceed with login
+    , else...
+      => give new account registered message
+      => register name, email, and initial balance in db
+  */
 
-  await signInWithPopup(auth,provider)
+  let result,error;
+  
+  signInWithPopup(auth,provider)
     .then(x=>result = x)
     .catch(x=>error = x)
   

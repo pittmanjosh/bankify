@@ -1,4 +1,12 @@
-import { Button, Card, Container, FloatingLabel, Form } from "react-bootstrap";
+import {
+  Accordion,
+  Button,
+  Card,
+  Container,
+  FloatingLabel,
+  Form,
+  FormControl,
+} from "react-bootstrap";
 import { loginGoogleAuth } from "../auth/firebaseAuth";
 import { login } from "../data/dal";
 import useInput from "../hooks/useInput";
@@ -6,7 +14,7 @@ import ctx from "../context";
 import { useContext } from "react";
 
 export default function Login() {
-  const {setUser} = useContext(ctx);
+  const { setUser } = useContext(ctx);
   const email = useInput("");
   const password = useInput("");
 
@@ -15,29 +23,33 @@ export default function Login() {
     login(email.value, password.value);
     email.clear();
     password.clear();
-  }
+  };
 
   const handleGoogle = async (e) => {
     e.preventDefault();
-    const {result, error} = await loginGoogleAuth();
+    const { result, error } = loginGoogleAuth();
 
     if (result) {
       console.log(result);
       setUser(result);
     } else {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   return (
     <Container>
       <Card style={{ maxWidth: "36rem", minWidth: "18rem" }}>
-        <Card.Header><h2>Login</h2></Card.Header>
-        <br/>
+        <Card.Header>
+          <h2>Login</h2>
+        </Card.Header>
+        <br />
         <Card.Body>
-          <Button onClick={handleGoogle}>Sign in with Google</Button>
-          <hr/>
-          <Form onSubmit={submitForm} className="mb-3">
+          <Accordion defaultActiveKey="0">
+            <Accordion.Item eventKey="0">
+              <Accordion.Header>Email and Password</Accordion.Header>
+              <Accordion.Body>
+              <Form onSubmit={submitForm} className="mb-3">
             <Form.Group>
               <FloatingLabel
                 controlId="floatingInput"
@@ -54,7 +66,7 @@ export default function Login() {
                 />
               </FloatingLabel>
             </Form.Group>
-            <br/>
+            <br />
             <Form.Group>
               <FloatingLabel
                 controlId="floatingPassword"
@@ -73,7 +85,16 @@ export default function Login() {
             </Form.Group>
             <Button type="submit">Login</Button>
           </Form>
+          <Card.Footer />
+              </Accordion.Body>
+            </Accordion.Item>
+            <Accordion.Item eventKey="1">
+              <Accordion.Button onClick={handleGoogle}>Google</Accordion.Button>
+            </Accordion.Item>
+          </Accordion>
+          
         </Card.Body>
+        <Card.Footer />
       </Card>
     </Container>
   );
