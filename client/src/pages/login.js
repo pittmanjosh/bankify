@@ -55,6 +55,7 @@ export default function Login() {
             <Button type="submit">Register</Button>
           </Form>
         </Card.Body>
+        <Card.Footer/>
       </Card>
     </Container>
   );
