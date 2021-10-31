@@ -15,7 +15,7 @@ export default function DomRouter() {
     <Router>
       <Navbar collapseOnSelect expand="md" bg="dark" variant="dark" sticky>
         <Container className="justify-content-space-between">
-          <Link to="/home" className="navbar-brand nav-link">
+          <Link to="/" className="navbar-brand nav-link">
             Bankify
           </Link>
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -33,7 +33,7 @@ export default function DomRouter() {
                     Register
                   </Link>
                   <Link
-                    to="/home"
+                    to="/"
                     onClick={() => setUser(7)}
                     className="nav-link"
                   >
@@ -43,7 +43,7 @@ export default function DomRouter() {
               )}
               {user && (
                 <Link
-                  to="/home"
+                  to="/"
                   className="nav-link"
                   onClick={() => setUser("")}
                 >
@@ -69,7 +69,7 @@ export default function DomRouter() {
           <Route path="/login">
             <Login />
           </Route>
-          <Route path="/home">
+          <Route path="/">
             <Home />
           </Route>
         </Container>
