@@ -7,19 +7,18 @@ import Register from "../pages/register";
 import Login from "../pages/login";
 import Dashboard from "../pages/dashboard";
 import Home from "../pages/home";
-import Greeting from "../pages/greeting";
 import AllData from "../pages/alldata";
 
 export default function Content({ user }) {
   return (
-    <Switch >
-      <Row className="mx-auto" style={{maxWidth: "100%"}}>
+    <Switch>
+      <Row className="mx-auto" style={{ maxWidth: "100%" }}>
         <Col>
           <Route exact path="/register">
-          {user ? <Redirect to="/dashboard"/> : <Register />}
+            {user ? <Redirect to="/dashboard" /> : <Register />}
           </Route>
           <Route exact path="/login">
-            {user ? <Redirect to="/dashboard"/> : <Login />}
+            {user ? <Redirect to="/dashboard" /> : <Login />}
           </Route>
           <Route exact path="/dashboard">
             {user ? <Dashboard /> : <Redirect to="/" />}
@@ -28,7 +27,7 @@ export default function Content({ user }) {
             <AllData />
           </Route>
           <Route exact path="/">
-            {user ? <Home /> : <Greeting />}
+            <Home user={user}/>
           </Route>
         </Col>
       </Row>

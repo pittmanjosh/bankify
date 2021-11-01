@@ -45,54 +45,52 @@ export default function Login() {
         </Card.Header>
         <br />
         <Card.Body>
+          <Card.Title>Login Methods</Card.Title>
           <Accordion defaultActiveKey="0">
             <Accordion.Item eventKey="0">
               <Accordion.Header>Email and Password</Accordion.Header>
               <Accordion.Body>
-              <Form onSubmit={submitForm} className="mb-3">
-            <Form.Group>
-              <FloatingLabel
-                controlId="floatingInput"
-                label="Email"
-                className="mb-3"
-              >
-                <input
-                  type="email"
-                  placeholder="Email"
-                  autoComplete="email"
-                  className="form-control mb-3"
-                  {...email}
-                  required
-                />
-              </FloatingLabel>
-            </Form.Group>
-            <br />
-            <Form.Group>
-              <FloatingLabel
-                controlId="floatingPassword"
-                label="Password"
-                className="mb-3"
-              >
-                <input
-                  type="password"
-                  placeholder="Password"
-                  autoComplete="current-password"
-                  {...password}
-                  className="form-control mb-3"
-                  required
-                />
-              </FloatingLabel>
-            </Form.Group>
-            <Button type="submit">Login</Button>
-          </Form>
-          <Card.Footer />
+                <Form onSubmit={submitForm} className="mb-3">
+                  <Form.Group>
+                    <FloatingLabel
+                      controlId="floatingInput"
+                      label="Email"
+                      className="mb-3"
+                    >
+                      <input
+                        type="email"
+                        placeholder="Email"
+                        autoComplete="email"
+                        className="form-control mb-3"
+                        {...email}
+                        required
+                      />
+                    </FloatingLabel>
+                  </Form.Group>
+                  <br />
+                  <Form.Group>
+                    <FloatingLabel
+                      controlId="floatingPassword"
+                      label="Password"
+                      className="mb-3"
+                    >
+                      <input
+                        type="password"
+                        placeholder="Password"
+                        autoComplete="current-password"
+                        {...password}
+                        className="form-control mb-3"
+                        required
+                      />
+                    </FloatingLabel>
+                  </Form.Group>
+                  <Button type="submit">Login</Button>
+                </Form>
+                <Card.Footer />
               </Accordion.Body>
             </Accordion.Item>
-            <Accordion.Item eventKey="1">
-              <Accordion.Button onClick={handleGoogle}>Google</Accordion.Button>
-            </Accordion.Item>
+            <Accordion.Button onClick={handleGoogle}>Google</Accordion.Button>
           </Accordion>
-          
         </Card.Body>
         <Card.Footer />
       </Card>

@@ -1,5 +1,5 @@
 import getFirebase from "./firebase";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import hasher from "../utils/hash";
 
 const app = getFirebase();
@@ -27,20 +27,21 @@ export async function loginAuth(email, unhashedPwd) {
 }
 
 export function loginGoogleAuth() {
+  /*  
+      try to register account 
+      if gets existing account error 
+        => proceed with login
+      , else...
+        => give new account registered message
+        => register name, email, and initial balance in db
+    */
+
   var provider = new GoogleAuthProvider();
   provider.addScope('profile');
   provider.addScope('email');
-  /*  
-    try to register account 
-    if gets existing account error 
-      => proceed with login
-    , else...
-      => give new account registered message
-      => register name, email, and initial balance in db
-  */
 
   let result,error;
-  
+
   signInWithPopup(auth,provider)
     .then(x=>result = x)
     .catch(x=>error = x)
@@ -48,13 +49,7 @@ export function loginGoogleAuth() {
   return {result,error};
 }
 
-export async function logoutAuth() {
-  await signOut(auth)
-    .then((result) => console.log(result));
-}
-
-export function registerAuth(email, unhashedPwd) {
-  const hashedPwd = hasher(unhashedPwd);
-
-  return ()=>createUserWithEmailAndPassword(auth, email, hashedPwd)
+// returns auth component of app instance
+export function currentAuth() {
+  return auth;
 }
