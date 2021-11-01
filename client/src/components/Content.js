@@ -29,9 +29,6 @@ export default function Content() {
           <Route exact path="/alldata">
             <AllData />
           </Route>
-          <Route exact path="/*">
-            <Redirect to="/" />
-          </Route>
           <Route exact path="/">
             <Home user={user}/>
           </Route>
