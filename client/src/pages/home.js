@@ -29,12 +29,20 @@ export default function Home({user}) {
             </p>
           </Card.Text>
           <div>
-          <Link to="/register">
-            <Button type="link">Register Now</Button>
-          </Link>{"      "}
-          <Link to="/login">
-            <Button type="link">Login</Button>
-          </Link>
+          {user ?  (
+            <Link to="/dashboard">
+              <Button type="link">Get Services</Button>
+            </Link>
+          ) : (
+            <>
+              <Link to="/register">
+                <Button type="link">Register Now</Button>
+              </Link>{"      "}
+              <Link to="/login">
+                <Button type="link">Login</Button>
+              </Link>
+            </>
+          )}
           </div>
           
         </Card.Body>
