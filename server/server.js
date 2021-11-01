@@ -4,8 +4,7 @@ const dotenv = require("dotenv");
 const apiRouter = require("./routes/api.js");
 const cors = require("cors");
 const dbo = require("./db.js");
-// const graphql = require("express-graphql");
-// const schema = require("./models/schema");
+const fbAdmin = require('../firebase/admin');
 
 dotenv.config();
 

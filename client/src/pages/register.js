@@ -28,7 +28,7 @@ export default function Register() {
       return;
     }
 
-    let stateProps = {createAlert,setUser,resetForm};
+    let stateProps = {createAlert,/*setUser,*/resetForm};
 
     register(email.value,password.value,stateProps)
   };

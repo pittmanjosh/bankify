@@ -13,12 +13,12 @@ export default function Login() {
 
   const submitForm = (e) => {
     e.preventDefault();
-    loginEmailPassword(email.value, password.value,setUser,createAlert);
+    loginEmailPassword(email.value, password.value,/*setUser,*/createAlert);
   };
 
   const handleGoogle = (e) => {
     e.preventDefault();
-    loginGoogle(setUser,createAlert);
+    loginGoogle(/*setUser,*/createAlert);
   };
 
   return (

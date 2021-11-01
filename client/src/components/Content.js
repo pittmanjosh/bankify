@@ -12,7 +12,7 @@ import Home from "../pages/home";
 import AllData from "../pages/alldata";
 
 export default function Content() {
-  const {user} = useContext(ctx)
+  const {user,createAlert} = useContext(ctx)
   return (
     <Switch>
       <Row className="mx-auto" style={{ maxWidth: "100%" }}>
@@ -28,6 +28,9 @@ export default function Content() {
           </Route>
           <Route exact path="/alldata">
             <AllData />
+          </Route>
+          <Route exact path="/*">
+            <Redirect to="/" />
           </Route>
           <Route exact path="/">
             <Home user={user}/>

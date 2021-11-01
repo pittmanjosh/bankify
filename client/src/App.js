@@ -7,6 +7,7 @@ import { useState,useEffect } from "react";
 import BankContext from "./context";
 import { onAuthStateChanged } from "firebase/auth";
 import { authentication } from "./data/dal";
+import currentAuth from "./auth/firebaseAuth";
 
 export default function App() {
   const [user, setUser] = useState("");
@@ -14,6 +15,13 @@ export default function App() {
   const [msg, setMsg] = useState("");
   const [heading, setHeading] = useState("");
   const [type, setType] = useState("danger");
+
+  let auth = currentAuth();
+
+  onAuthStateChanged(auth, (user) => {
+    setUser(user);
+  });
+  
 
   const createAlert = (message, variant, title) => {
     setMsg(message);

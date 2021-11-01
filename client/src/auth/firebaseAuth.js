@@ -1,12 +1,35 @@
 import getFirebase from "./firebase";
-import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
-import hasher from "../utils/hash";
+import { getAuth } from "firebase/auth";
+import { useContext, createContext, useState } from "react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect,
+  useHistory,
+  useLocation
+} from "react-router-dom";
 
 const app = getFirebase();
 const auth = getAuth(app);
-
 
 // returns auth component of app instance
 export default function currentAuth() {
   return auth;
 }
+
+const authContext = createContext();
+
+export function ProvideAuth({children}) {
+  <authContext.Provider value={auth}>
+    {children}
+  </authContext.Provider>
+}
+
+// function useProvideAuth() {
+//   consot [user,setUser] = useState(null);
+
+//   on
+// }
+
