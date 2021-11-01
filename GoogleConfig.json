@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "bankify-capstone",
+  "private_key_id": "04cdbcda33b0221d97f651292fc8a8f3ff551393",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCXZ1j+7GqhUFFb\nP67y1o66SqDEJrkjlLm+6pr31xtQH5GjmomId6G6NfN/a4LIuRwpmJqu3vRd9GQu\nrBtCGWCRxKhB9q9AmIhqzXsQuG7XVhZuqwiLXfm4KRhMy7nbjKhP4UEZOQBNuuWo\njhueecOgThLTJiWh88JHOcKJC5WGvryQw/wtdwvrzbuOQtlxWHhnVhzOcWwOW1pD\nfO1fa7gDy6V0WM/TyF8f/8xpwr40GHYd3VukBZK/yVLvO87DL7pTTPZs5YJ1j0Oa\ntkktpcehSocNzM4xtAu7gET7jhsPmjNSFeiadUvUonRcUXZxF4Rdlcl7w/6y2QEd\nl9UTrHDBAgMBAAECggEAAeSUaZGA1eQxNDMZfQpbgxJ11wmF5sKsq/Chjk8T6vrV\nK/FhM4jw6uH9oNPVsQ/qS5Vk37BvLvjAtOTJAsqhmSVla3e0jO9HtgHnDJE3gxmk\n2eAwmCE+9NGctff5FTGkMWV5Fj6O48ZW/zYuEUYgZHj9aW2QhwzZYbakBAXIMVL5\nR0PeWVOOngcQ+r3peFxSIehQomUKjLeD40SwWeI/i0oAOJjT50egfKiwXIoLIxAS\ni6r5LasA6dUiUZeMcAjw0rIjoNNDbEJrMRBG4nHRvZ0VuxMyCXF5UaCcU/etgChU\nNFybEOjxr3wg7YVRuv9WvXeS9BpxZUx4kq+DsPo8zQKBgQDP7jGqvzEpKJBnWp0R\nHm5gvVPznvZuQ18dXYx/xK2q2pge8daY1migxJ8/pdstTPbnTatXQAn+zdbcg7nJ\nNKpaO2eBnnYMl89Z4U/Q6d4L92kWQf1gbz8VxXRN123kCm22/vNRQ226VvxWGDfr\nCzNaFbOuVBOlFE283nuIIeFpBQKBgQC6Z8UUaxUenI+ymcv9cKcYCQ7qFeI8KBbO\nTUWJ/NWcaTp7keX6YLYXyAHmkD42cdlgcfjNWTmQF0BXuvgxPMCOsxGOb/3G2Z/n\nP2KvRYNWgayH6Pfc/xe2IZoT//oFRb7fGZNVqYcMU9BtyXosp/5nvFDj7Z3HFF3H\nBcbcbP6FjQKBgQC0SitEitzcfDChfR89ba51MRRu48F3H/GD685cJrQStdE626Sg\nByDXbUVLkcr2f4qCSoUrdPp1thL8Rzc7L/AZpvJ7oGNpTeRbYZKsaWu/4nl69CL3\nj94aSYgryoSdOzGgf3WIW7fz32KSYBN0ONUA4lpW6M3T0EQLZLml8wKY5QKBgQCU\n+vjln8wKYkDrEsaZsZ6qtBqqdoERaU0I53NLnLqxPt0SBAKVwRPoH999Ag3m/8kn\nrw+WN9is1BiFxZY17ANOScofWFywwCBv9xYNVXZp/kwBd+4aP/sYgvSdRXnzGtI5\nhzxdO5gG/znXdS7jYAURrc3MzY3LnfhxZ6mPZMFrxQKBgDTpNrnLjIOIQ4WGhJ1v\nbBJHFU9NkSRZygcjegO1jc7yctWaWVyvgKPpL2PxkBpxUZCsSEITITqjYLRaS993\n0i0jfYL+YGhcBQRYGd8Hh/P5mzUxpIGxtEsxrFHqBjV8Du0DNYk3//mfERag1T+K\nn8Jyl/vTugYmopqw2NA/Jwhr\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-e8bxs@bankify-capstone.iam.gserviceaccount.com",
+  "client_id": "117685154448228777914",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-e8bxs%40bankify-capstone.iam.gserviceaccount.com"
+}
