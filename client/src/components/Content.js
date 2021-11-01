@@ -1,3 +1,5 @@
+import ctx from '../context';
+import { useContext } from 'react';
 // UI elements
 import { Col, Row } from "react-bootstrap";
 // Router components
@@ -9,7 +11,8 @@ import Dashboard from "../pages/dashboard";
 import Home from "../pages/home";
 import AllData from "../pages/alldata";
 
-export default function Content({ user }) {
+export default function Content() {
+  const {user} = useContext(ctx)
   return (
     <Switch>
       <Row className="mx-auto" style={{ maxWidth: "100%" }}>

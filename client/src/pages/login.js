@@ -1,40 +1,24 @@
-import {
-  Accordion,
-  Button,
-  Card,
-  Container,
-  FloatingLabel,
-  Form,
-  FormControl,
-} from "react-bootstrap";
-import { loginGoogleAuth } from "../auth/firebaseAuth";
-import { login } from "../data/dal";
+import { Accordion, Button, Card, Container, FloatingLabel, Form } from "react-bootstrap";
+import { loginEmailPassword, loginGoogle } from "../data/dal";
 import useInput from "../hooks/useInput";
 import ctx from "../context";
-import { useContext } from "react";
+import { useContext, useState } from "react";
+import { BrowserRouter as Router, Redirect } from "react-router-dom";
 
 export default function Login() {
-  const { setUser } = useContext(ctx);
+  const { setUser, createAlert} = useContext(ctx);
   const email = useInput("");
   const password = useInput("");
+  const [isRedirect,setIsRedirect] = useState(false)
 
-  const submitForm = (event) => {
-    event.preventDefault();
-    login(email.value, password.value);
-    email.clear();
-    password.clear();
+  const submitForm = (e) => {
+    e.preventDefault();
+    loginEmailPassword(email.value, password.value,setUser,createAlert);
   };
 
-  const handleGoogle = async (e) => {
+  const handleGoogle = (e) => {
     e.preventDefault();
-    const { result, error } = loginGoogleAuth();
-
-    if (result) {
-      console.log(result);
-      setUser(result);
-    } else {
-      console.log(error);
-    }
+    loginGoogle(setUser,createAlert);
   };
 
   return (
@@ -45,8 +29,9 @@ export default function Login() {
         </Card.Header>
         <br />
         <Card.Body>
+          {isRedirect && <Redirect to="/dashboard"/>}
           <Card.Title>Login Methods</Card.Title>
-          <Accordion defaultActiveKey="0">
+          <Accordion>
             <Accordion.Item eventKey="0">
               <Accordion.Header>Email and Password</Accordion.Header>
               <Accordion.Body>

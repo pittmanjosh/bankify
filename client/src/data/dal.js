@@ -1,32 +1,46 @@
-import getFirebase from '../auth/firebase'
-import { logoutAuth, authState,currentAuth} from "../auth/firebaseAuth";
+import currentAuth from "../auth/firebaseAuth";
 import {
-  createUserWithEmailAndPassword, 
+  createUserWithEmailAndPassword,
+  GoogleAuthProvider,
   onAuthStateChanged, 
   signOut,
-  signInWithEmailAndPassword
+  signInWithEmailAndPassword,
+  signInWithPopup
 } from "firebase/auth";
 import hasher from "../utils/hash";
 
 const auth = currentAuth();
 
-export function login(email,unhashedPwd) {
-  const hashedPwd = hasher(unhashedPwd);
-  // receive unique userId from firebase
+export function loginEmailPassword(email,pwd,setUser,createAlert) {
   let user; 
-  signInWithEmailAndPassword(auth, email, hashedPwd)
-    .then((result) => {user = result.user.uid})
-    .catch((e) => console.log(e.message));
-
-  return user;
+  signInWithEmailAndPassword(auth, email, pwd)
+    .then((result) => {
+      setUser(result);
+      createAlert("Welcome back to Bankify","success","Successful Login!");
+    })
+    .catch((e) => createAlert(e.message,"danger"));
 }
 
-export function register(email,unhashedPwd,props) {
-  let {createAlert,setUser,resetForm} = props;
-  const hashedPwd = hasher(unhashedPwd);
+export function loginGoogle(setUser,createAlert) {
+  var provider = new GoogleAuthProvider();
+  provider.addScope('profile');
+  provider.addScope('email');
 
-  createUserWithEmailAndPassword(auth, email, hashedPwd)
-    .then(x => {
+  let user;
+
+  signInWithPopup(auth,provider)
+    .then((result)=>{
+      setUser(result);
+      createAlert("Welcome back to Bankify","success","Successful Login!");})
+    .catch(x=>createAlert(x.message,"danger"))
+
+}
+
+export function register(email,pwd,props) {
+  let {createAlert,setUser,resetForm} = props;
+
+  createUserWithEmailAndPassword(auth, email, pwd)
+    .then(x=>{
       setUser(x);
       createAlert("You are now registered!","success");
       resetForm();})
@@ -35,19 +49,26 @@ export function register(email,unhashedPwd,props) {
       createAlert(x.message,"danger","Registration Failed!");})
 }
 
-export function logout() {
-  // need tor remove tokens
+export function logout(setUser,createAlert,) {
+  // need to remove tokens
   signOut(auth)
-    .then(x=>console.log(x))
-    .catch(x=>console.log(x))
+    .then(()=>{
+      if (createAlert) {
+        createAlert("Come back soon!","secondary");
+      } else {
+        console.log("Successful Logout");
+      };
+      setUser("");
+    })
+    .catch(x=>{
+      if (createAlert) createAlert(x.message,"danger")
+    })
 }
 
 export function authentication() {
   const unsubscribe = onAuthStateChanged(auth, (user) => {
-    console.log(user);
     return user;
   });
-  console.log("no current user")
   unsubscribe();
   return null;
 }
