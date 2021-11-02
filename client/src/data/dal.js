@@ -64,12 +64,8 @@ export function logout(/*setUser,*/createAlert,) {
     })
 }
 
-// export function authentication() {
-//   const unsubscribe = onAuthStateChanged(auth, (user) => {
-//     console.log("now has user");
-//     return user;
-//   });
-//   console.log("no has user");
-//   unsubscribe();
-//   return null;
-// }
+export function authentication() {
+  const unsubscribe = onAuthStateChanged(auth, (user)=>{return user});
+  unsubscribe();
+  return null;
+}

@@ -26,10 +26,3 @@ export function ProvideAuth({children}) {
     {children}
   </authContext.Provider>
 }
-
-// function useProvideAuth() {
-//   consot [user,setUser] = useState(null);
-
-//   on
-// }
-

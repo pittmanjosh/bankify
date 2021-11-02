@@ -3,10 +3,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap";
 import Bankify from "./components/Bankify";
 import { BrowserRouter as Router } from "react-router-dom";
-import { useState,useEffect } from "react";
+import { useState } from "react";
 import BankContext from "./context";
 import { onAuthStateChanged } from "firebase/auth";
-import { authentication } from "./data/dal";
 import currentAuth from "./auth/firebaseAuth";
 
 export default function App() {

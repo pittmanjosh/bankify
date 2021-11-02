@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Link } from "react-router-dom";
 import { logout } from "../data/dal";
 import ctx from "../context";
 import { useContext } from "react";
+import useUser from "../hooks/useUser";
 
 export default function MyNav() {
   return (
@@ -26,9 +27,10 @@ export default function MyNav() {
 }
 
 function UserDependentLinks() {
-  const { user, /*setUser,*/ createAlert } = useContext(ctx);
+  const { /*user, setUser,*/ createAlert } = useContext(ctx);
+  const user = useUser();
 
-  const AllDataLink = (
+  const AllDataLink = ()=>(
     <Link to="/alldata" className="nav-link">
       All Data
     </Link>);
@@ -37,7 +39,7 @@ function UserDependentLinks() {
       <Link to="/dashboard" className="nav-link">
         Dashboard
       </Link>
-      {AllDataLink}>
+      <AllDataLink/>
       <Link 
         to="/" 
         className="nav-link" 
@@ -54,7 +56,7 @@ function UserDependentLinks() {
       <Link to="/register" className="nav-link">
         Register
       </Link>
-      {AllDataLink}>
+      <AllDataLink />
     </>
   );
 

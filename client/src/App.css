@@ -52,3 +52,8 @@ body {
 .content-pane {
   padding: 2rem;
 }
+img.avatar-img {
+  height: 96px;
+  width: 96px;
+  border-radius: 50%;
+}
