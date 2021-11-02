@@ -7,6 +7,7 @@ import { useState } from "react";
 import BankContext from "./context";
 import { onAuthStateChanged } from "firebase/auth";
 import currentAuth from "./auth/firebaseAuth";
+import { UserProvider } from "./providers/UserProvider";
 
 export default function App() {
   const [user, setUser] = useState("");
@@ -36,10 +37,12 @@ export default function App() {
   const alertProps = { msg, type, heading, reset: resetAlert };
 
   return (
+    <UserProvider>
     <BankContext.Provider value={{ user, setUser, createAlert, alertProps }}>
       <Router>
         <Bankify />
       </Router>
     </BankContext.Provider>
+    </UserProvider>
   );
 }
