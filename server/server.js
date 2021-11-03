@@ -4,7 +4,7 @@ const dotenv = require("dotenv");
 const apiRouter = require("./routes/api.js");
 const cors = require("cors");
 const dbo = require("./db.js");
-const fbAdmin = require('../firebase/admin');
+const auth = require('../middleware/auth');
 
 dotenv.config();
 
@@ -15,13 +15,6 @@ app.use(cors());
 
 // Have Node serve the files for our built React app
 app.use(express.static(path.resolve(__dirname, "../client/build")));
-
-// app.use("/graphql", graphql(
-//   {
-//     schema,
-//     graphiql: (process.env.NODE_ENV === "development") || false,
-//   }
-// ));
 
 app.use("/api", apiRouter);
 

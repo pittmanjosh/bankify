@@ -16,17 +16,42 @@ import { BrowserRouter as Router, Redirect } from "react-router";
 import useUser from "../hooks/useUser";
 import { useState, useRef } from "react";
 import { useSetAlert } from "../hooks/useAlert";
+import useInput from "../hooks/useInput";
+import auth from "../auth/firebase";
 
 export default function Dashboard() {
   const [balance, setBalance] = useState(0);
-  const [showDeposit,setShowDeposit] = useState(false);
-  const [showWithdraw,setShowWithdraw] = useState(false);
+  const [showDeposit, setShowDeposit] = useState(false);
+  const [showWithdraw, setShowWithdraw] = useState(false);
+  const depositAmount = useInput();
+  const withdrawAmount = useInput();
+  const depositButton = useRef();
+  const withdrawButton = useRef();
 
   const user = useUser();
 
-  const openDeposit = ()=>setShowDeposit(true)
-  const closeDeposit = ()=>setShowDeposit(false)
-  
+  const openDeposit = () => setShowDeposit(true);
+  const closeDeposit = () => setShowDeposit(false);
+
+  function callAuthRoute() {
+
+    user.getIdToken()
+      .then((x) => {
+        (async () => {
+          let response = await fetch("/auth", {
+            method: "GET",
+            headers: {
+              Authorization: x,
+            },
+          });
+          let text = await response.text();
+          console.log(text)
+        })()
+      })
+      .catch((error)=>{console.log(error)})
+  }
+
+  callAuthRoute()
 
   let name = user.displayName;
   let photoURL = user.photoURL;
@@ -37,7 +62,6 @@ export default function Dashboard() {
   };
 
   fetch(photoURL, requestOptions)
-    .then(() => console.log("avatar successfully fetched"))
     .catch(() => {
       photoURL = `https://ui-avatars.com/api/?name=${name}`;
     });
@@ -50,9 +74,9 @@ export default function Dashboard() {
   // if loading put in bootstrap placeholder elements
   // if not found, create use with user email
 
-  const DepositWindow = ()=>{
+  const DepositWindow = () => {
     return (
-      <Modal show={showDeposit} onHide={closeDeposit} animation={false}>
+      <Modal show={showDeposit} onHide={closeDeposit} backdrop="static">
         <Modal.Header closeButton>
           <Modal.Title>Deposit heading</Modal.Title>
         </Modal.Header>
@@ -66,9 +90,8 @@ export default function Dashboard() {
           </Button>
         </Modal.Footer>
       </Modal>
-    )
-  }
-  
+    );
+  };
 
   return (
     <Container>
@@ -94,12 +117,16 @@ export default function Dashboard() {
               <span className="form-control" aria-label="Amount">
                 {`${balance}.00`}
               </span>
-                <Button variant="outline-primary" id="deposit" onClick={openDeposit}>
-                  Deposit
-                </Button>
-                <Button variant="outline-primary" id="withdraw">
-                  Withdraw
-                </Button>
+              <Button
+                variant="outline-primary"
+                id="deposit"
+                onClick={openDeposit}
+              >
+                Deposit
+              </Button>
+              <Button variant="outline-primary" id="withdraw">
+                Withdraw
+              </Button>
             </div>
           </Form>
 
@@ -107,7 +134,7 @@ export default function Dashboard() {
           <Card.Title>Withdraw</Card.Title>
         </Card.Body>
       </Card>
-      <DepositWindow/>
+      <DepositWindow />
     </Container>
   );
 }
