@@ -1,5 +1,7 @@
 const admin = require('firebase-admin');
-  
+const dotenv = require('dotenv');
+dotenv.config();
+
 const type = process.env.GOOGLE_CERT_TYPE;
 const project_id = process.env.GOOGLE_CERT_PROJECT_ID;
 const private_key_id = process.env.GOOGLE_CERT_KEY_ID;

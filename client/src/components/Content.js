@@ -30,7 +30,7 @@ export default function Content() {
             <AllData />
           </Route>
           <Route exact path="/">
-            <Home user={user}/>
+            {user ? <Dashboard/> : <Home/>}
           </Route>
         </Col>
       </Row>

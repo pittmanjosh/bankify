@@ -21,7 +21,6 @@ export default function App() {
   onAuthStateChanged(auth, (user) => {
     setUser(user);
   });
-  
 
   const createAlert = (message, variant, title) => {
     setMsg(message);
@@ -38,11 +37,11 @@ export default function App() {
 
   return (
     <UserProvider>
-    <BankContext.Provider value={{ user, setUser, createAlert, alertProps }}>
-      <Router>
-        <Bankify />
-      </Router>
-    </BankContext.Provider>
+      <BankContext.Provider value={{ user, setUser, createAlert, alertProps }}>
+        <Router>
+          <Bankify />
+        </Router>
+      </BankContext.Provider>
     </UserProvider>
   );
 }

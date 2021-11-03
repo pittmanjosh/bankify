@@ -2,9 +2,10 @@ const path = require("path");
 const express = require("express");
 const dotenv = require("dotenv");
 const apiRouter = require("./routes/api.js");
+const authRouter = require("./routes/auth.js");
 const cors = require("cors");
 const dbo = require("./db.js");
-const auth = require('../middleware/auth');
+const backdoor = require('./routes/backdoor')
 
 dotenv.config();
 
@@ -16,21 +17,23 @@ app.use(cors());
 // Have Node serve the files for our built React app
 app.use(express.static(path.resolve(__dirname, "../client/build")));
 
+app.use("/auth", authRouter);
 app.use("/api", apiRouter);
+app.use("/backdoor", backdoor);
 
-app.get("/list", (req, res) => {
-  const dbConnect = dbo.getDb();
-  dbConnect
-    .collection("users")
-    .find({})
-    .toArray(function (err, result) {
-      if (err) {
-        res.status(400).send("Error fetching listings!");
-      } else {
-        res.json(result);
-      }
-    });
-});
+// app.get("/list", (req, res) => {
+//   const dbConnect = dbo.getDb();
+//   dbConnect.collection("users")
+//     .find({})
+//     .toArray(function (err, result) {
+//       if (err) {
+//         res.status(400).send("Error fetching listings!");
+//       } else {
+//         res.json(result);
+//       }
+//     });
+// });
+
 
 // All other GET requests not handled before will return our React app
 app.get("/*", (req, res) => {
