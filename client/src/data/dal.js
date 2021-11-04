@@ -7,7 +7,6 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup
 } from "firebase/auth";
-import hasher from "../utils/hash";
 
 const auth = currentAuth();
 
