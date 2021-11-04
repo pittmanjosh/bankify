@@ -1,6 +1,7 @@
 import { Button, Card, Container, FloatingLabel, Form } from "react-bootstrap";
 import { register } from "../data/dal";
 import useInput from "../hooks/useInput";
+import Input from "../components/Input";
 import { useContext } from "react";
 import ctx from "../context";
 
@@ -28,7 +29,7 @@ export default function Register() {
       return;
     }
 
-    let stateProps = {createAlert,/*setUser,*/resetForm};
+    let stateProps = {createAlert,resetForm};
 
     register(email.value,password.value,stateProps)
   };
@@ -47,14 +48,8 @@ export default function Register() {
                 controlId="floatingInput"
                 label="Account Name"
                 className="mb-3"
-              >
-                <input
-                  placeholder="Account Name "
-                  autoComplete="name"
-                  {...name}
-                  className="form-control mb-3"
-                  required
-                />
+              > 
+              <Input label="Account Name" ac="name" state={name}/>
               </FloatingLabel>
             </Form.Group>
             <Form.Group>
@@ -64,14 +59,7 @@ export default function Register() {
                 label="Email"
                 className="mb-3"
               >
-                <input
-                  type="email"
-                  placeholder="Email"
-                  autoComplete="email"
-                  className="form-control mb-3"
-                  {...email}
-                  required
-                />
+                <Input label="Email" ac="email" state={email}/>
               </FloatingLabel>
             </Form.Group>
             <Form.Group>
@@ -81,13 +69,11 @@ export default function Register() {
                 label="New Password"
                 className="mb-3"
               >
-                <input
+                <Input 
                   type="password"
-                  placeholder="New Password"
-                  autoComplete="new-password"
-                  {...password}
-                  className="form-control mb-3"
-                  required
+                  label="New Password" 
+                  ac="new-password" 
+                  state={password}   
                 />
               </FloatingLabel>
               <FloatingLabel
@@ -95,13 +81,11 @@ export default function Register() {
                 label="Confirm Password"
                 className="mb-3"
               >
-                <input
+                <Input 
                   type="password"
-                  placeholder="Confirm Password"
-                  autoComplete="new-password"
-                  {...confirmPassword}
-                  className="form-control mb-3"
-                  required
+                  label="Confirm Password" 
+                  ac="confirm-password" 
+                  state={confirmPassword}   
                 />
               </FloatingLabel>
             </Form.Group>

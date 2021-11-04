@@ -36,15 +36,13 @@ export function loginGoogle(/*setUser,*/createAlert) {
 }
 
 export function register(email,pwd,props) {
-  let {createAlert,/*setUser,*/resetForm} = props;
+  let {createAlert,resetForm} = props;
 
   createUserWithEmailAndPassword(auth, email, pwd)
     .then(x=>{
-      // setUser(x);
       createAlert("You are now registered!","success");
       resetForm();})
     .catch(x => {
-      // setUser("");
       createAlert(x.message,"danger","Registration Failed!");})
 }
 // setUser was deprecated first argument
