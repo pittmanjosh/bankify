@@ -7,7 +7,6 @@ import {
   Modal,
   Row,
 } from "react-bootstrap";
-// import { register } from "../data/dal";
 // import useInput from "../hooks/useInput";
 // import { useContext } from "react";
 // import ctx from "../context";
