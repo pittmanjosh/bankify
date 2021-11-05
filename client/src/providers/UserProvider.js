@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react";
-import { authentication } from "../data/dal";
+import { authentication } from "../adapters/auth";
 
 const UserContext = createContext()
 

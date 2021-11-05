@@ -2,3 +2,4 @@ node_modules
 .bankify.json
 .env
 client\ 2
+.vscode
