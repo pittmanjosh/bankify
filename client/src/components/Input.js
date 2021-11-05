@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 export default function Input({label,ac,state,type}) {
   const {value, onChange} = state;
 

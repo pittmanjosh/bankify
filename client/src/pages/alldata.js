@@ -43,7 +43,7 @@ export default function AllData() {
     }
 
     return (
-      <Table striped bordered hover size="sm">
+      <Table striped bordered hover style={{tableLayout: "fixed"}}>
         <thead>
           <tr>
             <th>#</th>
@@ -59,11 +59,11 @@ export default function AllData() {
             return (
               <tr key={i}>
                 <td>{i + 1}</td>
-                <td>{user?.name || ""}</td>
-                <td>{user?.email || ""}</td>
-                <td>{user?.uid || ""} </td>
-                <td>{user?.checking || ""}</td>
-                <td>{user?.savings || ""} </td>
+                <td>{user.name || ""}</td>
+                <td>{user.email || ""}</td>
+                <td>{user.uid || ""} </td>
+                <td>{`$${String(user.checking)}.00`}</td>
+                <td>{`$${String(user.savings)}.00`} </td>
               </tr>
             );
           })}

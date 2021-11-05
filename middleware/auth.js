@@ -3,7 +3,7 @@ const fbAdmin = require('../firebase/admin');
 function authentication(req,res,next) {
   // read token from header
   const idToken = req.headers.authorization?.split(' ')[1] || null;
-
+  
   if (idToken) {
     fbAdmin.auth().verifyIdToken(idToken)
     .then((decodedToken)=>{

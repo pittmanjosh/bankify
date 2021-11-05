@@ -17,124 +17,105 @@ import useUser from "../hooks/useUser";
 import { useState, useRef } from "react";
 import { useSetAlert } from "../hooks/useAlert";
 import useInput from "../hooks/useInput";
-import auth from "../auth/firebase";
+import { updateProfile } from "@firebase/auth";
+import currentAuth from "../auth/firebaseAuth";
+import useModal from "../hooks/useModal";
+import TransactionModal from "../components/Modal";
 
 export default function Dashboard() {
-  const [balance, setBalance] = useState(0);
-  const [showDeposit, setShowDeposit] = useState(false);
-  const [showWithdraw, setShowWithdraw] = useState(false);
-  const depositAmount = useInput();
-  const withdrawAmount = useInput();
-  const depositButton = useRef();
-  const withdrawButton = useRef();
+  const [checking, setChecking] = useState(0);
+  const [savings, setSavings] = useState(0);
+  const depositCheckingModal = useModal("Deposit", "checking");
+  const withdrawCheckingModal = useModal("Withdraw", "checking");
+  const depositSavingsModal = useModal("Deposit", "savings");
+  const withdrawSavingsModal = useModal("Withdraw", "savings");
 
-  const user = useUser();
+  const auth = currentAuth();
+  const user = auth.currentUser;
 
-  const openDeposit = () => setShowDeposit(true);
-  const closeDeposit = () => setShowDeposit(false);
-
-  function callAuthRoute() {
-
-    user.getIdToken()
-      .then((x) => {
-        (async () => {
-          let response = await fetch("/auth", {
-            method: "GET",
-            headers: {
-              Authorization: x,
-            },
-          });
-          let text = await response.text();
-          console.log(text)
-        })()
-      })
-      .catch((error)=>{console.log(error)})
-  }
-
-  callAuthRoute()
-
-  let name = user.displayName;
+  let name = user.displayName ? user.displayName.toUpperCase() : "USER";
   let photoURL = user.photoURL;
-
-  var requestOptions = {
-    method: "GET",
-    redirect: "follow",
-  };
-
-  fetch(photoURL, requestOptions)
-    .catch(() => {
-      photoURL = `https://ui-avatars.com/api/?name=${name}`;
-    });
-
   const Avatar = () => {
-    return <img src={photoURL} className="avatar-img" crossOrigin />;
-  };
+    if (!photoURL) photoURL = "https://react-bootstrap.github.io/logo.svg";
 
-  // Fetch User from Database
-  // if loading put in bootstrap placeholder elements
-  // if not found, create use with user email
-
-  const DepositWindow = () => {
-    return (
-      <Modal show={showDeposit} onHide={closeDeposit} backdrop="static">
-        <Modal.Header closeButton>
-          <Modal.Title>Deposit heading</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={closeDeposit}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={closeDeposit}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    );
+    return <img src={photoURL} className="avatar-img" />;
   };
 
   return (
     <Container>
       <Card style={{ maxWidth: "36rem", minWidth: "18rem" }}>
-        <Card.Header>
-          <Row className="align-items-center">
-            <Col>
-              <h2>Dashboard</h2>
-            </Col>
-            <Col sm="3" className="align-item-end">
-              <Avatar />
-            </Col>
-          </Row>
-        </Card.Header>
+        <DashboardHeader>
+          <Avatar />
+        </DashboardHeader>
         <Card.Body className="justify-content-center align-item-center">
-          <Card.Text>{`Hello ${name}`}</Card.Text>
-          <Card.Title>Balance</Card.Title>
-          <br />
+          <Card.Text>{`Hello ${name}!`}</Card.Text>
           {console.log(user)}
-          <Form>
-            <div className="input-group mb-3">
-              <span className="input-group-text">$</span>
-              <span className="form-control" aria-label="Amount">
-                {`${balance}.00`}
-              </span>
-              <Button
-                variant="outline-primary"
-                id="deposit"
-                onClick={openDeposit}
-              >
-                Deposit
-              </Button>
-              <Button variant="outline-primary" id="withdraw">
-                Withdraw
-              </Button>
-            </div>
-          </Form>
-
-          <Card.Title>Deposit</Card.Title>
-          <Card.Title>Withdraw</Card.Title>
+          <DashboardPanel 
+            title="Checking" 
+            balance={checking} 
+            openDeposit={depositCheckingModal.open} 
+            openWithdraw={withdrawCheckingModal.open}  
+          />
+          <hr/>
+          <DashboardPanel 
+            title="Savings" 
+            balance={savings} 
+            openDeposit={depositSavingsModal.open} 
+            openWithdraw={withdrawSavingsModal.open}  
+          />
         </Card.Body>
       </Card>
-      <DepositWindow />
+      <TransactionModal {...depositCheckingModal} />
+      <TransactionModal {...withdrawCheckingModal} />
+      <TransactionModal {...depositSavingsModal} />
+      <TransactionModal {...withdrawSavingsModal} />
     </Container>
+  );
+}
+
+function DashboardHeader(props) {
+  return (
+    <Card.Header>
+      <Row className="align-items-center">
+        <Col>
+          <h2>Dashboard</h2>
+        </Col>
+        <Col sm="3" className="align-item-end">
+          {props.children}
+        </Col>
+      </Row>
+    </Card.Header>
+  );
+}
+
+function DashboardPanel(props) {
+  const {title,balance,openDeposit,openWithdraw} = props;
+
+  return (
+    <div className={`panel-${title.toLowerCase()}`}>
+      <Card.Title>{title}</Card.Title>
+      <br />
+      <div className="input-group mb-3">
+        <span className="input-group-text">$</span>
+        <span className="form-control" aria-label="Amount">
+          {`${balance}.00`}
+        </span>
+        <Button
+          variant="outline-primary"
+          id="deposit"
+          onClick={openDeposit}
+        >
+          Deposit
+        </Button>
+        <Button
+          variant="outline-primary"
+          id="withdraw"
+          onClick={openWithdraw}
+        >
+          Withdraw
+        </Button>
+      </div>
+      <hr />
+    </div>
   );
 }

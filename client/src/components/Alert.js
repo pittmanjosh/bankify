@@ -1,8 +1,7 @@
 import {Alert} from 'react-bootstrap';
 import useAlert from '../hooks/useAlert';
 
-export default function MyAlert() {
-  const {msg,type,heading,reset} = useAlert();
+export default function MyAlert({msg,type = 'danger',heading = '',reset = ''}) {
   if (msg) {
     setTimeout(reset,4000);
     return (

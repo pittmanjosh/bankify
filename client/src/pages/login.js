@@ -3,22 +3,28 @@ import { loginEmailPassword, loginGoogle } from "../data/dal";
 import useInput from "../hooks/useInput";
 import ctx from "../context";
 import { useContext, useState } from "react";
-import { BrowserRouter as Router, Redirect } from "react-router-dom";
+import Input from "../components/Input";
 
 export default function Login() {
-  const { setUser, createAlert} = useContext(ctx);
+  const {createAlert} = useContext(ctx);
   const email = useInput("");
   const password = useInput("");
-  const [isRedirect,setIsRedirect] = useState(false)
 
+  const clearForm = ()=>{
+    email.clear();
+    password.clear();
+  }
   const submitForm = (e) => {
     e.preventDefault();
-    loginEmailPassword(email.value, password.value,/*setUser,*/createAlert);
+    let success = loginEmailPassword(email.value, password.value,createAlert);
+    if (success) {
+      clearForm();
+    }
   };
 
   const handleGoogle = (e) => {
     e.preventDefault();
-    loginGoogle(/*setUser,*/createAlert);
+    loginGoogle(createAlert);
   };
 
   return (
@@ -29,8 +35,7 @@ export default function Login() {
         </Card.Header>
         <br />
         <Card.Body>
-          {isRedirect && <Redirect to="/dashboard"/>}
-          <Card.Title>Login Methods</Card.Title>
+          <Card.Title>Login Methods:</Card.Title>
           <Accordion>
             <Accordion.Item eventKey="0">
               <Accordion.Header>Email and Password</Accordion.Header>
@@ -42,14 +47,7 @@ export default function Login() {
                       label="Email"
                       className="mb-3"
                     >
-                      <input
-                        type="email"
-                        placeholder="Email"
-                        autoComplete="email"
-                        className="form-control mb-3"
-                        {...email}
-                        required
-                      />
+                      <Input label="Email" ac={email} state={email}/>
                     </FloatingLabel>
                   </Form.Group>
                   <br />
@@ -59,14 +57,7 @@ export default function Login() {
                       label="Password"
                       className="mb-3"
                     >
-                      <input
-                        type="password"
-                        placeholder="Password"
-                        autoComplete="current-password"
-                        {...password}
-                        className="form-control mb-3"
-                        required
-                      />
+                      <Input label="Password" ac="current-password" state={password}/>
                     </FloatingLabel>
                   </Form.Group>
                   <Button type="submit">Login</Button>

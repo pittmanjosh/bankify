@@ -57,3 +57,6 @@ img.avatar-img {
   width: 96px;
   border-radius: 50%;
 }
+td {
+  word-wrap: break-word;
+}

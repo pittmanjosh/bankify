@@ -4,11 +4,11 @@ import { BrowserRouter as Router,Link } from "react-router-dom";
 import Content from "./Content";
 import MyNav from "./Nav";
 import Alert from "./Alert";
-import { logout } from "../data/dal";
+import useAlert from "../hooks/useAlert";
 
 export default function Bankify() {
-  const { user, setUser, alertProps } = useContext(ctx);
-
+  const { user } = useContext(ctx);
+  const alertProps = useAlert()
   return (
     <>
       <MyNav/>

@@ -18,8 +18,8 @@ export default function App() {
 
   let auth = currentAuth();
 
-  onAuthStateChanged(auth, (user) => {
-    setUser(user);
+  onAuthStateChanged(auth, (authUser) => {
+    setUser(authUser);
   });
 
   const createAlert = (message, variant, title) => {
@@ -33,6 +33,7 @@ export default function App() {
     setType("danger");
     setHeading("");
   };
+  
   const alertProps = { msg, type, heading, reset: resetAlert };
 
   return (

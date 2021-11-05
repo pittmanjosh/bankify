@@ -10,10 +10,12 @@ Router.use(function timeLog (req, res, next) {
 
 Router.use(auth);
 
+const dbConnect = dbo.getDb();
+
 Router.route('/')
   .get(function (req, res) {
     // return user balance
-    const dbConnect = dbo.getDb();
+    
     (async ()=>{
       dbConnect.collection("users")
       .find({uid: req.uid})
@@ -35,7 +37,8 @@ Router.route('/')
   })
   .delete(function (req,res) {
     res.send({ message: "delete"})
-  })
+  });
+
   
 
 module.exports = Router;

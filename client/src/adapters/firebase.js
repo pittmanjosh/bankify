@@ -5,44 +5,49 @@ import {
   onAuthStateChanged, 
   signOut,
   signInWithEmailAndPassword,
-  signInWithPopup
+  signInWithPopup,
+  updateProfile
 } from "firebase/auth";
 
 const auth = currentAuth();
 
-export function loginEmailPassword(email,pwd,/*setUser,*/createAlert) {
+export function loginEmailPassword(email,pwd, createAlert) {
+  let success;
   signInWithEmailAndPassword(auth, email, pwd)
     .then((result) => {
-      // setUser(result);
       createAlert("Welcome back to Bankify","success","Successful Login!");
+      success = true;
     })
     .catch((e) => createAlert(e.message,"danger"));
+  
+  return success;
 }
 
-export function loginGoogle(/*setUser,*/createAlert) {
+export function loginGoogle(createAlert) {
   var provider = new GoogleAuthProvider();
   provider.addScope('profile');
   provider.addScope('email');
 
-  let user;
-
   signInWithPopup(auth,provider)
-    .then((result)=>{
-      // setUser(result);
+    .then(()=>{
       createAlert("Welcome back to Bankify","success","Successful Login!");})
     .catch(x=>createAlert(x.message,"danger"))
-
 }
 
-export function register(email,pwd,props) {
-  let {createAlert,resetForm} = props;
-
+export function register(name,email,pwd,createAlert) {
   createUserWithEmailAndPassword(auth, email, pwd)
-    .then(x=>{
+    .then(user=>{
       createAlert("You are now registered!","success");
-      resetForm();})
-    .catch(x => {
-      createAlert(x.message,"danger","Registration Failed!");})
+      return user;
+    })
+    .then(()=>{
+      updateProfile(auth.currentUser, {
+        displayName: name,
+        profileURL: `https://ui-avatars.com/api/?name=${name}`
+      })
+        .catch(x => createAlert(x.message,"danger","Name not filed!"))
+    })
+    .catch(x => createAlert(x.message,"danger","Registration Failed!"))
 }
 // setUser was deprecated first argument
 export function logout(/*setUser,*/createAlert,) {

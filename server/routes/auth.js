@@ -7,16 +7,18 @@ Router.use(auth)
 Router.route('/')
   .get((req,res)=>{
     // Read personal data
-    res.send({
+    const fbUserData = {
       uid: req.uid,
       name: req.name,
       email: req.email
-    })
+    };
     
-    })
+    res.send(fbUserData);
+  })
   .post((req,res)=>{
     // Create user
-    })
+
+  })
   .put((req,res)=>{
     // Update account
   })

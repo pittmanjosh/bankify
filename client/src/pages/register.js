@@ -6,21 +6,14 @@ import { useContext } from "react";
 import ctx from "../context";
 
 export default function Register() {
-  const { setUser, createAlert } = useContext(ctx);
+  const { createAlert } = useContext(ctx);
   const name = useInput("");
   const email = useInput("");
   const password = useInput("");
   const confirmPassword = useInput("");
 
-  const resetForm = () => {
-    name.clear();
-    email.clear();
-    password.clear();
-    confirmPassword.clear();
-  };
-
-  const submitForm = (event) => {
-    event.preventDefault();
+  const submitForm = (e) => {
+    e.preventDefault();
     let pwdMatch = password.value === confirmPassword.value;
 
     if (!pwdMatch) {
@@ -29,9 +22,7 @@ export default function Register() {
       return;
     }
 
-    let stateProps = {createAlert,resetForm};
-
-    register(email.value,password.value,stateProps)
+    register(name.value,email.value,password.value,createAlert);
   };
 
   return (
