@@ -30,6 +30,17 @@ Router.route('/')
     
   })
   .post(function (req,res) {
+    (async ()=>{
+      dbConnect.collection("users")
+      .find({uid: req.uid})
+      .toArray(function (err, result) {
+        if (err) {
+          res.status(400).send("Error fetching listings!");
+        } else {
+          res.send(result);
+        }
+      });
+    })();
     res.send({ message: "post"})
   })
   .put(function (req,res) {

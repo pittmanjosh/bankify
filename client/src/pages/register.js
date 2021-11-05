@@ -1,5 +1,5 @@
 import { Button, Card, Container, FloatingLabel, Form } from "react-bootstrap";
-import { register } from "../data/dal";
+import { register } from "../adapters/firebase";
 import useInput from "../hooks/useInput";
 import Input from "../components/Input";
 import { useContext } from "react";

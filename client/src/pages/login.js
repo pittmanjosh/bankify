@@ -1,5 +1,5 @@
 import { Accordion, Button, Card, Container, FloatingLabel, Form } from "react-bootstrap";
-import { loginEmailPassword, loginGoogle } from "../data/dal";
+import { loginEmailPassword, loginGoogle } from "../adapters/firebase";
 import useInput from "../hooks/useInput";
 import ctx from "../context";
 import { useContext, useState } from "react";
