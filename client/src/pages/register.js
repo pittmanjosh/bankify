@@ -1,4 +1,4 @@
-import { Button, Card, Container, FloatingLabel, Form } from "react-bootstrap";
+import { Button, Card, Col, FloatingLabel, Form } from "react-bootstrap";
 import { register } from "../adapters/firebase";
 import useInput from "../hooks/useInput";
 import Input from "../components/Input";
@@ -26,7 +26,7 @@ export default function Register() {
   };
 
   return (
-    <Container>
+    <Col sm={8} lg={7} xl={6}>
       <Card style={{ maxWidth: "36rem", minWidth: "18rem", }}>
         <Card.Header>
           <h2>Register Account</h2>
@@ -84,6 +84,6 @@ export default function Register() {
           </Form>
         </Card.Body>
       </Card>
-    </Container>
+    </Col>
   );
 }

@@ -14,7 +14,7 @@ const auth = currentAuth();
 export function loginEmailPassword(email,pwd, createAlert) {
   let success;
   signInWithEmailAndPassword(auth, email, pwd)
-    .then((result) => {
+    .then(() => {
       createAlert("Welcome back to Bankify","success","Successful Login!");
       success = true;
     })
@@ -29,7 +29,7 @@ export function loginGoogle(createAlert) {
   provider.addScope('email');
 
   signInWithPopup(auth,provider)
-    .then(()=>{
+    .then((x)=>{
       createAlert("Welcome back to Bankify","success","Successful Login!");})
     .catch(x=>createAlert(x.message,"danger"))
 }

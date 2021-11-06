@@ -2,32 +2,22 @@ import {
   Button,
   Card,
   Col,
-  Container,
-  Form,
-  Modal,
   Row,
 } from "react-bootstrap";
-// import useInput from "../hooks/useInput";
-// import { useContext } from "react";
-// import ctx from "../context";
-// import currentAuth from "../auth/firebaseAuth";
-import { BrowserRouter as Router, Redirect } from "react-router";
-import useUser from "../hooks/useUser";
-import { useState, useRef } from "react";
-import { useSetAlert } from "../hooks/useAlert";
-import useInput from "../hooks/useInput";
-import { updateProfile } from "@firebase/auth";
+import { useState } from "react";
 import currentAuth from "../auth/firebaseAuth";
 import useModal from "../hooks/useModal";
 import TransactionModal from "../components/Modal";
 
 export default function Dashboard() {
-  const [checking, setChecking] = useState(0);
-  const [savings, setSavings] = useState(0);
-  const depositCheckingModal = useModal("Deposit", "checking");
-  const withdrawCheckingModal = useModal("Withdraw", "checking");
-  const depositSavingsModal = useModal("Deposit", "savings");
-  const withdrawSavingsModal = useModal("Withdraw", "savings");
+  const checkingState = useState(0); //change to fetched balance
+  const checking = checkingState[0];
+  const savingsState = useState(0); //change to fetched balance
+  const savings = savingsState[0];
+  const depositCheckingModal = useModal("Deposit", "Checking");
+  const withdrawCheckingModal = useModal("Withdraw", "Checking");
+  const depositSavingsModal = useModal("Deposit", "Savings");
+  const withdrawSavingsModal = useModal("Withdraw", "Savings");
 
   const auth = currentAuth();
   const user = auth.currentUser;
@@ -41,8 +31,8 @@ export default function Dashboard() {
   };
 
   return (
-    <Container>
-      <Card style={{ maxWidth: "36rem", minWidth: "18rem" }}>
+    <Col sm={8} lg={7} xl={6}>
+      <Card>
         <DashboardHeader>
           <Avatar />
         </DashboardHeader>
@@ -64,11 +54,11 @@ export default function Dashboard() {
           />
         </Card.Body>
       </Card>
-      <TransactionModal {...depositCheckingModal} />
-      <TransactionModal {...withdrawCheckingModal} />
-      <TransactionModal {...depositSavingsModal} />
-      <TransactionModal {...withdrawSavingsModal} />
-    </Container>
+      <TransactionModal {...depositCheckingModal} state={checkingState}/>
+      <TransactionModal {...withdrawCheckingModal} state={checkingState}/>
+      <TransactionModal {...depositSavingsModal} state={savingsState} />
+      <TransactionModal {...withdrawSavingsModal} state={savingsState}/>
+    </Col>
   );
 }
 
@@ -114,7 +104,6 @@ function DashboardPanel(props) {
           Withdraw
         </Button>
       </div>
-      <hr />
     </div>
   );
 }

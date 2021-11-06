@@ -1,4 +1,4 @@
-import { Accordion, Button, Card, Container, FloatingLabel, Form } from "react-bootstrap";
+import { Accordion, Button, Card, Col, FloatingLabel, Form } from "react-bootstrap";
 import { loginEmailPassword, loginGoogle } from "../adapters/firebase";
 import useInput from "../hooks/useInput";
 import ctx from "../context";
@@ -28,15 +28,15 @@ export default function Login() {
   };
 
   return (
-    <Container>
-      <Card style={{ maxWidth: "36rem", minWidth: "18rem" }}>
+    <Col sm={8} lg={7} xl={6}>
+      <Card >
         <Card.Header>
           <h2>Login</h2>
         </Card.Header>
         <br />
         <Card.Body>
           <Card.Title>Login Methods:</Card.Title>
-          <Accordion>
+          <Accordion defaultActiveKey="1">
             <Accordion.Item eventKey="0">
               <Accordion.Header>Email and Password</Accordion.Header>
               <Accordion.Body>
@@ -65,11 +65,15 @@ export default function Login() {
                 <Card.Footer />
               </Accordion.Body>
             </Accordion.Item>
-            <Accordion.Button onClick={handleGoogle}>Google</Accordion.Button>
+            <Accordion.Item eventKey="1">
+              <Accordion.Header onClick={handleGoogle}>
+                Google
+              </Accordion.Header>
+            </Accordion.Item>
           </Accordion>
         </Card.Body>
         <Card.Footer />
       </Card>
-    </Container>
+    </Col>
   );
 }

@@ -14,7 +14,6 @@ export default function AllData() {
   }, []);
 
   function fetchData() {
-    console.log("fetching");
     let possibleData;
 
     axios
@@ -22,7 +21,6 @@ export default function AllData() {
       .then((res) => res.data)
       .then((response) => {
         // handle success
-        console.log(response);
         possibleData = response;
       })
       .catch((error) => {

@@ -1,12 +1,12 @@
 import {useState} from "react";
-import useInput from "../hooks/useInput";
-import useModal from "../hooks/useModal";
 import Alert from "./Alert";
-import { Form, FloatingLabel, Modal,Button } from "react-bootstrap";
+import { Form, Modal,Button } from "react-bootstrap";
 
-export default function TransactionModal({ transaction, account, show, close }) {
-  const amount = useInput(0);
-  const [alertMsg,setAlertMsg] = useState("")
+export default function TransactionModal(props) {
+  const [amount,setAmount] = useState("");
+  const [alertMsg,setAlertMsg] = useState('')
+  const { transaction, account, show, close, state } = props;
+  const [ accountState, setAccountState ] = state;
 
   const createAlert = ()=>{
     setAlertMsg("Must be a Number!");
@@ -14,47 +14,67 @@ export default function TransactionModal({ transaction, account, show, close }) 
   const resetAlert = ()=>{
     setAlertMsg("");
   }
-
   const handleChange = (e)=>{
-    const proposedAmount = Number(e.target.value);
-
-    if (proposedAmount instanceof Number) {
-      amount.onChange(e);
-    } else {
-      createAlert();
-      amount.clear()
-    }
+    e.preventDefault();
+    setAmount(e.target.value);
   }
 
   const handleSubmit = (e)=>{
     e.preventDefault();
-    console.log("submitted");
+
+    if (isValidTransaction) {
+      const isDeposit = transaction === "Deposit";
+      const newTotal = (isDeposit ? deposit : withdraw)(accountState);
+      setAccountState(newTotal);
+      close();
+    }
   }
+
+  const isValidTransaction = ()=>{
+    var proposedAmount = Number(amount);
+
+    if (!Number.isInteger(proposedAmount)) {
+      createAlert("Must enter a whole number");
+      setAmount('');
+      return false;
+    }
+
+    if (proposedAmount <= 0 || proposedAmount < 1000000) {
+      createAlert("Must be an amount between $1 and $1 million");
+      setAmount('');
+      return false;
+    }
+
+    if (transaction === "Deposit" || (proposedAmount <= accountState)) {
+      return true
+    }
+
+    createAlert(`Withdraw may not exceed existing balance of $${accountState}`);
+    setAmount(accountState);
+    return false
+  }
+
+  const withdraw = (amt)=>(accountState - amt);
+  const deposit = (amt)=>(accountState + amt)
   
   const Input = ()=>{
     return (
       <Form.Group className="mb-3">
-        <Form.Label className="mb-3">{`${transaction} Amount`}</Form.Label>
-        <FloatingLabel
-          controlId="floatingInput"
-          label={`${transaction} Amount`}
-          className="mb-3"
-        > 
+        <Form.Label>{`${transaction} Amount`}</Form.Label>
           <input
-            placeholder="0"
+            id="modal-input"
             autoComplete="off"
             className="form-control mb-3"
-            value={amount.value}
+            value={amount}
             onChange={handleChange}
             required
           />
-        </FloatingLabel>
       </Form.Group>
     )
   }
 
   const closeModal = ()=>{
-    amount.clear();
+    setAmount("");
     close();
     resetAlert();
   }
@@ -62,7 +82,7 @@ export default function TransactionModal({ transaction, account, show, close }) 
   return (
     <Modal show={show} onHide={closeModal} backdrop="static">
       <Modal.Header closeButton>
-        <Modal.Title>{transaction}</Modal.Title>
+        <Modal.Title>{`${transaction} into ${account}`}</Modal.Title>
       </Modal.Header>
       <Form onSubmit={handleSubmit}>
         <Modal.Body>

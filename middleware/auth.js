@@ -24,10 +24,11 @@ function authentication(req,res,next) {
   
   fbAdmin.auth().verifyIdToken(idToken)
     .then((decodedToken)=>{
-      const {uid, email, name} = decodedToken;
+      const {uid, email, name, photoURL} = decodedToken;
       req.uid = uid;
       req.email = email;
       req.name = name;
+      req.photoURL = photoURL;
       console.log("Authorized User:",uid)
       next();
     })
