@@ -8,6 +8,7 @@ import {
   signInWithPopup,
   updateProfile
 } from "firebase/auth";
+import { createUser } from "./mongodb";
 
 const auth = currentAuth();
 
@@ -40,12 +41,18 @@ export function register(name,email,pwd,createAlert) {
       createAlert("You are now registered!","success");
       return user;
     })
-    .then(()=>{
-      updateProfile(auth.currentUser, {
+    .then(user=>{
+      updateProfile(user, {
         displayName: name,
         profileURL: `https://ui-avatars.com/api/?name=${name}`
       })
-        .catch(x => createAlert(x.message,"danger","Name not filed!"))
+      .catch(x => createAlert(x.message,"danger","Name not filed!"))
+
+      return user;
+    })
+    .then(user=>{
+      createUser(user)
+        .catch(x=>createAlert(x.message,"danger","Database Failure"))
     })
     .catch(x => createAlert(x.message,"danger","Registration Failed!"))
 }

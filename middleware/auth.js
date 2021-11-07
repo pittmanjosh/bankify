@@ -7,11 +7,12 @@ function authentication(req,res,next) {
   if (idToken) {
     fbAdmin.auth().verifyIdToken(idToken)
     .then((decodedToken)=>{
-      const {uid, email, name} = decodedToken;
+      const {uid, email, name, picture} = decodedToken;
       req.uid = uid;
       req.email = email;
       req.name = name;
-      console.log("Authorized User:",uid)
+      req.photoURL = picture;
+      console.log("Authorized User:",uid);
       next();
     })
     .catch(()=>{
@@ -20,21 +21,6 @@ function authentication(req,res,next) {
   } else {
     res.status(401).send("Missing idToken")
   }
-  // verify token
-  
-  fbAdmin.auth().verifyIdToken(idToken)
-    .then((decodedToken)=>{
-      const {uid, email, name, photoURL} = decodedToken;
-      req.uid = uid;
-      req.email = email;
-      req.name = name;
-      req.photoURL = photoURL;
-      console.log("Authorized User:",uid)
-      next();
-    })
-    .catch(()=>{
-      res.status(401).send("Authentication failed")
-    })
 };
 
 module.exports = authentication;
