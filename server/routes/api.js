@@ -46,10 +46,10 @@ Router.route("/")
       const collection = dbConnect.collection("users");
       collection.findOne({ uid: req.uid }, (err, result)=>{
         if (!err) {
-          res.status(400).send(`${name} exists`);
+          res.status(400).send(`${req.name} exists`);
         } 
       });
-      
+
       dbConnect.collection("users").insertOne(newUser, (err, result) => {
         if (err) {
           res.status(400).send("Error adding user");
@@ -63,9 +63,9 @@ Router.route("/")
     const account = req.body.account;
     const amount = req.body.amount;
     if (!account || !amount) {
-      res.status(400).send("Missing parameters")
+      res.status(400).send("Missing parameters");
     } else {
-      console.log("meets parameters")
+      console.log("meets parameters");
     }
 
     console.log("account:",account);
