@@ -49,14 +49,14 @@ export default function Dashboard() {
           {console.log(user)}
           <DashboardPanel 
             title="Checking" 
-            balance={user.checking} 
+            balance={user?.checking || 0} 
             openDeposit={depositCheckingModal.open} 
             openWithdraw={withdrawCheckingModal.open}  
           />
           <hr/>
           <DashboardPanel 
             title="Savings" 
-            balance={user.savings} 
+            balance={user?.savings || 0} 
             openDeposit={depositSavingsModal.open} 
             openWithdraw={withdrawSavingsModal.open}  
           />
