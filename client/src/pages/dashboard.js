@@ -4,7 +4,7 @@ import {
   Col,
   Row,
 } from "react-bootstrap";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import currentAuth from "../auth/firebaseAuth";
 import useModal from "../hooks/useModal";
 import TransactionModal from "../components/Modal";
@@ -12,17 +12,21 @@ import { getUser } from "../adapters/mongodb";
 
 
 export default function Dashboard() {
-  const currentUser = currentAuth().currentUser;
-  const user = getUser(currentUser);
-  const checkingState = useState(user["checking"]); //change to fetched balance
-  const checking = checkingState[0];
-  const savingsState = useState(user["savings"]); //change to fetched balance
-  const savings = savingsState[0];
+  const checkingState = useState(null); //change to fetched balance
+  const [checking,setChecking] = checkingState;
+  const savingsState = useState(null); //change to fetched balance
+  const [savings,setSavings] = savingsState;
   const depositCheckingModal = useModal("Deposit", "Checking");
   const withdrawCheckingModal = useModal("Withdraw", "Checking");
   const depositSavingsModal = useModal("Deposit", "Savings");
   const withdrawSavingsModal = useModal("Withdraw", "Savings");
-
+  let currentUser = currentAuth().currentUser;
+  let user = getUser(currentUser);
+  
+  useEffect(()=>{
+    setSavings(user.savings)
+    setChecking(user.checking)
+  })
   
 
   let name = user.displayName ? user.displayName.toUpperCase() : "USER";
