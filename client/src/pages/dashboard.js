@@ -25,7 +25,7 @@ export default function Dashboard() {
 
   useEffect(()=>{
     let currentUser = currentAuth().currentUser;
-    let fetchedUser = getUser(currentUser);
+    let fetchedUser = await getUser(currentUser);
     setUser(fetchedUser)
   })
   
