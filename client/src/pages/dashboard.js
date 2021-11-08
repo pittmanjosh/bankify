@@ -26,8 +26,11 @@ export default function Dashboard() {
   let user = auth.currentUser;
 
   useEffect(()=>{
-    const fetchedUser = getUser(user);
-    console.log("fetched",fetchedUser)
+    (async ()=>{
+      const fetchedUser = await getUser(user);
+      console.log("fetched",fetchedUser)
+    })()
+    
     // setSavings(fetchedUser.savings);
     // setChecking(fetchedUser.checking);
   })
