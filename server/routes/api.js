@@ -42,15 +42,16 @@ Router.route("/")
     };
 
     (async () => {
-      const dbConnect = dbo.getDb();
-      const collection = dbConnect.collection("users");
-      collection.findOne({ uid: req.uid }, (err, result)=>{
+      const dbConnect0 = dbo.getDb();
+
+      dbConnect0.collection("users").findOne({ uid: req.uid }, (err, result)=>{
         if (result || err) {
           res.status(400).send(`${req.name} exists`);
         } 
       });
-
-      collection.insertOne(newUser, (err, result) => {
+      
+      const dbConnect1 = dbo.getDb();
+      dbConnect1.collection("users").insertOne(newUser, (err, result) => {
         if (err) {
           res.status(400).send("Error adding user");
         } else {
