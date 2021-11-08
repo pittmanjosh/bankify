@@ -45,11 +45,12 @@ Router.route("/")
       const dbConnect0 = dbo.getDb();
 
       dbConnect0.collection("users").findOne({ uid: req.uid }, (err, result)=>{
+        console.log("user-check:",result)
         if (result || err) {
           res.status(400).send(`${req.name} exists`);
         } 
       });
-      
+
       const dbConnect1 = dbo.getDb();
       dbConnect1.collection("users").insertOne(newUser, (err, result) => {
         if (err) {
