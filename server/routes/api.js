@@ -56,7 +56,16 @@ Router.route("/")
   .put(function (req, res) {
     const account = req.body.account;
     const amount = req.body.amount;
-    const isSavings = (String(account) === "savings");
+    if (!account || !amount) {
+      res.status(400).send("Missing parameters")
+    } else {
+      console.log("meets parameters")
+    }
+
+    console.log("account:",account);
+    console.log("amount:",amount);
+
+    const isSavings = account === "savings";
     const update = (isSavings) ? (
       {"savings": amount}
     ) : (
@@ -69,8 +78,10 @@ Router.route("/")
       dbConnect.collection("users")
         .updateOne({uid:req.uid}, operation, (err, result) => {
           if (err) {
+            console.log('Successful put')
             res.status(400).send("Error finding user");
           } else {
+            console.log('Failed put')
             res.status(202).send(`${name} updated`);
           }
         })
