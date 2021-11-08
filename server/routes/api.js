@@ -21,8 +21,7 @@ Router.route("/")
 
       dbConnect
         .collection("users")
-        .find({ uid: req.uid })
-        .toArray(function (err, result) {
+        .findOne({ uid: req.uid }, (err, result)=>{
           if (err) {
             res.status(400).send("Error fetching listings!");
           } else {
@@ -44,6 +43,8 @@ Router.route("/")
 
     (async () => {
       const dbConnect = dbo.getDb();
+      const collection = dbConnect.collection("users");
+      if (collection.findOne)
       dbConnect.collection("users").insertOne(newUser, (err, result) => {
         if (err) {
           res.status(400).send("Error adding user");
