@@ -42,11 +42,11 @@ Router.route("/")
     };
 
     (async () => {
-      const dbConnect = dbo.getDb();
-      const collection = dbConnect.collection("users");
-      collection.findOne({ uid: req.uid }, (err, result)=>{
+      const dbConnect0 = dbo.getDb();
+      const dbConnect1 = dbo.getDb();
+      dbConnect0.collection("users").findOne({ uid: req.uid }, (err, result)=>{
         if (err) {
-          collection.insertOne(newUser, (err, result) => {
+          dbConnect1.insertOne(newUser, (err, result) => {
             if (err) {
               res.status(400).send("Error adding user");
             } else {
