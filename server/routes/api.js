@@ -19,8 +19,7 @@ Router.route("/")
     (async () => {
       const dbConnect = dbo.getDb();
 
-      dbConnect
-        .collection("users")
+      dbConnect.collection("users")
         .findOne({ uid: req.uid }, (err, result)=>{
           if (err) {
             res.status(400).send("Error fetching listings!");
@@ -47,7 +46,7 @@ Router.route("/")
         if (err) {
           res.status(400).send("Error adding user");
         } else {
-          res.status(201);
+          res.status(201).send("created");
         }
       });
     })();
