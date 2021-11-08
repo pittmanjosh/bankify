@@ -45,7 +45,7 @@ Router.route("/")
       const dbConnect = dbo.getDb();
       const collection = dbConnect.collection("users");
       collection.findOne({ uid: req.uid }, (err, result)=>{
-        if (!err) {
+        if (result) {
           res.status(400).send(`${req.name} exists`);
         } 
       });
