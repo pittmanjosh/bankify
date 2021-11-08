@@ -32,7 +32,7 @@ export default function Dashboard() {
     
     // setSavings(fetchedUser.savings);
     // setChecking(fetchedUser.checking);
-  })
+  },[])
   
 
 
