@@ -16,13 +16,14 @@ export default function Dashboard() {
   const [checking,setChecking] = checkingState;
   const savingsState = useState(null); //change to fetched balance
   const [savings,setSavings] = savingsState;
+  // const [user,setUser] = useState(null);
   const depositCheckingModal = useModal("Deposit", "Checking");
   const withdrawCheckingModal = useModal("Withdraw", "Checking");
   const depositSavingsModal = useModal("Deposit", "Savings");
   const withdrawSavingsModal = useModal("Withdraw", "Savings");
 
   let currentUser = currentAuth().currentUser;
-  let user = getUser(currentUser);
+  let user = await getUser(currentUser);
 
   useEffect(()=>{
     setSavings(user.savings)
