@@ -12,7 +12,7 @@ Router.use(function timeLog(req, res, next) {
 });
 
 Router.use(auth);
-Router.use(express.json())
+Router.use(express.raw())
 Router.route("/")
   .get(function (req, res) {
     // return user balance
