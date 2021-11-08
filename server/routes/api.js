@@ -12,7 +12,7 @@ Router.use(function timeLog(req, res, next) {
 });
 
 Router.use(auth);
-
+Router.use(express.json())
 Router.route("/")
   .get(function (req, res) {
     // return user balance
@@ -54,7 +54,27 @@ Router.route("/")
     })();
   })
   .put(function (req, res) {
-    res.send({ message: "put" });
+    const account = req.body.account;
+    const amount = req.body.amount;
+    const isSavings = (String(account) === "savings");
+    const update = (isSavings) ? (
+      {"savings": amount}
+    ) : (
+      {"checking": amount}
+    );
+    const operation = { $set: update};
+    const name = req.name;
+    (async () => {
+      const dbConnect = dbo.getDb();
+      dbConnect.collection("users")
+        .updateOne({uid:req.uid}, operation, (err, result) => {
+          if (err) {
+            res.status(400).send("Error finding user");
+          } else {
+            res.status(202).send(`${name} updated`);
+          }
+        })
+    })();
   })
   .delete(function (req, res) {
     res.send({ message: "delete" });
