@@ -34,7 +34,7 @@ export function getUser(user) {
   (async ()=>{
     axios(config)
     .then(function (response) {
-      return response.data;
+      return JSON.stringify(response.data);
     })
     .catch(function (error) {
       console.log(error);
