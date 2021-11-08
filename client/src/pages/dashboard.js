@@ -4,13 +4,10 @@ import {
   Col,
   Row,
 } from "react-bootstrap";
-import { useState } from "react";
-import currentAuth from "../auth/firebaseAuth";
+import { useState, useEffect,useContext } from "react";
 import useModal from "../hooks/useModal";
 import TransactionModal from "../components/Modal";
-import { getUser } from "../adapters/mongodb";
-import { useEffect } from "react/cjs/react.development";
-import useUser from "../hooks/useUser";
+import ctx from "../context";
 
 
 export default function Dashboard() {
@@ -22,12 +19,10 @@ export default function Dashboard() {
   const withdrawCheckingModal = useModal("Withdraw", "Checking");
   const depositSavingsModal = useModal("Deposit", "Savings");
   const withdrawSavingsModal = useModal("Withdraw", "Savings");
-
-  let auth = currentAuth()
-  let user = auth.currentUser;
+  const {user} = useContext(ctx);
 
   useEffect(()=>{
-    console.log(useUser())
+    console.log(user)
 
     // (async ()=>{
     //   const fetchedUser = await getUser(user);
