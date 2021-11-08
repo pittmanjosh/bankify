@@ -1,31 +1,31 @@
-import { Button, Card, Col, Row } from "react-bootstrap";
-import { useState, useEffect } from "react";
+import {
+  Button,
+  Card,
+  Col,
+  Row,
+} from "react-bootstrap";
+import { useState } from "react";
 import currentAuth from "../auth/firebaseAuth";
 import useModal from "../hooks/useModal";
 import TransactionModal from "../components/Modal";
 import { getUser } from "../adapters/mongodb";
 
+
 export default function Dashboard() {
-  const checkingState = useState(null); //change to fetched balance
-  const [checking, setChecking] = checkingState;
-  const savingsState = useState(null); //change to fetched balance
-  const [savings, setSavings] = savingsState;
-  const [user, setUser] = useState(null);
+  const checkingState = useState(0); //change to fetched balance
+  const checking = checkingState[0];
+  const savingsState = useState(0); //change to fetched balance
+  const savings = savingsState[0];
   const depositCheckingModal = useModal("Deposit", "Checking");
   const withdrawCheckingModal = useModal("Withdraw", "Checking");
   const depositSavingsModal = useModal("Deposit", "Savings");
   const withdrawSavingsModal = useModal("Withdraw", "Savings");
 
-  useEffect(() => {
-    (async () => {
-      let currentUser = currentAuth().currentUser;
-      let fetchedUser = await getUser(currentUser);
-      setUser(fetchedUser);
-    })();
-  },[]);
+  let currentUser = currentAuth().currentUser;
+  let user = getUser(currentUser)
 
-  let name = user?.displayName ? user.displayName.toUpperCase() : "USER";
-  let photoURL = user?.photoURL || null;
+  let name = user.displayName ? user.displayName.toUpperCase() : "USER";
+  let photoURL = user.photoURL;
   const Avatar = () => {
     if (!photoURL) photoURL = "https://react-bootstrap.github.io/logo.svg";
 
@@ -41,25 +41,25 @@ export default function Dashboard() {
         <Card.Body className="justify-content-center align-item-center">
           <Card.Text>{`Hello ${name}!`}</Card.Text>
           {console.log(user)}
-          <DashboardPanel
-            title="Checking"
-            balance={user?.checking || 0}
-            openDeposit={depositCheckingModal.open}
-            openWithdraw={withdrawCheckingModal.open}
+          <DashboardPanel 
+            title="Checking" 
+            balance={checking} 
+            openDeposit={depositCheckingModal.open} 
+            openWithdraw={withdrawCheckingModal.open}  
           />
-          <hr />
-          <DashboardPanel
-            title="Savings"
-            balance={user?.savings || 0}
-            openDeposit={depositSavingsModal.open}
-            openWithdraw={withdrawSavingsModal.open}
+          <hr/>
+          <DashboardPanel 
+            title="Savings" 
+            balance={savings} 
+            openDeposit={depositSavingsModal.open} 
+            openWithdraw={withdrawSavingsModal.open}  
           />
         </Card.Body>
       </Card>
-      <TransactionModal {...depositCheckingModal} state={checkingState} />
-      <TransactionModal {...withdrawCheckingModal} state={checkingState} />
+      <TransactionModal {...depositCheckingModal} state={checkingState}/>
+      <TransactionModal {...withdrawCheckingModal} state={checkingState}/>
       <TransactionModal {...depositSavingsModal} state={savingsState} />
-      <TransactionModal {...withdrawSavingsModal} state={savingsState} />
+      <TransactionModal {...withdrawSavingsModal} state={savingsState}/>
     </Col>
   );
 }
@@ -80,7 +80,7 @@ function DashboardHeader(props) {
 }
 
 function DashboardPanel(props) {
-  const { title, balance, openDeposit, openWithdraw } = props;
+  const {title,balance,openDeposit,openWithdraw} = props;
 
   return (
     <div className={`panel-${title.toLowerCase()}`}>
@@ -91,10 +91,18 @@ function DashboardPanel(props) {
         <span className="form-control" aria-label="Amount">
           {`${balance}.00`}
         </span>
-        <Button variant="outline-primary" id="deposit" onClick={openDeposit}>
+        <Button
+          variant="outline-primary"
+          id="deposit"
+          onClick={openDeposit}
+        >
           Deposit
         </Button>
-        <Button variant="outline-primary" id="withdraw" onClick={openWithdraw}>
+        <Button
+          variant="outline-primary"
+          id="withdraw"
+          onClick={openWithdraw}
+        >
           Withdraw
         </Button>
       </div>
