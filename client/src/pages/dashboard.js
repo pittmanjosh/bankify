@@ -10,6 +10,7 @@ import useModal from "../hooks/useModal";
 import TransactionModal from "../components/Modal";
 import { getUser } from "../adapters/mongodb";
 import { useEffect } from "react/cjs/react.development";
+import useUser from "../hooks/useUser";
 
 
 export default function Dashboard() {
@@ -26,10 +27,12 @@ export default function Dashboard() {
   let user = auth.currentUser;
 
   useEffect(()=>{
-    (async ()=>{
-      const fetchedUser = await getUser(user);
-      console.log("fetched",fetchedUser)
-    })()
+    console.log(useUser())
+
+    // (async ()=>{
+    //   const fetchedUser = await getUser(user);
+    //   console.log("fetched",fetchedUser)
+    // })()
     
     // setSavings(fetchedUser.savings);
     // setChecking(fetchedUser.checking);
