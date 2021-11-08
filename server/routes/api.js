@@ -42,22 +42,21 @@ Router.route("/")
     };
 
     (async () => {
-      const dbConnect0 = dbo.getDb();
-      const dbConnect1 = dbo.getDb();
-      dbConnect0.collection("users").findOne({ uid: req.uid }, (err, result)=>{
-        if (err) {
-          dbConnect1.insertOne(newUser, (err, result) => {
-            if (err) {
-              res.status(400).send("Error adding user");
-            } else {
-              res.status(201);
-            }
-          });
-        } else {
-          res.status(406);
-        }
+      const dbConnect = dbo.getDb();
+      const collection = dbConnect.collection("users");
+      collection.findOne({ uid: req.uid }, (err, result)=>{
+        if (!err) {
+          res.status(400).send(`${name} exists`);
+        } 
       });
       
+      dbConnect.collection("users").insertOne(newUser, (err, result) => {
+        if (err) {
+          res.status(400).send("Error adding user");
+        } else {
+          res.status(201);
+        }
+      });
     })();
   })
   .put(function (req, res) {
