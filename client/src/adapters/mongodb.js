@@ -1,6 +1,5 @@
 import currentAuth from "../auth/firebaseAuth";
 import axios from "axios";
-import qs from 'qs';
 const auth = currentAuth();
 const currentUser = auth.currentUser;
 
@@ -32,14 +31,16 @@ export function getUser(user) {
       'Authorization': `Bearer ${user.accessToken}`
     }
   };
+  (async ()=>{
+    axios(config)
+    .then(function (response) {
+      return response.data;
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  })()
   
-  axios(config)
-  .then(function (response) {
-    return JSON.stringify(response.data);
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
 
   return null;
 }

@@ -27,8 +27,9 @@ export default function Dashboard() {
 
   useEffect(()=>{
     const fetchedUser = getUser(user);
-    setSavings(fetchedUser.savings);
-    setChecking(fetchedUser.checking);
+    console.log("fetched",fetchedUser)
+    // setSavings(fetchedUser.savings);
+    // setChecking(fetchedUser.checking);
   })
   
 
