@@ -44,14 +44,20 @@ Router.route("/")
     (async () => {
       const dbConnect = dbo.getDb();
       const collection = dbConnect.collection("users");
-      if (collection.findOne)
-      dbConnect.collection("users").insertOne(newUser, (err, result) => {
+      collection.findOne({ uid: req.uid }, (err, result)=>{
         if (err) {
-          res.status(400).send("Error adding user");
+          collection.insertOne(newUser, (err, result) => {
+            if (err) {
+              res.status(400).send("Error adding user");
+            } else {
+              res.status(201);
+            }
+          });
         } else {
-          res.status(201);
+          res.status(406);
         }
       });
+      
     })();
   })
   .put(function (req, res) {
