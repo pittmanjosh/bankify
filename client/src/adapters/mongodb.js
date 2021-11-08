@@ -33,14 +33,13 @@ export function getUser(user) {
   };
   (async ()=>{
     axios(config)
-    .then(function (response) {
-      return JSON.stringify(response.data);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+      .then(function (response) {
+        return response;
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   })()
-  
 
   return null;
 }
