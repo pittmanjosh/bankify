@@ -24,7 +24,14 @@ export default function Dashboard() {
 
   let auth = currentAuth()
   let user = auth.currentUser;
+
+  useEffect(()=>{
+    const fetchedUser = getUser(user);
+    setSavings(fetchedUser.savings);
+    setChecking(fetchedUser.checking);
+  })
   
+
 
   let name = user.displayName ? user.displayName.toUpperCase() : "USER";
   let photoURL = user.photoURL;
