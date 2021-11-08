@@ -22,7 +22,7 @@ export default function Dashboard() {
       let fetchedUser = await getUser(currentUser);
       setUser(fetchedUser);
     })();
-  });
+  },[]);
 
   let name = user?.displayName ? user.displayName.toUpperCase() : "USER";
   let photoURL = user?.photoURL || null;
