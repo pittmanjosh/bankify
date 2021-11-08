@@ -22,13 +22,9 @@ export default function Dashboard() {
   const depositSavingsModal = useModal("Deposit", "Savings");
   const withdrawSavingsModal = useModal("Withdraw", "Savings");
 
-  let currentUser = currentAuth().currentUser;
-  let user = getUser(currentUser)
+  let auth = currentAuth()
+  let user = auth.currentUser;
   
-  useEffect(()=>{
-    setChecking(user.checking);
-    setSavings(user.savings)
-  })
 
   let name = user.displayName ? user.displayName.toUpperCase() : "USER";
   let photoURL = user.photoURL;
