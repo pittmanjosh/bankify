@@ -20,17 +20,18 @@ export default function Dashboard() {
   const withdrawCheckingModal = useModal("Withdraw", "Checking");
   const depositSavingsModal = useModal("Deposit", "Savings");
   const withdrawSavingsModal = useModal("Withdraw", "Savings");
+
   let currentUser = currentAuth().currentUser;
   let user = getUser(currentUser);
-  
+
   useEffect(()=>{
     setSavings(user.savings)
     setChecking(user.checking)
   })
   
 
-  let name = user.displayName ? user.displayName.toUpperCase() : "USER";
-  let photoURL = user.photoURL;
+  let name = user?.displayName ? user.displayName.toUpperCase() : "USER";
+  let photoURL = user?.photoURL || null;
   const Avatar = () => {
     if (!photoURL) photoURL = "https://react-bootstrap.github.io/logo.svg";
 
