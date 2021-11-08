@@ -8,6 +8,7 @@ import { useState, useEffect,useContext } from "react";
 import useModal from "../hooks/useModal";
 import TransactionModal from "../components/Modal";
 import ctx from "../context";
+import { getUser } from "../adapters/mongodb";
 
 
 export default function Dashboard() {
@@ -22,7 +23,7 @@ export default function Dashboard() {
   const {user} = useContext(ctx);
 
   useEffect(()=>{
-    console.log(user)
+    console.log(getUser(user))
 
     // (async ()=>{
     //   const fetchedUser = await getUser(user);
