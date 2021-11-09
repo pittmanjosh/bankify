@@ -24,8 +24,8 @@ export default function Dashboard() {
   const {user} = useContext(ctx);
 
   useEffect(()=>{
-    console.log(getUser(user,setFetchedUser))
-  },[fetchedUser])
+    getUser(user,setFetchedUser)
+  },[])
   
 
 
@@ -46,6 +46,7 @@ export default function Dashboard() {
         <Card.Body className="justify-content-center align-item-center">
           <Card.Text>{`Hello ${name}!`}</Card.Text>
           {console.log(user)}
+          {console.log(fetchedUser)}
           <DashboardPanel 
             title="Checking" 
             balance={checking} 
