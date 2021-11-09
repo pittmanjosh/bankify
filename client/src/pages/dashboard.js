@@ -20,11 +20,12 @@ export default function Dashboard() {
   const withdrawCheckingModal = useModal("Withdraw", "Checking");
   const depositSavingsModal = useModal("Deposit", "Savings");
   const withdrawSavingsModal = useModal("Withdraw", "Savings");
+  const [fetchedUser,setFetchedUser] = useState({});
   const {user} = useContext(ctx);
 
   useEffect(()=>{
-    console.log(getUser(user))
-  },[])
+    console.log(getUser(user,setFetchedUser))
+  },[fetchedUser])
   
 
 

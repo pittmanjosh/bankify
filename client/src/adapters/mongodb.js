@@ -23,7 +23,7 @@ export function createUser(user) {
     .catch((error) => console.log("error", error));
 }
 
-export function getUser(user) {
+export function getUser(user,setter) {
   var config = {
     method: 'get',
     url: '/api',
@@ -31,18 +31,15 @@ export function getUser(user) {
       'Authorization': `Bearer ${user.accessToken}`
     }
   };
-  var result;
   (async ()=>{
     axios(config)
       .then((res) => res.data)
       .then(function (response) {
-        result = response;
+        setter(response);
         console.log('fetched:',response);
       })
       .catch(function (error) {
         console.log(error);
       });
   })()
-
-  return result;
 }
