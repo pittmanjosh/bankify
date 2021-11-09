@@ -27,7 +27,7 @@ export default function TransactionModal(props) {
     const isValid = validate();
     const targetAccount = account.toLowerCase();
     if (isValid) {
-      console.log("account:",account);
+      console.log("account:",targetAccount);
       const isDeposit = transaction === "Deposit";
       let newTotal;
       if (isDeposit) {
