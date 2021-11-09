@@ -19,9 +19,11 @@ export default function Dashboard() {
 
   useEffect(() => {
     if (data) {
+      console.log("providing data from fetch")
       setSavings(data.savings);
       setChecking(data.checking);
     } else {
+      console.log("fetching data")
       getUser(user, setData);
     }
   });
@@ -48,14 +50,14 @@ export default function Dashboard() {
             <>
               <DashboardPanel
                 title="Checking"
-                balance={data.checking}
+                balance={checking}
                 openDeposit={depositCheckingModal.open}
                 openWithdraw={withdrawCheckingModal.open}
               />
               <hr />
               <DashboardPanel
                 title="Savings"
-                balance={data.savings}
+                balance={savings}
                 openDeposit={depositSavingsModal.open}
                 openWithdraw={withdrawSavingsModal.open}
               />
