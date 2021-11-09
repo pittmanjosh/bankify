@@ -25,7 +25,7 @@ export default function TransactionModal(props) {
   const handleSubmit = (e)=>{
     e.preventDefault();
     const isValid = validate();
-
+    const targetAccount = account.toLowerCase();
     if (isValid) {
       console.log("account:",account);
       const isDeposit = transaction === "Deposit";
@@ -37,8 +37,8 @@ export default function TransactionModal(props) {
         console.log("withdraw")
         newTotal = withdraw(amount);
       }
-      updateBalance(user,account,String(newTotal));
-      setAccountState(String(newTotal));
+      updateBalance(user,targetAccount,newTotal);
+      setAccountState(newTotal);
       close();
     }
   }
@@ -73,12 +73,12 @@ export default function TransactionModal(props) {
   const withdraw = (amt)=>{
     let result = Number(accountState) - Number(amt);
     console.log("withdraw",result)
-    return result;
+    return String(result);
   };
   const deposit = (amt)=>{
     let result = Number(accountState) + Number(amt);
     console.log("deposit",result)
-    return result;
+    return String(result);
   };
   
   const Input = ()=>{
