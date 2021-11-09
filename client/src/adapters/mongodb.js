@@ -62,8 +62,6 @@ export function updateBalance(user, account, amount) {
 }
 
 export function findUser(user) {
-  var user;
-
   var config = {
     method: "get",
     url: "/api",
@@ -78,7 +76,6 @@ export function findUser(user) {
       })
       .then((result) => {
         console.log(result);
-        user = result;
       })
       .catch(function (error) {
         console.log(error);
