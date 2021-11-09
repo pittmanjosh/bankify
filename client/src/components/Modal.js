@@ -1,12 +1,16 @@
 import {useState} from "react";
 import Alert from "./Alert";
 import { Form, Modal,Button } from "react-bootstrap";
+import { updateBalance } from "../adapters/mongodb";
+import { useContext } from "react";
+import ctx from "../context";
 
 export default function TransactionModal(props) {
   const [amount,setAmount] = useState("");
   const [alertMsg,setAlertMsg] = useState('')
   const { transaction, account, show, close, state } = props;
   const [ accountState, setAccountState ] = state;
+  const {user} = useContext(ctx);
 
   const createAlert = ()=>{
     setAlertMsg("Must be a Number!");
@@ -25,6 +29,7 @@ export default function TransactionModal(props) {
     if (isValidTransaction) {
       const isDeposit = transaction === "Deposit";
       const newTotal = (isDeposit ? deposit : withdraw)(accountState);
+      updateBalance(user,account,newTotal);
       setAccountState(newTotal);
       close();
     }

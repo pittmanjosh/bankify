@@ -23,15 +23,15 @@ export function createUser(user) {
     .catch((error) => console.log("error", error));
 }
 
-export function getUser(user,setter) {
+export function getUser(user, setter) {
   var config = {
-    method: 'get',
-    url: '/api',
-    headers: { 
-      'Authorization': `Bearer ${user.accessToken}`
-    }
+    method: "get",
+    url: "/api",
+    headers: {
+      Authorization: `Bearer ${user.accessToken}`,
+    },
   };
-  (async ()=>{
+  (async () => {
     axios(config)
       .then((res) => res.data)
       .then(function (response) {
@@ -40,5 +40,32 @@ export function getUser(user,setter) {
       .catch(function (error) {
         console.log(error);
       });
+  })();
+}
+
+export function updateBalance(user,account,amount) {
+  (async () => {
+    var myHeaders = new Headers();
+    myHeaders.append(
+      "Authorization",
+      `Bearer ${user.accessToken}`
+    );
+    myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+
+    var urlencoded = new URLSearchParams();
+    urlencoded.append("account", account);
+    urlencoded.append("amount", amount);
+
+    var requestOptions = {
+      method: "PUT",
+      headers: myHeaders,
+      body: urlencoded,
+      redirect: "follow",
+    };
+
+    fetch("/api", requestOptions)
+      .then((response) => response.text())
+      .then((result) => console.log(result))
+      .catch((error) => console.log("error", error));
   })()
 }
