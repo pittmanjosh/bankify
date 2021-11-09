@@ -6,15 +6,14 @@ import ctx from "../context";
 import { getUser } from "../adapters/mongodb";
 
 export default function Dashboard() {
-  const checkingState = useState(0); //change to fetched balance
+  const checkingState = useState(null); //change to fetched balance
   const [checking, setChecking] = checkingState;
-  const savingsState = useState(0); //change to fetched balance
+  const savingsState = useState(null); //change to fetched balance
   const [savings, setSavings] = savingsState;
   const depositCheckingModal = useModal("Deposit", "Checking");
   const withdrawCheckingModal = useModal("Withdraw", "Checking");
   const depositSavingsModal = useModal("Deposit", "Savings");
   const withdrawSavingsModal = useModal("Withdraw", "Savings");
-  const [data, setData] = useState(null);
   const { user } = useContext(ctx);
 
   useEffect(() => {
@@ -39,7 +38,7 @@ export default function Dashboard() {
           <Card.Text>{`Hello ${name}!`}</Card.Text>
           {console.log(user)}
           {console.log(data)}
-          {data && (
+          {(savings !== null) && (
             <>
               <DashboardPanel
                 title="Checking"
