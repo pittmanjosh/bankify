@@ -30,9 +30,8 @@ export default function TransactionModal(props) {
       console.log("valid")
       const isDeposit = transaction === "Deposit";
       const newTotal = (isDeposit ? deposit : withdraw)(accountState);
-      console.log("new total:",newTotal)
-      updateBalance(user,account, String(newTotal));
-      setAccountState(newTotal);
+      updateBalance(user,account,String(newTotal));
+      setAccountState(String(newTotal));
       close();
     }
   }
@@ -40,6 +39,8 @@ export default function TransactionModal(props) {
   const validate = ()=>{
     var currentBalance = Number(accountState);
     var proposedAmount = Number(amount);
+
+    console.log("balange:",currentBalance,", transaction:",transaction,", amount:",proposedAmount)
 
     if (!Number.isInteger(proposedAmount)) {
       createAlert("Must enter a whole number");
@@ -62,14 +63,21 @@ export default function TransactionModal(props) {
     return false
   }
 
-  const withdraw = (amt)=>(Number(accountState) - Number(amt));
-  const deposit = (amt)=>(Number(accountState) + Number(amt));
+  const withdraw = (amt)=>{
+    result = Number(accountState) - Number(amt);
+    console.log("withdraw",result)
+    return result;
+  };
+  const deposit = (amt)=>{
+    result = Number(accountState) + Number(amt);
+    console.log("deposit",result)
+    return result;
+  };
   
   const Input = ()=>{
     return (
       <Form.Group className="mb-3">
         <Form.Label>{`${transaction} Amount`}</Form.Label>
-          <span className="input-group-text">$</span>
           <input
             id="modal-input"
             autoComplete="off"
