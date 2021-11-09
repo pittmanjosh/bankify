@@ -35,7 +35,10 @@ export default function TransactionModal(props) {
   }
 
   const isValidTransaction = ()=>{
+    var currentBalance = Number(accountState);
     var proposedAmount = Number(amount);
+
+    console.log("balange:",currentBalance,", transaction:",transaction,", amount:",proposedAmount)
 
     if (!Number.isInteger(proposedAmount)) {
       createAlert("Must enter a whole number");
@@ -49,7 +52,7 @@ export default function TransactionModal(props) {
       return false;
     }
 
-    if (transaction === "Deposit" || (proposedAmount <= accountState)) {
+    if (transaction === "Deposit" || (proposedAmount <= currentBalance)) {
       return true
     }
 
