@@ -7,9 +7,11 @@ import { getUser } from "../adapters/mongodb";
 
 export default function Dashboard() {
   const checkingState = useState(null); //change to fetched balance
-  const [checking, setChecking] = checkingState;
+  const checking = checkingState[0];
+  const setChecking = checkingState[1];
   const savingsState = useState(null); //change to fetched balance
-  const [savings, setSavings] = savingsState;
+  const savings = savingsState[0];
+  const setSavings = savingsState[1];
   const depositCheckingModal = useModal("Deposit", "Checking");
   const withdrawCheckingModal = useModal("Withdraw", "Checking");
   const depositSavingsModal = useModal("Deposit", "Savings");
