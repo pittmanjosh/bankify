@@ -64,12 +64,12 @@ export default function TransactionModal(props) {
   }
 
   const withdraw = (amt)=>{
-    result = Number(accountState) - Number(amt);
+    let result = Number(accountState) - Number(amt);
     console.log("withdraw",result)
     return result;
   };
   const deposit = (amt)=>{
-    result = Number(accountState) + Number(amt);
+    let result = Number(accountState) + Number(amt);
     console.log("deposit",result)
     return result;
   };
