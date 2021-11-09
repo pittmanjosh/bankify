@@ -65,22 +65,25 @@ export function findUser(user) {
   var user;
 
   var config = {
-    method: 'get',
-    url: '/api',
-    headers: { 
-      'Authorization': `Bearer ${user.accessToken}`
-    }
+    method: "get",
+    url: "/api",
+    headers: {
+      Authorization: `Bearer ${user.accessToken}`,
+    },
   };
-  
-  axios(config)
-  .then(function (response) {response.data})
-  .then(result=>{
-    console.log(result);
-    user = result;
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
+  (async () => {
+    axios(config)
+      .then(function (response) {
+        response.data;
+      })
+      .then((result) => {
+        console.log(result);
+        user = result;
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  })();
 
   return user;
 }
@@ -89,7 +92,6 @@ export function createUserIfNecessary(user) {
   let existingUser = findUser(user);
 
   if (!existingUser) {
-    createUser(user)
-      .catch((error) => console.log("error", error));
+    createUser(user).catch((error) => console.log("error", error));
   }
 }
