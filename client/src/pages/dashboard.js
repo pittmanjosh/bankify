@@ -38,7 +38,6 @@ export default function Dashboard() {
         <Card.Body className="justify-content-center align-item-center">
           <Card.Text>{`Hello ${name}!`}</Card.Text>
           {console.log(user)}
-          {console.log(data)}
           {(savings !== null) && (
             <>
               <DashboardPanel
