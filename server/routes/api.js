@@ -12,7 +12,7 @@ Router.use(function timeLog(req, res, next) {
 });
 
 Router.use(auth);
-Router.use(express.urlencoded())
+Router.use(express.urlencoded({extended:true}))
 Router.route("/")
   .get(function (req, res) {
     // return user balance
