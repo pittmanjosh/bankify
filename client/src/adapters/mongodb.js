@@ -62,26 +62,22 @@ export function updateBalance(user, account, amount) {
 }
 
 export function findUser(user) {
-  var config = {
-    method: "get",
-    url: "/api",
-    headers: {
-      Authorization: `Bearer ${user.accessToken}`,
-    },
-  };
-  (async () => {
-    axios(config)
-      .then(function (response) {
-        response.data;
-      })
-      .then((result) => {
-        console.log(result);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  })();
+  var myHeaders = new Headers();
+  myHeaders.append(
+    "Authorization",
+    `Bearer ${user.accessToken}`
+  );
 
+  var requestOptions = {
+    method: "GET",
+    headers: myHeaders,
+    redirect: "follow",
+  };
+
+  fetch("/api", requestOptions)
+    .then((response) => response.text())
+    .then((result) => console.log(result))
+    .catch((error) => console.log("error", error));
   return user;
 }
 
