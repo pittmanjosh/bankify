@@ -24,7 +24,7 @@ export default function Dashboard() {
 
   useEffect(()=>{
     (async ()=>{
-      console.log(await getUser(user))
+      console.log(getUser(user))
     })
     
 
