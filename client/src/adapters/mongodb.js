@@ -34,7 +34,9 @@ export function getUser(user, setSavings, setChecking) {
         console.log(response);
         setChecking(response.checking);
         setSavings(response.savings);
+        return response;
       })
+      .then(res=>createUser(res))
       .catch(function (error) {
         console.log(error);
       });
@@ -82,14 +84,6 @@ export function findUser(user) {
       currentUser = result;
     })
     .catch((error) => console.log("error", error));
-    
+
   return user;
-}
-
-export function createUserIfNecessary(user) {
-  let existingUser = findUser(user);
-
-  if (!existingUser) {
-    createUser(user).catch((error) => console.log("error", error));
-  }
 }
