@@ -45,10 +45,3 @@ export function getUser(user) {
 
   return result;
 }
-
-
-
-fetch("https://badbank-pittman.herokuapp.com/api", requestOptions)
-  .then(response => response.text())
-  .then(result => console.log(result))
-  .catch(error => console.log('error', error));
