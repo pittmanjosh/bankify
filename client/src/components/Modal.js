@@ -25,7 +25,7 @@ export default function TransactionModal(props) {
   const handleSubmit = (e)=>{
     e.preventDefault();
     const isValid = validate();
-    
+
     if (isValid) {
       const isDeposit = transaction === "Deposit";
       const newTotal = (isDeposit ? deposit : withdraw)(accountState);
@@ -62,8 +62,8 @@ export default function TransactionModal(props) {
     return false
   }
 
-  const withdraw = (amt)=>(accountState - amt);
-  const deposit = (amt)=>(accountState + amt)
+  const withdraw = (amt)=>(Number(accountState) - Number(amt));
+  const deposit = (amt)=>(Number(accountState) + Number(amt));
   
   const Input = ()=>{
     return (
