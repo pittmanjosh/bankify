@@ -19,7 +19,7 @@ export function createUser(user) {
     .catch((error) => console.log("error", error));
 }
 
-export function getUser(user, setter) {
+export function getUser(user,setSavings,setChecking) {
   var config = {
     method: "get",
     url: "/api",
@@ -31,7 +31,8 @@ export function getUser(user, setter) {
     axios(config)
       .then((res) => res.data)
       .then(function (response) {
-        setter(response);
+        setChecking(response.checking);
+        setSavings(response.savings);
       })
       .catch(function (error) {
         console.log(error);
