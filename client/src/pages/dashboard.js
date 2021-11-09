@@ -18,13 +18,12 @@ export default function Dashboard() {
   const { user } = useContext(ctx);
 
   useEffect(() => {
+    getUser(user, setData);
+
     if (data) {
       console.log("providing data from fetch")
       setSavings(data.savings);
       setChecking(data.checking);
-    } else {
-      console.log("fetching data")
-      getUser(user, setData);
     }
   });
 
