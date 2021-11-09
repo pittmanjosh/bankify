@@ -30,9 +30,8 @@ export default function TransactionModal(props) {
       console.log("valid")
       const isDeposit = transaction === "Deposit";
       const newTotal = (isDeposit ? deposit : withdraw)(accountState);
-      updateBalance(user,account,newTotal).then(()=>{
-        setAccountState(newTotal);
-      })
+      updateBalance(user,account,newTotal);
+      setAccountState(newTotal);
       close();
     }
   }
