@@ -31,16 +31,24 @@ export function getUser(user) {
       'Authorization': `Bearer ${user.accessToken}`
     }
   };
+  let result;
   (async ()=>{
     axios(config)
       .then((res) => res.data)
       .then(function (response) {
-        return response;
+        result = response;
       })
       .catch(function (error) {
         console.log(error);
       });
   })()
 
-  return null;
+  return result;
 }
+
+
+
+fetch("https://badbank-pittman.herokuapp.com/api", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
