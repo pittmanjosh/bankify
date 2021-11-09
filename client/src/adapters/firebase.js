@@ -8,7 +8,7 @@ import {
   signInWithPopup,
   updateProfile,
 } from "firebase/auth";
-import { createUser, findUser } from "./mongodb";
+import { createUserIfNecessary } from "./mongodb";
 
 const auth = currentAuth();
 
@@ -86,12 +86,4 @@ export function authentication() {
   });
   unsubscribe();
   return null;
-}
-
-function createUserIfNecessary(user) {
-  let existingUser = findUser(user);
-
-  if (!existingUser) {
-    createUser(user).catch((error) => console.log("error", error));
-  }
 }

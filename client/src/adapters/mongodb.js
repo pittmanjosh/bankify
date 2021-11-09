@@ -64,20 +64,32 @@ export function updateBalance(user, account, amount) {
 export function findUser(user) {
   var user;
 
-  var myHeaders = new Headers();
-  myHeaders.append("Authorization", `Bearer ${user.accessToken}`);
-
-  var requestOptions = {
-    method: "GET",
-    headers: myHeaders,
-    redirect: "follow",
+  var config = {
+    method: 'get',
+    url: '/api',
+    headers: { 
+      'Authorization': `Bearer ${user.accessToken}`
+    }
   };
+  
+  axios(config)
+  .then(function (response) {response.data})
+  .then(result=>{
+    console.log(result);
+    user = result;
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
 
-  fetch("/api", requestOptions)
-    .then((response) => response.text())
-    .then((result) => user = result)
-    .catch((error) => console.log("error", error));
-
-  console.log(user ? 'user exists' : 'user nonexistent');
   return user;
+}
+
+export function createUserIfNecessary(user) {
+  let existingUser = findUser(user);
+
+  if (!existingUser) {
+    createUser(user)
+      .catch((error) => console.log("error", error));
+  }
 }
