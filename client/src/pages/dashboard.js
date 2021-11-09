@@ -18,11 +18,13 @@ export default function Dashboard() {
   const { user } = useContext(ctx);
 
   useEffect(() => {
-    console.log("in useEffect")
+    console.log("in useEffect");
     getUser(user, setData);
-    setSavings(data.savings);
-    setChecking(data.checking);
-  },[data]);
+    if (data) {
+      setSavings(data.savings);
+      setChecking(data.checking);
+    }
+  }, [data]);
 
   let name = user.displayName ? user.displayName.toUpperCase() : "USER";
   let photoURL = user.photoURL;
