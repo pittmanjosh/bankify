@@ -62,6 +62,7 @@ export function updateBalance(user, account, amount) {
 }
 
 export function findUser(user) {
+  let currentUser;
   var myHeaders = new Headers();
   myHeaders.append(
     "Authorization",
@@ -76,8 +77,12 @@ export function findUser(user) {
 
   fetch("/api", requestOptions)
     .then((response) => response.text())
-    .then((result) => console.log(result))
+    .then((result) => {
+      console.log(result);
+      currentUser = result;
+    })
     .catch((error) => console.log("error", error));
+    
   return user;
 }
 
