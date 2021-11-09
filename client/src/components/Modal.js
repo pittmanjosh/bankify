@@ -1,8 +1,7 @@
-import {useState} from "react";
+import {useState,useContext} from "react";
 import Alert from "./Alert";
 import { Form, Modal,Button } from "react-bootstrap";
 import { updateBalance } from "../adapters/mongodb";
-import { useContext } from "react";
 import ctx from "../context";
 
 export default function TransactionModal(props) {

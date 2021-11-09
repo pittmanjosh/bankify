@@ -43,29 +43,24 @@ export function getUser(user, setter) {
   })();
 }
 
-export function updateBalance(user,account,amount) {
-  (async () => {
-    var myHeaders = new Headers();
-    myHeaders.append(
-      "Authorization",
-      `Bearer ${user.accessToken}`
-    );
-    myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+export function updateBalance(user, account, amount) {
+  var myHeaders = new Headers();
+  myHeaders.append("Authorization", `Bearer ${user.accessToken}`);
+  myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
 
-    var urlencoded = new URLSearchParams();
-    urlencoded.append("account", account);
-    urlencoded.append("amount", amount);
+  var urlencoded = new URLSearchParams();
+  urlencoded.append("account", account);
+  urlencoded.append("amount", amount);
 
-    var requestOptions = {
-      method: "PUT",
-      headers: myHeaders,
-      body: urlencoded,
-      redirect: "follow",
-    };
+  var requestOptions = {
+    method: "PUT",
+    headers: myHeaders,
+    body: urlencoded,
+    redirect: "follow",
+  };
 
-    fetch("/api", requestOptions)
-      .then((response) => response.text())
-      .then((result) => console.log(result))
-      .catch((error) => console.log("error", error));
-  })()
+  fetch("/api", requestOptions)
+    .then((response) => response.text())
+    .then((result) => console.log(result))
+    .catch((error) => console.log("error", error));
 }
