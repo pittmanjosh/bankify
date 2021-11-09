@@ -24,7 +24,7 @@ export default function Dashboard() {
       setSavings(data.savings);
       setChecking(data.checking);
     }
-  }, [user,data,savings,checking]);
+  }, [savings,checking]);
 
   let name = user.displayName ? user.displayName.toUpperCase() : "USER";
   let photoURL = user.photoURL;
