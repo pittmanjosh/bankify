@@ -41,6 +41,7 @@ export function loginGoogle(createAlert) {
     })
     .then(user => {
       createUserIfNecessary(user)
+      console.log('user',user)
     })
     .catch((x) => createAlert(x.message, "danger"));
 }
