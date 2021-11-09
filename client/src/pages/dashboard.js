@@ -30,7 +30,7 @@ export default function Dashboard() {
     } else {
       getUser(user,setFetchedUser);
     }
-  },[])
+  },[fetchedUser])
   
 
 
