@@ -37,6 +37,7 @@ export function getUser(user) {
       .then((res) => res.data)
       .then(function (response) {
         result = response;
+        console.log('fetched:',response);
       })
       .catch(function (error) {
         console.log(error);
