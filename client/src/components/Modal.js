@@ -11,8 +11,8 @@ export default function TransactionModal(props) {
   const [ accountState, setAccountState ] = state;
   const {user} = useContext(ctx);
 
-  const createAlert = ()=>{
-    setAlertMsg("Must be a Number!");
+  const createAlert = (msg)=>{
+    setAlertMsg(msg);
   }
   const resetAlert = ()=>{
     setAlertMsg("");
