@@ -33,6 +33,7 @@ export function getUser(user) {
   };
   (async ()=>{
     axios(config)
+      .then((res) => res.data)
       .then(function (response) {
         return response;
       })
