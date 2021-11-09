@@ -47,7 +47,7 @@ export default function TransactionModal(props) {
       return false;
     }
 
-    if (proposedAmount <= 0 || proposedAmount < 1000000) {
+    if (proposedAmount <= 0 || proposedAmount > 1000000) {
       createAlert("Must be an amount between $1 and $1 million");
       setAmount('');
       return false;
