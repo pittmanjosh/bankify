@@ -24,8 +24,9 @@ export default function TransactionModal(props) {
 
   const handleSubmit = (e)=>{
     e.preventDefault();
-
-    if (isValidTransaction) {
+    const isValid = validate();
+    
+    if (isValid) {
       const isDeposit = transaction === "Deposit";
       const newTotal = (isDeposit ? deposit : withdraw)(accountState);
       updateBalance(user,account,newTotal);
@@ -34,7 +35,7 @@ export default function TransactionModal(props) {
     }
   }
 
-  const isValidTransaction = ()=>{
+  const validate = ()=>{
     var currentBalance = Number(accountState);
     var proposedAmount = Number(amount);
 
