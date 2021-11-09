@@ -81,9 +81,10 @@ export default function TransactionModal(props) {
   
   const Input = ()=>{
     return (
-      <Form.Group className="mb-3">
-        <Form.Label>{`${transaction} Amount`}</Form.Label>
-          <input
+      <div className="input-group mb-3">
+      <Form.Label>{`${transaction} Amount`}</Form.Label>
+        <span className="input-group-text">$</span>
+        <input
             id="modal-input"
             autoComplete="off"
             className="form-control mb-3"
@@ -91,7 +92,7 @@ export default function TransactionModal(props) {
             onChange={handleChange}
             required
           />
-      </Form.Group>
+      </div>
     )
   }
 
