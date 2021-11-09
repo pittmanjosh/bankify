@@ -3,10 +3,6 @@ import axios from "axios";
 const auth = currentAuth();
 const currentUser = auth.currentUser;
 
-export function updateBalance(account, amount) {
-  return 32;
-}
-
 export function createUser(user) {
   var myHeaders = new Headers();
   myHeaders.append("Authorization", `Bearer ${user.accessToken}`);
