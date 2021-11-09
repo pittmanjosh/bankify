@@ -23,18 +23,7 @@ export default function Dashboard() {
   const {user} = useContext(ctx);
 
   useEffect(()=>{
-    (async ()=>{
-      console.log(getUser(user))
-    })
-    
-
-    // (async ()=>{
-    //   const fetchedUser = await getUser(user);
-    //   console.log("fetched",fetchedUser)
-    // })()
-    
-    // setSavings(fetchedUser.savings);
-    // setChecking(fetchedUser.checking);
+    console.log(getUser(user))
   },[])
   
 
