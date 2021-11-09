@@ -31,7 +31,7 @@ export function getUser(user) {
       'Authorization': `Bearer ${user.accessToken}`
     }
   };
-  let result;
+  var result;
   (async ()=>{
     axios(config)
       .then((res) => res.data)
