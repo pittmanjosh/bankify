@@ -19,7 +19,7 @@ export function createUser(user) {
     .catch((error) => console.log("error", error));
 }
 
-export function getUser(user,setSavings,setChecking) {
+export function getUser(user, setSavings, setChecking) {
   var config = {
     method: "get",
     url: "/api",
@@ -42,7 +42,7 @@ export function getUser(user,setSavings,setChecking) {
 }
 
 export function updateBalance(user, account, amount) {
-  console.log('setting',account,"to",amount)
+  console.log("setting", account, "to", amount);
   var myHeaders = new Headers();
   myHeaders.append("Authorization", `Bearer ${user.accessToken}`);
   myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
@@ -58,6 +58,26 @@ export function updateBalance(user, account, amount) {
     redirect: "follow",
   };
 
+  fetch("/api", requestOptions).catch((error) => console.log("error", error));
+}
+
+export function findUser(user) {
+  var user;
+
+  var myHeaders = new Headers();
+  myHeaders.append("Authorization", `Bearer ${user.accessToken}`);
+
+  var requestOptions = {
+    method: "GET",
+    headers: myHeaders,
+    redirect: "follow",
+  };
+
   fetch("/api", requestOptions)
+    .then((response) => response.text())
+    .then((result) => user = result)
     .catch((error) => console.log("error", error));
+
+  console.log(user ? 'user exists' : 'user nonexistent');
+  return user;
 }

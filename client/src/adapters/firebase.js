@@ -2,79 +2,96 @@ import currentAuth from "../auth/firebaseAuth";
 import {
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
-  onAuthStateChanged, 
+  onAuthStateChanged,
   signOut,
   signInWithEmailAndPassword,
   signInWithPopup,
-  updateProfile
+  updateProfile,
 } from "firebase/auth";
-import { createUser } from "./mongodb";
+import { createUser, findUser } from "./mongodb";
 
 const auth = currentAuth();
 
-export function loginEmailPassword(email,pwd, createAlert) {
+export function loginEmailPassword(email, pwd, createAlert) {
   let success;
   signInWithEmailAndPassword(auth, email, pwd)
-    .then(() => {
-      createAlert("Welcome back to Bankify","success","Successful Login!");
+    .then((user) => {
+      createAlert("Welcome back to Bankify", "success", "Successful Login!");
       success = true;
+      return user;
     })
-    .catch((e) => createAlert(e.message,"danger"));
-  
+    .then((user) => {
+      createUserIfNecessary(user);
+    })
+    .catch((e) => createAlert(e.message, "danger"));
+
   return success;
 }
 
 export function loginGoogle(createAlert) {
   var provider = new GoogleAuthProvider();
-  provider.addScope('profile');
-  provider.addScope('email');
+  provider.addScope("profile");
+  provider.addScope("email");
 
-  signInWithPopup(auth,provider)
-    .then((x)=>{
-      createAlert("Welcome back to Bankify","success","Successful Login!");})
-    .catch(x=>createAlert(x.message,"danger"))
-}
+  signInWithPopup(auth, provider)
+    .then((user) => {
+      createAlert("Welcome back to Bankify", "success", "Successful Login!");
 
-export function register(name,email,pwd,createAlert) {
-  createUserWithEmailAndPassword(auth, email, pwd)
-    .then(user=>{
-      createAlert("You are now registered!","success");
       return user;
     })
-    .then(user=>{
+    .then(user => {
+      createUserIfNecessary(user)
+    })
+    .catch((x) => createAlert(x.message, "danger"));
+}
+
+export function register(name, email, pwd, createAlert) {
+  createUserWithEmailAndPassword(auth, email, pwd)
+    .then((user) => {
+      createAlert("You are now registered!", "success");
+      return user;
+    })
+    .then((user) => {
       updateProfile(user, {
         displayName: name,
-        profileURL: `https://ui-avatars.com/api/?name=${name}`
-      })
-      .catch(x => createAlert(x.message,"danger","Name not filed!"))
+        profileURL: `https://ui-avatars.com/api/?name=${name}`,
+      }).catch((x) => createAlert(x.message, "danger", "Name not filed!"));
 
       return user;
     })
-    .then(user=>{
-      createUser(user)
-        .catch(x=>createAlert(x.message,"danger","Database Failure"))
+    .then((user) => {
+      createUserIfNecessary(user);
     })
-    .catch(x => createAlert(x.message,"danger","Registration Failed!"))
+    .catch((x) => createAlert(x.message, "danger", "Registration Failed!"));
 }
 // setUser was deprecated first argument
-export function logout(/*setUser,*/createAlert,) {
+export function logout(createAlert) {
   // need to remove tokens
   signOut(auth)
-    .then(()=>{
+    .then(() => {
       if (createAlert) {
-        createAlert("Come back soon!","secondary");
+        createAlert("Come back soon!", "secondary");
       } else {
         console.log("Successful Logout");
-      };
-      // setUser("");
+      }
     })
-    .catch(x=>{
-      if (createAlert) createAlert(x.message,"danger")
-    })
+    .catch((x) => {
+      if (createAlert) createAlert(x.message, "danger");
+    });
 }
 
 export function authentication() {
-  const unsubscribe = onAuthStateChanged(auth, (user)=>{return user});
+  const unsubscribe = onAuthStateChanged(auth, (user) => {
+    return user;
+  });
   unsubscribe();
   return null;
+}
+
+function createUserIfNecessary(user) {
+  let existingUser = findUser(user);
+
+  if (!existingUser) {
+    createUser(user).catch((error) => console.log("error", error));
+  }
 }
