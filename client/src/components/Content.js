@@ -26,7 +26,7 @@ export default function Content() {
             </Route>
             <Route exact path="/login">
               {newUser && <Redirect to="/thanks"/>}
-              {user ? <Redirect to="/dashboard" /> : <Login />}
+              {!user && <Login />}
             </Route>
             <Route exact path="/dashboard">
               {user ? <Dashboard /> : <Redirect to="/" />}

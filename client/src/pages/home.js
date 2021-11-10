@@ -2,7 +2,7 @@ import React from "react";
 import { Button, Card, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
-export default function Home({ user }) {
+export default function Home() {
   return (
     <Col sm={8} lg={7} xl={6}>
     <Card >
