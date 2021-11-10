@@ -59,7 +59,7 @@ export function updateBalance(user, account, amount) {
 }
 
 export function findUser(user) {
-  let currentUser = false;
+  let currentUser;
   var myHeaders = new Headers();
   myHeaders.append(
     "Authorization",
