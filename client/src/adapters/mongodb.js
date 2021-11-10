@@ -11,8 +11,6 @@ export function createUser(user) {
   };
 
   fetch("/api", requestOptions)
-    .then((response) => response.text())
-    .then((result) => console.log(result))
     .catch((error) => console.log("error", error));
 }
 
@@ -28,7 +26,6 @@ export function getUser(user, setSavings, setChecking) {
     axios(config)
       .then((res) => res.data)
       .then(function (response) {
-        console.log(response);
         setChecking(response.checking);
         setSavings(response.savings);
         return response;

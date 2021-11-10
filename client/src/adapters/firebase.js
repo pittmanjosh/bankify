@@ -62,6 +62,7 @@ export function register(name, email, pwd, createAlert) {
 
       return user;
     })
+    .then(x=>console.log("register",x))
     .catch((x) => createAlert(x.message, "danger", "Registration Failed!"));
 }
 // setUser was deprecated first argument
