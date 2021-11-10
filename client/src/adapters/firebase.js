@@ -17,6 +17,7 @@ export function loginEmailPassword(email, pwd, createAlert) {
     .then((user) => {
       createAlert("Welcome back to Bankify", "success", "Successful Login!");
       success = true;
+      console.log("email & pass",user);
       return user;
     })
     .catch((e) => createAlert(e.message, "danger"));
@@ -32,6 +33,7 @@ export function loginGoogle(createAlert) {
   signInWithPopup(auth, provider)
     .then((user) => {
       createAlert("Welcome back to Bankify", "success", "Successful Login!");
+      console.log("google",user);
       return user;
     })
     .catch((x) => createAlert(x.message, "danger"));
@@ -41,6 +43,7 @@ export function register(name, email, pwd, createAlert) {
   createUserWithEmailAndPassword(auth, email, pwd)
     .then((user) => {
       createAlert("You are now registered!", "success");
+      console.log("register",user);
       return user;
     })
     .then((user) => {
