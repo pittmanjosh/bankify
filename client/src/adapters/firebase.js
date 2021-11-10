@@ -58,7 +58,9 @@ export function register(name, email, pwd, createAlert) {
       updateProfile(user, {
         displayName: name,
         profileURL: `https://ui-avatars.com/api/?name=${name}`,
-      }).catch((x) => createAlert(x.message, "danger", "Name not filed!"));
+      })
+      .then(()=>console.log('updated user'))
+      .catch((x) => createAlert(x.message, "danger", "Name not filed!"));
 
       return user;
     })
