@@ -28,7 +28,6 @@ export function getUser(user, setSavings, setChecking) {
     axios(config)
       .then((res) => res.data)
       .then(function (response) {
-        console.log(response);
         setChecking(response.checking);
         setSavings(response.savings);
         return response;
@@ -40,7 +39,6 @@ export function getUser(user, setSavings, setChecking) {
 }
 
 export function updateBalance(user, account, amount) {
-  console.log("setting", account, "to", amount);
   var myHeaders = new Headers();
   myHeaders.append("Authorization", `Bearer ${user.accessToken}`);
   myHeaders.append("Content-Type", "application/x-www-form-urlencoded");

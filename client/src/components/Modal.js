@@ -26,15 +26,13 @@ export default function TransactionModal(props) {
     e.preventDefault();
     const isValid = validate();
     const targetAccount = account.toLowerCase();
+    
     if (isValid) {
-      console.log("account:",targetAccount);
       const isDeposit = transaction === "Deposit";
       let newTotal;
       if (isDeposit) {
-        console.log("deposit")
         newTotal = deposit(amount);
       } else {
-        console.log("withdraw")
         newTotal = withdraw(amount);
       }
       updateBalance(user,targetAccount,newTotal);
