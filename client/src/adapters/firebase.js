@@ -31,7 +31,7 @@ export function loginGoogle(createAlert) {
     .then(result=>{
       let user = result.user;
       let userExists = findUser(user);
-      console.log("googleUser",user)
+
       if (!userExists) {
         createUser(user)
       }
@@ -43,7 +43,6 @@ export function register(name, email, pwd, createAlert) {
   createUserWithEmailAndPassword(auth, email, pwd)
     .then((user) => {
       createAlert("You are now registered!", "success");
-      console.log("register",user);
       return user.user;
     })
     .then((user) => {
@@ -64,9 +63,7 @@ export function logout(createAlert) {
     .then(() => {
       if (createAlert) {
         createAlert("Come back soon!", "secondary");
-      } else {
-        console.log("Successful Logout");
-      }
+      } 
     })
     .catch((x) => {
       if (createAlert) createAlert(x.message, "danger");
