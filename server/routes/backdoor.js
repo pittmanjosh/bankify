@@ -14,7 +14,7 @@ Router.route("/").get((req, res) => {
         if (err) {
           res.status(400).send("Error fetching listings!");
         } else {
-          res.status(200).send(result);
+          res.send(result);
         }
       });
   })();
