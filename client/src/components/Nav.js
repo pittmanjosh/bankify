@@ -36,7 +36,6 @@ function UserDependentLinks() {
     </Link>);
   const MyLinks = user ? (
     <>
-      {console.log(user)}
       <Link to="/dashboard" className="nav-link">
         Dashboard
       </Link>

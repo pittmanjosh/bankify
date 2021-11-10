@@ -19,7 +19,6 @@ export default function Dashboard() {
   const { user } = useContext(ctx);
 
   useEffect(() => {
-    console.log('useEffect called');
     getUser(user,setSavings,setChecking);
   });
 

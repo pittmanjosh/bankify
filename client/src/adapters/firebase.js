@@ -26,6 +26,7 @@ export function loginGoogle(createAlert) {
   signInWithPopup(auth, provider)
     .then((result) => {
       createAlert("Welcome back to Bankify", "success", "Successful Login!");
+      console.log("googleResult",result)
       return result;
     })
     .then(result=>{
