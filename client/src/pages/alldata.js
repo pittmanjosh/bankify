@@ -14,6 +14,7 @@ export default function AllData() {
   }, []);
 
   function fetchData() {
+    let isData = false;
     let possibleData;
 
     axios
@@ -21,17 +22,15 @@ export default function AllData() {
       .then((res) => res.data)
       .then((response) => {
         // handle success
-        possibleData = response;
+        setData(response);
+        isData = true;
       })
       .catch((error) => {
         // handle error
         console.log(error);
-      })
-      .then(() => {
-        setData(possibleData);
       });
 
-    const alertMsg = possibleData ? "" : "Data Fetch Error";
+    const alertMsg = !isData ? "" : "Data Fetch Error";
     createAlert(alertMsg, "danger");
   }
 
