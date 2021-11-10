@@ -11,6 +11,8 @@ export default function TransactionModal(props) {
   const [ accountState, setAccountState ] = state;
   const {user} = useContext(ctx);
 
+  const id = `${account}-${transaction}`.toLowerCase();
+
   const createAlert = (msg)=>{
     setAlertMsg(msg);
   }
@@ -81,7 +83,7 @@ export default function TransactionModal(props) {
       <div className="input-group mb-3">
         <span className="input-group-text mb-3">$</span>
         <input
-            id="modal-input"
+            id={id}
             className="form-control mb-3"
             value={amount}
             onChange={handleChange}
@@ -101,7 +103,7 @@ export default function TransactionModal(props) {
   return (
     <Modal show={show} onHide={closeModal} animation={false} backdrop="static">
       <Modal.Header closeButton>
-        <Modal.Title>{`${transaction} into ${account}`}</Modal.Title>
+        <Modal.Title>{`${account} ${transaction}`}</Modal.Title>
       </Modal.Header>
       <Form onSubmit={handleSubmit}>
         <Modal.Body>
