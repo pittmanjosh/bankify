@@ -52,7 +52,7 @@ export function register(name, email, pwd, createAlert) {
     .then((user) => {
       createAlert("You are now registered!", "success");
       console.log("register",user);
-      return user;
+      return user.user;
     })
     .then((user) => {
       updateProfile(user, {
