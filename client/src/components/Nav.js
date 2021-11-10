@@ -36,6 +36,7 @@ function UserDependentLinks() {
     </Link>);
   const MyLinks = user ? (
     <>
+      {console.log(user)}
       <Link to="/dashboard" className="nav-link">
         Dashboard
       </Link>
@@ -45,7 +46,7 @@ function UserDependentLinks() {
         className="nav-link" 
         onClick={()=>logout(createAlert)}
       >
-        {`Logout: ${user.name}`}
+        {`Logout: ${user.displayName}`}
       </Link>
     </>
   ) : (
