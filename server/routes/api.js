@@ -12,7 +12,7 @@ Router.use(function timeLog(req, res, next) {
 });
 
 Router.use(auth);
-Router.use(express.urlencoded({extended:true}))
+Router.use(express.urlencoded({extended:true}));
 Router.route("/")
   .get(function (req, res) {
     // return user balance
@@ -46,7 +46,7 @@ Router.route("/")
         if (err) {
           res.status(400).send("Error adding user");
         } else {
-          res.status(201).send("created");
+          res.status(201).send(req.name,"created");
         }
       });
     })();

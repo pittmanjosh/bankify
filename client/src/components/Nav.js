@@ -45,7 +45,7 @@ function UserDependentLinks() {
         className="nav-link" 
         onClick={()=>logout(createAlert)}
       >
-        Logout
+        {`Logout: ${user.name}`}
       </Link>
     </>
   ) : (
