@@ -16,7 +16,7 @@ export default function Dashboard() {
   const withdrawCheckingModal = useModal("Withdraw", "Checking");
   const depositSavingsModal = useModal("Deposit", "Savings");
   const withdrawSavingsModal = useModal("Withdraw", "Savings");
-  const { user,setNewUser } = useContext(ctx);
+  const { user } = useContext(ctx);
 
   useEffect(() => {
     getUser(user,setSavings,setChecking);
@@ -32,7 +32,6 @@ export default function Dashboard() {
 
   return (
     <Col sm={8} lg={7} xl={6}>
-      {setNewUser(false)}
       <Card>
         <DashboardHeader>
           <Avatar />

@@ -19,7 +19,7 @@ export default function Thanks() {
           </p>
         </Card.Text>
         <Link to="/dashboard">
-          <Button type="link" onClick={()=>setNewUser(false)}>Services</Button>
+          <Button type="link">Services</Button>
         </Link>
       </Card.Body>
     </Card>

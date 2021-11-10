@@ -6,7 +6,7 @@ import { useContext } from "react";
 import Input from "../components/Input";
 
 export default function Login() {
-  const {createAlert,setNewUser} = useContext(ctx);
+  const {createAlert} = useContext(ctx);
   const email = useInput("");
   const password = useInput("");
 
@@ -24,7 +24,7 @@ export default function Login() {
 
   const handleGoogle = (e) => {
     e.preventDefault();
-    loginGoogle(createAlert,setNewUser);
+    loginGoogle(createAlert);
   };
 
   return (

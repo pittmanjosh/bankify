@@ -9,24 +9,23 @@ import Register from "../pages/register";
 import Login from "../pages/login";
 import Dashboard from "../pages/dashboard";
 import Home from "../pages/home";
-import Thanks from "../pages/thanks";
 import AllData from "../pages/alldata";
+import Thanks from "../pages/thanks";
 
 export default function Content() {
-  const { user,newUser } = useContext(ctx);
+  const { user } = useContext(ctx);
   return (
     <Switch>
       <Container className="content-container" fluid>
         <Row className="justify-content-center">
+            <Route exact path="/thanks">
+              {user ? <Thanks/> : <Redirect to="/login"/>}
+            </Route>
             <Route exact path="/register">
               {user ? <Redirect to="/dashboard" /> : <Register />}
             </Route>
-            <Route exact path="/thanks">
-              {newUser ? <Thanks/> : <Redirect to="/"/>}
-            </Route>
             <Route exact path="/login">
-              {newUser && <Redirect to="/thanks"/>}
-              {!user && <Login />}
+              {user ? <Redirect to="/thanks" /> : <Login />}
             </Route>
             <Route exact path="/dashboard">
               {user ? <Dashboard /> : <Redirect to="/" />}
