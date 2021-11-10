@@ -1,5 +1,3 @@
-import axios from "axios";
-
 export function createUser(user) {
   var myHeaders = new Headers();
   myHeaders.append("Authorization", `Bearer ${user.accessToken}`);
@@ -13,26 +11,7 @@ export function createUser(user) {
   fetch("/api", requestOptions).catch((error) => console.log("error", error));
 }
 
-export const getUser = (user, setSavings, setChecking) => {
-  // var config = {
-  //   method: "get",
-  //   url: "/api",
-  //   headers: {
-  //     Authorization: `Bearer ${user.accessToken}`,
-  //   },
-  // };
-  // (async () => {
-  //   axios(config)
-  //     .then((res) => res.data)
-  //     .then(function (response) {
-  //       setChecking(response.checking);
-  //       setSavings(response.savings);
-  //     })
-  //     .catch(function (error) {
-  //       console.log(error);
-  //     });
-  // })();
-
+export function getUser(user, setSavings, setChecking) {
   var myHeaders = new Headers();
   myHeaders.append("Authorization", `Bearer ${user.accessToken}`);
 
@@ -52,7 +31,6 @@ export const getUser = (user, setSavings, setChecking) => {
 };
 
 export function updateBalance(user, account, amount) {
-  console.log("setting", account, "to", amount);
   var myHeaders = new Headers();
   myHeaders.append("Authorization", `Bearer ${user.accessToken}`);
   myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
