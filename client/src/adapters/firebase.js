@@ -47,13 +47,13 @@ export function register(name, email, pwd, createAlert) {
       return user.user;
     })
     .then((user) => {
-      const update = updateProfile(user, {
+      updateProfile(user, {
         displayName: name,
         profileURL: `https://ui-avatars.com/api/?name=${name}`,
       })
+        .then(x=>console.log(x))
         .catch((x) => createAlert(x.message, "danger", "Name not filed!"));
 
-      createUser(user)
       console.log("update",update);
     })
     .catch((x) => createAlert(x.message, "danger", "Registration Failed!"));
