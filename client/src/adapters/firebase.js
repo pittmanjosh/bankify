@@ -29,7 +29,12 @@ export function loginGoogle(createAlert) {
     })
     .then(user=>{
       let currentUser = findUser(user);
-      return currentUser;
+      return {fbUser: user, currentUser};
+    })
+    .then(({fbUser,currentUser})=>{
+      if (!currentUser) {
+        createUser(fbUser);
+      };
     })
     .then(()=>{
       createAlert("Welcome back to Bankify", "success", "Successful Login!");
