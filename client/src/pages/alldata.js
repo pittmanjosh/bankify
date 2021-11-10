@@ -4,7 +4,7 @@ import { Card, Table } from "react-bootstrap";
 import ctx from "../context";
 
 export default function AllData() {
-  const [data, setData] = useState(null);
+  const [data, setData] = useState(undefined);
   const { createAlert } = useContext(ctx);
 
   useEffect(() => {
@@ -34,7 +34,7 @@ export default function AllData() {
   }
 
   function DataLayout() {
-    if (data === null) {
+    if (!(data instanceof Array)) {
       return <div>loading...</div>;
     }
 
