@@ -1,13 +1,5 @@
 import currentAuth from "../auth/firebaseAuth";
-import {
-  createUserWithEmailAndPassword,
-  GoogleAuthProvider,
-  onAuthStateChanged,
-  signOut,
-  signInWithEmailAndPassword,
-  signInWithPopup,
-  updateProfile,
-} from "firebase/auth";
+import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signOut, signInWithEmailAndPassword, signInWithPopup, updateProfile } from "firebase/auth";
 import { createUser, findUser } from "./mongodb";
 
 const auth = currentAuth();
@@ -55,23 +47,19 @@ export function register(name, email, pwd, createAlert) {
       return user.user;
     })
     .then((user) => {
-      updateProfile(user, {
+      const update = updateProfile(user, {
         displayName: name,
         profileURL: `https://ui-avatars.com/api/?name=${name}`,
       })
-      .then(()=>console.log('updated user'))
-      .catch((x) => createAlert(x.message, "danger", "Name not filed!"));
+        .catch((x) => createAlert(x.message, "danger", "Name not filed!"));
 
-      return user;
-    })
-    .then(user=>{
-      createUser(user);
+      createUser(user)
+      console.log("update",update);
     })
     .catch((x) => createAlert(x.message, "danger", "Registration Failed!"));
 }
-// setUser was deprecated first argument
+
 export function logout(createAlert) {
-  // need to remove tokens
   signOut(auth)
     .then(() => {
       if (createAlert) {
