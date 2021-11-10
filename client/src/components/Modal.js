@@ -79,7 +79,7 @@ export default function TransactionModal(props) {
     return (<>
       <Form.Label>{`${transaction} Amount`}</Form.Label>
       <div className="input-group mb-3">
-        <span className="input-group-text">$</span>
+        <span className="input-group-text mb-3">$</span>
         <input
             id="modal-input"
             className="form-control mb-3"
