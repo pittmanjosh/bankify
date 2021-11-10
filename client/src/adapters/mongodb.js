@@ -15,7 +15,7 @@ export function createUser(user) {
     .catch((error) => console.log("error", error));
 }
 
-export function getUser(user, setSavings, setChecking) {
+export const getUser = (user, setSavings, setChecking)=>{
   var config = {
     method: "get",
     url: "/api",
@@ -27,10 +27,8 @@ export function getUser(user, setSavings, setChecking) {
     axios(config)
       .then((res) => res.data)
       .then(function (response) {
-        console.log("getUser response:",response);
         setChecking(response.checking);
         setSavings(response.savings);
-        return response;
       })
       .catch(function (error) {
         console.log(error);
@@ -61,7 +59,7 @@ export function updateBalance(user, account, amount) {
 }
 
 export function findUser(user) {
-  let currentUser;
+  let currentUser = false;
   var myHeaders = new Headers();
   myHeaders.append(
     "Authorization",
