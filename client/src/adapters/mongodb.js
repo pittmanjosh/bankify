@@ -11,7 +11,7 @@ export function createUser(user) {
   };
 
   fetch("/api", requestOptions)
-    .then(()=>{console.log('creating user')})
+    .then((x)=>{console.log('creating user result:',x)})
     .catch((error) => console.log("error", error));
 }
 
@@ -27,6 +27,7 @@ export function getUser(user, setSavings, setChecking) {
     axios(config)
       .then((res) => res.data)
       .then(function (response) {
+        console.log("getUser response:",response);
         setChecking(response.checking);
         setSavings(response.savings);
         return response;
@@ -54,7 +55,9 @@ export function updateBalance(user, account, amount) {
     redirect: "follow",
   };
 
-  fetch("/api", requestOptions).catch((error) => console.log("error", error));
+  fetch("/api", requestOptions)
+    .then(x=>console.log("updateBalance result:", x))
+    .catch((error) => console.log("error", error));
 }
 
 export function findUser(user) {

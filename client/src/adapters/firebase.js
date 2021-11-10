@@ -10,7 +10,7 @@ export function loginEmailPassword(email, pwd, createAlert) {
     .then((user) => {
       createAlert("Welcome back to Bankify", "success", "Successful Login!");
       success = true;
-      console.log("email & pass",user);
+      console.log("email & pass result:",user);
       return user;
     })
     .catch((e) => createAlert(e.message, "danger"));
@@ -51,7 +51,7 @@ export function register(name, email, pwd, createAlert) {
         displayName: name,
         profileURL: `https://ui-avatars.com/api/?name=${name}`,
       })
-        .then(x=>console.log(x))
+        .then(x=>console.log("update profile result:",x))
         .catch((x) => createAlert(x.message, "danger", "Name not filed!"));
 
       createUser(user);
