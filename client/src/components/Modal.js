@@ -26,7 +26,7 @@ export default function TransactionModal(props) {
     e.preventDefault();
     const isValid = validate();
     const targetAccount = account.toLowerCase();
-    
+
     if (isValid) {
       const isDeposit = transaction === "Deposit";
       let newTotal;
@@ -44,8 +44,6 @@ export default function TransactionModal(props) {
   const validate = ()=>{
     var currentBalance = Number(accountState);
     var proposedAmount = Number(amount);
-
-    console.log("balange:",currentBalance,",transaction:",transaction,", amount:",proposedAmount)
 
     if (!Number.isInteger(proposedAmount)) {
       createAlert("Must enter a whole number");
@@ -70,12 +68,10 @@ export default function TransactionModal(props) {
 
   const withdraw = (amt)=>{
     let result = Number(accountState) - Number(amt);
-    console.log("withdraw",result)
     return String(result);
   };
   const deposit = (amt)=>{
     let result = Number(accountState) + Number(amt);
-    console.log("deposit",result)
     return String(result);
   };
   
