@@ -82,7 +82,6 @@ export default function TransactionModal(props) {
         <span className="input-group-text">$</span>
         <input
             id="modal-input"
-            autoComplete="off"
             className="form-control mb-3"
             value={amount}
             onChange={handleChange}
@@ -100,7 +99,7 @@ export default function TransactionModal(props) {
   }
 
   return (
-    <Modal show={show} onHide={closeModal} backdrop="static">
+    <Modal show={show} onHide={closeModal} animation={false} backdrop="static">
       <Modal.Header closeButton>
         <Modal.Title>{`${transaction} into ${account}`}</Modal.Title>
       </Modal.Header>
