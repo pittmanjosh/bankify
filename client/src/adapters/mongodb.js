@@ -27,8 +27,8 @@ export function getUser(user, setSavings, setChecking) {
     axios(config)
       .then((res) => res.data)
       .then(function (response) {
-        setChecking(response.checking || 0);
-        setSavings(response.savings || 0);
+        setChecking(response.checking);
+        setSavings(response.savings);
         return response;
       })
       .catch(function (error) {
