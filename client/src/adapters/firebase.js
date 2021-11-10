@@ -39,7 +39,7 @@ export function loginGoogle(createAlert) {
     .then(result=>{
       let user = result.user;
       let userExists = findUser(user);
-
+      console.log("googleUser",user)
       if (!userExists) {
         createUser(user)
       }
