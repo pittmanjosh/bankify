@@ -11,7 +11,6 @@ export function createUser(user) {
   };
 
   fetch("/api", requestOptions)
-    .then((x)=>{console.log('creating user result:',x)})
     .catch((error) => console.log("error", error));
 }
 

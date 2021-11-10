@@ -3,3 +3,4 @@ node_modules
 .env
 client\ 2
 .vscode
+build
