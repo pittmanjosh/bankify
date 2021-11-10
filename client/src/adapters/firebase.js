@@ -8,6 +8,7 @@ import {
   signInWithPopup,
   updateProfile,
 } from "firebase/auth";
+import { createUser, findUser } from "./mongodb";
 
 const auth = currentAuth();
 
@@ -31,10 +32,17 @@ export function loginGoogle(createAlert) {
   provider.addScope("email");
 
   signInWithPopup(auth, provider)
-    .then((user) => {
+    .then((result) => {
       createAlert("Welcome back to Bankify", "success", "Successful Login!");
-      console.log("google",user);
-      return user;
+      return result;
+    })
+    .then(result=>{
+      let user = result.user;
+      let userExists = findUser(user);
+
+      if (!userExists) {
+        createUser(user)
+      }
     })
     .catch((x) => createAlert(x.message, "danger"));
 }

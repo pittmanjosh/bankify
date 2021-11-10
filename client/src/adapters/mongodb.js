@@ -28,10 +28,12 @@ export function getUser(user, setSavings, setChecking) {
     axios(config)
       .then((res) => res.data)
       .then(function (response) {
+        console.log(response);
         setChecking(response.checking);
         setSavings(response.savings);
         return response;
       })
+      .then(res=>createUser(res))
       .catch(function (error) {
         console.log(error);
       });
@@ -39,6 +41,7 @@ export function getUser(user, setSavings, setChecking) {
 }
 
 export function updateBalance(user, account, amount) {
+  console.log("setting", account, "to", amount);
   var myHeaders = new Headers();
   myHeaders.append("Authorization", `Bearer ${user.accessToken}`);
   myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
@@ -55,4 +58,28 @@ export function updateBalance(user, account, amount) {
   };
 
   fetch("/api", requestOptions).catch((error) => console.log("error", error));
+}
+
+export function findUser(user) {
+  let currentUser;
+  var myHeaders = new Headers();
+  myHeaders.append(
+    "Authorization",
+    `Bearer ${user.accessToken}`
+  );
+
+  var requestOptions = {
+    method: "GET",
+    headers: myHeaders,
+    redirect: "follow",
+  };
+
+  fetch("/api", requestOptions)
+    .then((response) => response.text())
+    .then((result) => {
+      currentUser = result;
+    })
+    .catch((error) => console.log("error", error));
+
+  return currentUser;
 }
