@@ -15,7 +15,7 @@ export default function Content() {
   const { user, createAlert } = useContext(ctx);
   return (
     <Switch>
-      <Container fluid>
+      <Container className="content-container" fluid>
         <Row className="justify-content-center">
             <Route exact path="/register">
               {user ? <Redirect to="/dashboard" /> : <Register />}

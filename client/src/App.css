@@ -60,3 +60,7 @@ img.avatar-img {
 td {
   word-wrap: break-word;
 }
+
+.content-container {
+  margin-top: 15px;
+}
