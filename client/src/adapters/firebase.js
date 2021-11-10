@@ -62,7 +62,10 @@ export function register(name, email, pwd, createAlert) {
 
       return user;
     })
-    .then(x=>console.log("register",x))
+    .then(x=>{
+      let user = x.user;
+      createUser(user);
+    })
     .catch((x) => createAlert(x.message, "danger", "Registration Failed!"));
 }
 // setUser was deprecated first argument
