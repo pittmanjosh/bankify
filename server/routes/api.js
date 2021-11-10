@@ -54,7 +54,6 @@ Router.route("/")
   .put(function (req, res) {
     const account = req.body.account;
     const amount = req.body.amount;
-    const name = req.name;
     if (!account || !amount) {
       res.status(400).send("Missing parameters");
     } else {
@@ -70,11 +69,8 @@ Router.route("/")
     ) : (
       {"checking": amount}
     );
-    const operation = { 
-      $set: update,
-      $set: {"name": name}
-    };
-    
+    const operation = { $set: update};
+    const name = req.name;
     (async () => {
       const dbConnect = dbo.getDb();
       dbConnect.collection("users")
