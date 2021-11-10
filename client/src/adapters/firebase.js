@@ -34,7 +34,10 @@ export function loginGoogle(createAlert) {
       let userExists = findUser(user);
 
       if (!userExists) {
+        console.log('user soon to exist')
         createUser(user)
+      } else {
+        console.log('user exists')
       }
     })
     .catch((x) => createAlert(x.message, "danger"));
