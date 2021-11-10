@@ -54,7 +54,6 @@ export function register(name, email, pwd, createAlert) {
         .then(x=>console.log(x))
         .catch((x) => createAlert(x.message, "danger", "Name not filed!"));
 
-      console.log("update",update);
     })
     .catch((x) => createAlert(x.message, "danger", "Registration Failed!"));
 }
