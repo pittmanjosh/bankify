@@ -21,20 +21,6 @@ app.use("/auth", authRouter);
 app.use("/api", apiRouter);
 app.use("/backdoor", backdoor);
 
-// app.get("/list", (req, res) => {
-//   const dbConnect = dbo.getDb();
-//   dbConnect.collection("users")
-//     .find({})
-//     .toArray(function (err, result) {
-//       if (err) {
-//         res.status(400).send("Error fetching listings!");
-//       } else {
-//         res.json(result);
-//       }
-//     });
-// });
-
-
 // All other GET requests not handled before will return our React app
 app.get("/*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "../client/build", "index.html"));
