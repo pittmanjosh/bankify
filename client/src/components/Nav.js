@@ -27,16 +27,16 @@ export default function MyNav() {
 }
 
 function UserDependentLinks() {
-  const { createAlert,setNewUser } = useContext(ctx);
+  const { createAlert } = useContext(ctx);
   const user = useUser();
 
   const AllDataLink = ()=>(
-    <Link to="/alldata" className="nav-link" onClick={()=>setNewUser(false)}>
+    <Link to="/alldata" className="nav-link" >
       All Data
     </Link>);
   const MyLinks = user ? (
     <>
-      <Link to="/dashboard" className="nav-link" onClick={()=>setNewUser(false)}>
+      <Link to="/dashboard" className="nav-link" >
         Dashboard
       </Link>
       <AllDataLink/>
@@ -44,7 +44,6 @@ function UserDependentLinks() {
         to="/" 
         className="nav-link" 
         onClick={()=>{
-          setNewUser(false);
           logout(createAlert);
         }}
       >
