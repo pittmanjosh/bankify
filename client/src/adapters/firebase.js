@@ -25,7 +25,6 @@ export function loginGoogle(createAlert) {
 
   signInWithPopup(auth, provider)
     .then((result) => {
-      createAlert("Welcome back to Bankify", "success", "Successful Login!");
       console.log("googleResult",result)
       return result;
     })
@@ -35,10 +34,13 @@ export function loginGoogle(createAlert) {
 
       if (!userExists) {
         console.log('user soon to exist')
-        createUser(user)
+        createUser(user);
       } else {
         console.log('user exists')
       }
+    })
+    .then(()=>{
+      createAlert("Welcome back to Bankify", "success", "Successful Login!");
     })
     .catch((x) => createAlert(x.message, "danger"));
 }

@@ -23,7 +23,6 @@ export default function App() {
   });
 
   const createAlert = (message, variant, title) => {
-    console.log("createAlert called")
     setMsg(message);
     setType(variant);
     setHeading(title);
