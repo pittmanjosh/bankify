@@ -27,7 +27,7 @@ export default function MyNav() {
 }
 
 function UserDependentLinks() {
-  const { /*user, setUser,*/ createAlert } = useContext(ctx);
+  const { createAlert } = useContext(ctx);
   const user = useUser();
 
   const AllDataLink = ()=>(

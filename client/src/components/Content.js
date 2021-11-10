@@ -12,7 +12,7 @@ import Home from "../pages/home";
 import AllData from "../pages/alldata";
 
 export default function Content() {
-  const { user, createAlert } = useContext(ctx);
+  const { user } = useContext(ctx);
   return (
     <Switch>
       <Container className="content-container" fluid>
