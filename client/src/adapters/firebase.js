@@ -32,7 +32,7 @@ export function loginGoogle(createAlert) {
       let user = result.user;
       let userExists = findUser(user);
 
-      if (userExists !==false) {
+      if (userExists === false) {
         console.log('user soon to exist')
         createUser(user);
       } else {
