@@ -8,7 +8,6 @@ import useAlert from "../hooks/useAlert";
 
 export default function Bankify() {
   const { user,alertProps } = useContext(ctx);
-  // const alertProps = useAlert()
   return (
     <>
       <MyNav/>

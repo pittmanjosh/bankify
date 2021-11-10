@@ -11,6 +11,7 @@ export function createUser(user) {
   };
 
   fetch("/api", requestOptions)
+    .then(()=>{console.log('creating user')})
     .catch((error) => console.log("error", error));
 }
 
@@ -30,7 +31,6 @@ export function getUser(user, setSavings, setChecking) {
         setSavings(response.savings);
         return response;
       })
-      .then(res=>createUser(res))
       .catch(function (error) {
         console.log(error);
       });
@@ -75,6 +75,7 @@ export function findUser(user) {
     .then((response) => response.text())
     .then((result) => {
       currentUser = result;
+      console.log('findUser',result)
     })
     .catch((error) => console.log("error", error));
 
