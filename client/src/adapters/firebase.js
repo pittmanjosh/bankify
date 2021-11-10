@@ -18,7 +18,7 @@ export function loginEmailPassword(email, pwd, createAlert) {
   return success;
 }
 
-export function loginGoogle(createAlert) {
+export function loginGoogle(createAlert, setNewUser) {
   var provider = new GoogleAuthProvider();
   provider.addScope("profile");
   provider.addScope("email");
@@ -34,6 +34,7 @@ export function loginGoogle(createAlert) {
 
       if (!userExists) {
         console.log('user soon to exist')
+        setNewUser(true);
         createUser(user);
       } else {
         console.log('user exists')

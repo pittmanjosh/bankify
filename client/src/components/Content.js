@@ -1,7 +1,7 @@
 import ctx from "../context";
 import { useContext } from "react";
 // UI elements
-import { Col, Container, Row } from "react-bootstrap";
+import { Container, Row } from "react-bootstrap";
 // Router components
 import { Switch, Route, Redirect } from "react-router";
 // Site Pages
@@ -9,10 +9,11 @@ import Register from "../pages/register";
 import Login from "../pages/login";
 import Dashboard from "../pages/dashboard";
 import Home from "../pages/home";
+import Thanks from "../pages/thanks";
 import AllData from "../pages/alldata";
 
 export default function Content() {
-  const { user } = useContext(ctx);
+  const { user,newUser } = useContext(ctx);
   return (
     <Switch>
       <Container className="content-container" fluid>
@@ -20,7 +21,11 @@ export default function Content() {
             <Route exact path="/register">
               {user ? <Redirect to="/dashboard" /> : <Register />}
             </Route>
+            <Route exact path="/thanks">
+              {newUser ? <Thanks/> : <Redirect to="/"/>}
+            </Route>
             <Route exact path="/login">
+              {newUser && <Redirect to="/thanks"/>}
               {user ? <Redirect to="/dashboard" /> : <Login />}
             </Route>
             <Route exact path="/dashboard">

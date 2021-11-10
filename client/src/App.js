@@ -11,6 +11,7 @@ import { UserProvider } from "./providers/UserProvider";
 
 export default function App() {
   const [user, setUser] = useState("");
+  const [newUser,setNewUser] = useState(false);
   // settings for alert
   const [msg, setMsg] = useState("");
   const [heading, setHeading] = useState("");
@@ -38,7 +39,7 @@ export default function App() {
 
   return (
     <UserProvider>
-      <BankContext.Provider value={{ user, setUser, createAlert, alertProps }}>
+      <BankContext.Provider value={{ user, setUser, newUser, setNewUser, createAlert, alertProps }}>
         <Router>
           <Bankify />
         </Router>

@@ -2,11 +2,11 @@ import { Accordion, Button, Card, Col, FloatingLabel, Form } from "react-bootstr
 import { loginEmailPassword, loginGoogle } from "../adapters/firebase";
 import useInput from "../hooks/useInput";
 import ctx from "../context";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import Input from "../components/Input";
 
 export default function Login() {
-  const {createAlert} = useContext(ctx);
+  const {createAlert,setNewUser} = useContext(ctx);
   const email = useInput("");
   const password = useInput("");
 
@@ -24,7 +24,7 @@ export default function Login() {
 
   const handleGoogle = (e) => {
     e.preventDefault();
-    loginGoogle(createAlert);
+    loginGoogle(createAlert,setNewUser);
   };
 
   return (
