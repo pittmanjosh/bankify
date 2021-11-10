@@ -15,7 +15,6 @@ export default function AllData() {
 
   function fetchData() {
     let isData = false;
-    let possibleData;
 
     axios
       .get("/backdoor")

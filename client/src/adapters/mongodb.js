@@ -27,8 +27,8 @@ export function getUser(user, setSavings, setChecking) {
     axios(config)
       .then((res) => res.data)
       .then(function (response) {
-        setChecking(response.checking);
-        setSavings(response.savings);
+        setChecking(response.checking || 0);
+        setSavings(response.savings || 0);
         return response;
       })
       .catch(function (error) {
@@ -75,7 +75,7 @@ export function findUser(user) {
     .then((response) => response.text())
     .then((result) => {
       currentUser = result;
-      console.log('findUser',result)
+      console.log('findUser',result);
     })
     .catch((error) => console.log("error", error));
 
