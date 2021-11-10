@@ -8,7 +8,6 @@ import {
   signInWithPopup,
   updateProfile,
 } from "firebase/auth";
-import { createUserIfNecessary } from "./mongodb";
 
 const auth = currentAuth();
 

@@ -1,7 +1,4 @@
-import currentAuth from "../auth/firebaseAuth";
 import axios from "axios";
-const auth = currentAuth();
-const currentUser = auth.currentUser;
 
 export function createUser(user) {
   var myHeaders = new Headers();
@@ -36,7 +33,6 @@ export function getUser(user, setSavings, setChecking) {
         setSavings(response.savings);
         return response;
       })
-      .then(res=>createUser(res))
       .catch(function (error) {
         console.log(error);
       });
@@ -61,29 +57,4 @@ export function updateBalance(user, account, amount) {
   };
 
   fetch("/api", requestOptions).catch((error) => console.log("error", error));
-}
-
-export function findUser(user) {
-  let currentUser;
-  var myHeaders = new Headers();
-  myHeaders.append(
-    "Authorization",
-    `Bearer ${user.accessToken}`
-  );
-
-  var requestOptions = {
-    method: "GET",
-    headers: myHeaders,
-    redirect: "follow",
-  };
-
-  fetch("/api", requestOptions)
-    .then((response) => response.text())
-    .then((result) => {
-      console.log(result);
-      currentUser = result;
-    })
-    .catch((error) => console.log("error", error));
-
-  return user;
 }
