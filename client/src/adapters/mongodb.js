@@ -43,8 +43,11 @@ export const getUser = (user, setSavings, setChecking) => {
   };
 
   fetch("/api", requestOptions)
+    .then(res=>res.text())
     .then((result) => {
-      console.log("getUser",result)
+      console.log("getUser",result);
+      console.log("check",result.checking);
+      console.log("save",result.savings);
       setChecking(result.checking);
       setSavings(result.savings);
     })
