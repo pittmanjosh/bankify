@@ -34,7 +34,7 @@ export default function AllData() {
   }
 
   function DataLayout() {
-    if (!data) {
+    if (data === null) {
       return <div>loading...</div>;
     }
 
