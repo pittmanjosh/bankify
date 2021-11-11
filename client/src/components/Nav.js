@@ -47,7 +47,7 @@ function UserDependentLinks() {
           logout(createAlert);
         }}
       >
-        {`Logout: ${user.displayName}`}
+        {`Logout: ${user.displayName?.toUpperCase()}`}
       </Link>
     </>
   ) : (
