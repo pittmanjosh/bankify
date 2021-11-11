@@ -19,7 +19,9 @@ export default function Dashboard() {
   const { user } = useContext(ctx);
 
   useEffect(() => {
-    getUser(user,setSavings,setChecking);
+    if (user) {
+      getUser(user,setSavings,setChecking);
+    }
   });
 
   let name = user.displayName ? user.displayName.toUpperCase() : "USER";
