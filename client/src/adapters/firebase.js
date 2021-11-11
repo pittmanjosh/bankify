@@ -56,7 +56,7 @@ export function register(name, email, pwd, createAlert) {
       })
         .then(x=>console.log("update profile result:",x))
         .catch((x) => createAlert(x.message, "danger", "Name not filed!"));
-      console.log(currentUser);
+      console.log("register current",currentUser);
       createUser(user);
     })
     .catch((x) => createAlert(x.message, "danger", "Registration Failed!"));
