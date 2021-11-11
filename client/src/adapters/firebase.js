@@ -32,11 +32,17 @@ export function loginGoogle(createAlert) {
     })
     .then(({fbUser,currentUser})=>{
       if (!currentUser) {
-        createUser(fbUser);
-      };
-    })
-    .then(()=>{
-      createAlert("Welcome back to Bankify", "success", "Successful Login!");
+        createUser(fbUser)
+          .then(()=>{
+            createAlert("Thanks for choosing Bankify","success","Registration Complete")
+          })
+          .catch(()=>{
+            createAlert("Welcome back to Bankify", "success", "Successful Login!");
+          })
+          
+      } else {
+        createAlert("Welcome back to Bankify", "success", "Successful Login!");
+      }
     })
     .catch((x) => createAlert(x.message, "danger"));
 }
