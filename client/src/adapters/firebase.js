@@ -10,7 +10,6 @@ export function loginEmailPassword(email, pwd, createAlert) {
     .then((user) => {
       createAlert("Welcome back to Bankify", "success", "Successful Login!");
       success = true;
-      console.log("email & pass result:",user);
       return user;
     })
     .catch((e) => createAlert(e.message, "danger"));
@@ -55,10 +54,8 @@ export function register(name, email, pwd, createAlert) {
         displayName: name,
         profileURL: picture,
       })
-        .then(x=>console.log("update profile result:",x))
         .catch((x) => createAlert(x.message, "danger", "Name not filed!"));
 
-      console.log("preCreate",user);
       createUser(user,name,picture);
     })
     .catch((x) => createAlert(x.message, "danger", "Registration Failed!"));
