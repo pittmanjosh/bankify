@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export function createUser(user) {
   var myHeaders = new Headers();
   myHeaders.append("Authorization", `Bearer ${user.accessToken}`);
@@ -22,14 +24,14 @@ export function getUser(user, setSavings, setChecking) {
   };
 
   fetch("/api", requestOptions)
-    .then(res=>res.json())
-    .then(result=>{
-      console.log('setting');
+    .then((res) => res.json())
+    .then((result) => {
+      console.log("setting");
       setChecking(result.checking);
       setSavings(result.savings);
     })
     .catch((error) => console.log("error", error));
-};
+}
 
 export function updateBalance(user, account, amount) {
   var myHeaders = new Headers();
@@ -54,22 +56,24 @@ export function updateBalance(user, account, amount) {
 
 export function findUser(user) {
   let currentUser;
-  var myHeaders = new Headers();
-  myHeaders.append("Authorization", `Bearer ${user.accessToken}`);
 
-  var requestOptions = {
-    method: "GET",
-    headers: myHeaders,
-    redirect: "follow",
+  var config = {
+    method: "get",
+    url: "/api",
+    headers: {
+      Authorization: `Bearer ${user.accessToken}`,
+    },
   };
 
-  fetch("/api", requestOptions)
-    .then(result=>result.text())
-    .then((result) => {
-      currentUser = result;
+  axios(config)
+    .then(res=>res.data)
+    .then(user=>{
+      currentUser = user;
+      console.log("findUser",user)
     })
-    .catch((error) => console.error(error));
-
-  console.log("current",currentUser)
+    .catch(function (error) {
+      console.log(error);
+    });
+  
   return currentUser;
 }
