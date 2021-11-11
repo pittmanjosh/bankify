@@ -67,7 +67,6 @@ export function findUser(user) {
     .then(result=>result.json())
     .then((result) => {
       currentUser = result;
-      console.log("findUser", result);
     })
     .catch((error) => console.error(error));
 
