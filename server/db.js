@@ -16,6 +16,7 @@ module.exports = {
       }
 
       dbConnection = db.db("capstone");
+      dbConnection.createIndex({email : 1},{unique : true});
       console.log("Successfully connected to MongoDB.");
 
       return callback();

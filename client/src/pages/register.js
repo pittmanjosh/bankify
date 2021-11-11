@@ -41,7 +41,7 @@ export default function Register() {
     <Col sm={8} lg={7} xl={6}>
       <Card>
         <Card.Header>
-          <h2>Register an Account</h2>
+          <h2>New Customers</h2>
         </Card.Header>
         <br />
         <Card.Body>

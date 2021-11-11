@@ -18,15 +18,15 @@ export default function Home() {
           </p>
           <p>
             While not FDIC insured, client-side Firebase Authentication does
-            keep you passwords safe. Not bad ehh?
+            keep your passwords safe. Not bad ehh?
           </p>
         </Card.Text>
         <Link to="/register">
-          <Button type="link">Register Now</Button>
+          <Button type="link">New Customers</Button>
         </Link>
         {"      "}
         <Link to="/login">
-          <Button type="link">Login</Button>
+          <Button type="link">Existing Customers</Button>
         </Link>
       </Card.Body>
     </Card>
