@@ -57,7 +57,7 @@ export default function Login() {
                       label="Password"
                       className="mb-3"
                     >
-                      <Input label="Password" ac="current-password" state={password}/>
+                      <Input type="password" label="Password" ac="current-password" state={password}/>
                     </FloatingLabel>
                   </Form.Group>
                   <Button type="submit">Login</Button>

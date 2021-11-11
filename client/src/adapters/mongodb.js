@@ -15,11 +15,6 @@ export function createUser(user, name, picture) {
     body: urlencoded,
     redirect: "follow",
   };
-  // var requestOptions = {
-  //   method: "POST",
-  //   headers: myHeaders,
-  //   redirect: "follow",
-  // };
 
   fetch("/api", requestOptions).catch((error) => console.log("error", error));
 }
@@ -37,7 +32,6 @@ export function getUser(user, setSavings, setChecking) {
   fetch("/api", requestOptions)
     .then((res) => res.json())
     .then((result) => {
-      console.log("setting");
       setChecking(result.checking);
       setSavings(result.savings);
     })
@@ -84,8 +78,6 @@ export function findUser(user) {
     .catch(function (error) {
       console.log(error);
     });
-
-  console.log(currentUser);
 
   return currentUser;
 }
