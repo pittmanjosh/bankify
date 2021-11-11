@@ -24,7 +24,6 @@ Router.route("/")
           if (err) {
             res.status(400).send("Error fetching listings!");
           } else {
-            console.log(result);
             res.send(result);
           }
         });

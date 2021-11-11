@@ -43,6 +43,7 @@ export function loginGoogle(createAlert) {
 }
 
 export function register(name, email, pwd, createAlert) {
+  const currentUser = auth.currentUser();
   createUserWithEmailAndPassword(auth, email, pwd)
     .then((user) => {
       createAlert("You are now registered!", "success");
@@ -55,7 +56,7 @@ export function register(name, email, pwd, createAlert) {
       })
         .then(x=>console.log("update profile result:",x))
         .catch((x) => createAlert(x.message, "danger", "Name not filed!"));
-
+      console.log(currentUser);
       createUser(user);
     })
     .catch((x) => createAlert(x.message, "danger", "Registration Failed!"));
