@@ -1,14 +1,25 @@
 import axios from "axios";
 
-export function createUser(user) {
+export function createUser(user, name, picture) {
   var myHeaders = new Headers();
   myHeaders.append("Authorization", `Bearer ${user.accessToken}`);
+  myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+
+  var urlencoded = new URLSearchParams();
+  urlencoded.append("picture", picture);
+  urlencoded.append("name", name);
 
   var requestOptions = {
     method: "POST",
     headers: myHeaders,
+    body: urlencoded,
     redirect: "follow",
   };
+  // var requestOptions = {
+  //   method: "POST",
+  //   headers: myHeaders,
+  //   redirect: "follow",
+  // };
 
   fetch("/api", requestOptions).catch((error) => console.log("error", error));
 }
@@ -66,8 +77,8 @@ export function findUser(user) {
   };
 
   axios(config)
-    .then(res=>res.data)
-    .then(user=>{
+    .then((res) => res.data)
+    .then((user) => {
       currentUser = user;
     })
     .catch(function (error) {
@@ -75,6 +86,6 @@ export function findUser(user) {
     });
 
   console.log(currentUser);
-  
+
   return currentUser;
 }

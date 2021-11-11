@@ -33,9 +33,9 @@ Router.route("/")
     // create user in mongoDB
     const newUser = {
       uid: req.uid,
-      name: req.name,
+      name: req.name || req.body.name,
       email: req.email,
-      photoURL: req.photoURL,
+      photoURL: req.photoURL || req.body.picture,
       checking: "0",
       savings: "0",
     };

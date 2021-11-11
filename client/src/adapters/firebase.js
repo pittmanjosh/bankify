@@ -43,6 +43,8 @@ export function loginGoogle(createAlert) {
 }
 
 export function register(name, email, pwd, createAlert) {
+  const picture = `https://ui-avatars.com/api/?name=${name}`;
+
   createUserWithEmailAndPassword(auth, email, pwd)
     .then((user) => {
       createAlert("You are now registered!", "success");
@@ -51,13 +53,13 @@ export function register(name, email, pwd, createAlert) {
     .then((user) => {
       updateProfile(user, {
         displayName: name,
-        profileURL: `https://ui-avatars.com/api/?name=${name}`,
+        profileURL: picture,
       })
         .then(x=>console.log("update profile result:",x))
         .catch((x) => createAlert(x.message, "danger", "Name not filed!"));
-        
-      console.log(user);
-      createUser(user);
+
+      console.log("preCreate",user);
+      createUser(user,name,picture);
     })
     .catch((x) => createAlert(x.message, "danger", "Registration Failed!"));
 }
