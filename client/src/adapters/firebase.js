@@ -56,7 +56,13 @@ export function register(name, email, pwd, createAlert) {
       })
         .catch((x) => createAlert(x.message, "danger", "Name not filed!"));
 
-      createUser(user,name,picture);
+      createUser(user,name,picture)
+        .then(()=>{
+          createAlert("Thanks for choosing Bankify!","success","BANKIFY")
+        })
+        .catch((x)=>{
+          console.log(x);
+        })
     })
     .catch((x) => createAlert(x.message, "danger", "Registration Failed!"));
 }

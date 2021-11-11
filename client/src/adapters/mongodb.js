@@ -16,7 +16,8 @@ export function createUser(user, name, picture) {
     redirect: "follow",
   };
 
-  fetch("/api", requestOptions).catch((error) => console.log("error", error));
+  fetch("/api", requestOptions)
+    .catch((error) => console.log("error", error));
 }
 
 export function getUser(user, setSavings, setChecking) {
@@ -55,7 +56,6 @@ export function updateBalance(user, account, amount) {
   };
 
   fetch("/api", requestOptions)
-    .then((x) => console.log("updateBalance result:", x))
     .catch((error) => console.log("error", error));
 }
 

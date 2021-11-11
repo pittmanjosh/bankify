@@ -18,24 +18,21 @@ export default function Content() {
     <Switch>
       <Container className="content-container" fluid>
         <Row className="justify-content-center">
-            <Route exact path="/thanks">
-              {user ? <Thanks/> : <Redirect to="/login"/>}
-            </Route>
-            <Route exact path="/register">
-              {user ? <Redirect to="/dashboard" /> : <Register />}
-            </Route>
-            <Route exact path="/login">
-              {user ? <Redirect to="/thanks" /> : <Login />}
-            </Route>
-            <Route exact path="/dashboard">
-              {user ? <Dashboard /> : <Redirect to="/" />}
-            </Route>
-            <Route exact path="/alldata">
-              <AllData />
-            </Route>
-            <Route exact path="/">
-              {user ? <Dashboard /> : <Home />}
-            </Route>
+          <Route exact path="/register">
+            {user ? <Redirect to="/dashboard" /> : <Register />}
+          </Route>
+          <Route exact path="/login">
+            {user ? <Redirect to="/dashboard" /> : <Login />}
+          </Route>
+          <Route exact path="/dashboard">
+            {user ? <Dashboard /> : <Redirect to="/" />}
+          </Route>
+          <Route exact path="/alldata">
+            <AllData />
+          </Route>
+          <Route exact path="/">
+            {user ? <Dashboard /> : <Home />}
+          </Route>
         </Row>
       </Container>
     </Switch>

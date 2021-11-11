@@ -1,5 +1,4 @@
 import {Alert} from 'react-bootstrap';
-import useAlert from '../hooks/useAlert';
 
 export default function MyAlert({msg,type = 'danger',heading = '',reset = ''}) {
   if (msg) {
