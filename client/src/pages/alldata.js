@@ -43,9 +43,9 @@ export default function AllData() {
         <thead>
           <tr>
             <th>#</th>
+            <th>uid</th>
             <th>Name</th>
             <th>Email</th>
-            <th>uid</th>
             <th>Checking Balance</th>
             <th>Savings Balance</th>
           </tr>
@@ -55,9 +55,9 @@ export default function AllData() {
             return (
               <tr key={i}>
                 <td>{i + 1}</td>
+                <td>{user._id || ""} </td>
                 <td>{user.name || ""}</td>
                 <td>{user.email || ""}</td>
-                <td>{user.uid || ""} </td>
                 <td>{`$${String(user.checking)}.00`}</td>
                 <td>{`$${String(user.savings)}.00`} </td>
               </tr>
