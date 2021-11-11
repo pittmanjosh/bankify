@@ -65,8 +65,10 @@ export function findUser(user) {
 
   fetch("/api", requestOptions)
     .then(result=>{
-      console.log("json",result.json());
-      console.log("text",result.text());
+      let duplicate = {...result};
+      let triplicate = {...result};
+      console.log("json",duplicate.json());
+      console.log("text",triplicate.text());
       return result;
     })
     .then((result) => {
