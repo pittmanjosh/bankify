@@ -71,5 +71,6 @@ export function findUser(user) {
     })
     .catch((error) => console.error(error));
 
+  console.log("current",currentUser)
   return currentUser;
 }
