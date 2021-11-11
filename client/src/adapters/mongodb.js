@@ -64,13 +64,7 @@ export function findUser(user) {
   };
 
   fetch("/api", requestOptions)
-    .then(result=>{
-      let duplicate = {...result};
-      let triplicate = {...result};
-      console.log("json",duplicate.json());
-      console.log("text",triplicate.text());
-      return result;
-    })
+    .then(result=>result.json())
     .then((result) => {
       currentUser = result;
       console.log("findUser", result);
