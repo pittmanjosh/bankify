@@ -69,7 +69,6 @@ export function findUser(user) {
     .then(res=>res.data)
     .then(user=>{
       currentUser = user;
-      console.log("findUser",user)
     })
     .catch(function (error) {
       console.log(error);
