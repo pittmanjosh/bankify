@@ -46,7 +46,7 @@ Router.route("/")
         if (err) {
           res.status(400).send("Error adding user");
         } else {
-          
+          console.log("post result",result);
           res.send(`${req.name} created`);
         }
       });
