@@ -65,8 +65,9 @@ export function findUser(user) {
 
   fetch("/api", requestOptions)
     .then(result=>{
-      console.log(result.json());
-      return result.json();
+      console.log("json",result.json());
+      console.log("text",result.text());
+      return result;
     })
     .then((result) => {
       currentUser = result;
