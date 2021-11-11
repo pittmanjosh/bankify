@@ -20,7 +20,7 @@ Router.route("/")
       const dbConnect = dbo.getDb();
 
       dbConnect.collection("users")
-        .findOne({ uid: req.uid }, (err, result)=>{
+        .findOne({ _id: req.uid }, (err, result)=>{
           if (err) {
             res.status(400).send("Error fetching listings!");
           } else {
@@ -71,7 +71,7 @@ Router.route("/")
     (async () => {
       const dbConnect = dbo.getDb();
       dbConnect.collection("users")
-        .updateOne({uid:req.uid}, operation, (err, result) => {
+        .updateOne({_id:req.uid}, operation, (err, result) => {
           if (err) {
             res.status(400).send("Error finding user");
           } else {
