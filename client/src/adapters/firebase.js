@@ -32,8 +32,6 @@ export function loginGoogle(createAlert) {
       return {fbUser: user, currentUser};
     })
     .then(({fbUser,currentUser})=>{
-      console.log("fb",fbUser);
-      console.log("current",currentUser);
       if (!currentUser) {
         createUser(fbUser);
       };
