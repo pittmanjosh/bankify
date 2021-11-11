@@ -23,7 +23,8 @@ export function getUser(user, setSavings, setChecking) {
 
   fetch("/api", requestOptions)
     .then(res=>res.json())
-    .then((result) => {
+    .then(result=>{
+      console.log('setting');
       setChecking(result.checking);
       setSavings(result.savings);
     })
