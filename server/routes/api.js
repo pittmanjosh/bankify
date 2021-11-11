@@ -32,7 +32,7 @@ Router.route("/")
   .post(function (req, res) {
     // create user in mongoDB
     const newUser = {
-      uid: req.uid,
+      _id: req.uid,
       name: req.name || req.body.name,
       email: req.email,
       photoURL: req.photoURL || req.body.picture,
