@@ -35,85 +35,76 @@ export default function Docs() {
           <Card.Title>/api</Card.Title>
           <ul style={{ listStyle: "none" }}>
             <li>
-              Description provides services based on data from Firebase Auth
-              middleware
+              Provides services based on data from Firebase Auth middleware
             </li>
             <li>
-              <Path {...get} />
+              <Card.Title>{get.title}</Card.Title>
+              <ul style={{ listStyle: "none" }}>
+                <li>
+                  <strong>Description:</strong>
+                  {"  "}
+                  {get.description}
+                </li>
+                <br />
+                <li>
+                  <strong>Parameters:</strong> <br />
+                  <Table striped bordered hover>
+                    <thead>
+                      <tr>
+                        <th>name</th>
+                        <th>location</th>
+                        <th>description</th>
+                        <th>required</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {get.params.map((x, i) => {
+                        return (
+                          <tr key={i}>
+                            <td>
+                              <strong>{x.name}</strong>
+                            </td>
+                            <td>{x.location}</td>
+                            <td>{x.description}</td>
+                            <td>{x.required ? "✔" : "x"}</td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </Table>
+                </li>
+                <br />
+                <li>
+                  <strong>Responses:</strong>
+                  <br />
+                  <Table striped bordered hover>
+                    <thead>
+                      <tr>
+                        <th>Response</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {get.responses.map((x, i) => {
+                        return (
+                          <tr key={i}>
+                            <td>
+                              <strong>{x.res}</strong>
+                            </td>
+                            <td>{x.description}</td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </Table>
+                </li>
+                <li></li>
+              </ul>
             </li>
           </ul>
         </Card.Body>
         <Card.Footer></Card.Footer>
       </Card>
     </Col>
-  );
-}
-
-function Path({ title, description, params, responses }) {
-  return (
-    <>
-      <Card.Title>{title}</Card.Title>
-      <ul style={{ listStyle: "none" }}>
-        <li>
-          <strong>Description:</strong>
-          {"  "}
-          {description}
-        </li>
-        <br />
-        <li>
-          <strong>Parameters:</strong> <br />
-          <Table striped bordered hover>
-            <thead>
-              <tr>
-                <th>name</th>
-                <th>location</th>
-                <th>description</th>
-                <th>required</th>
-              </tr>
-            </thead>
-            <tbody>
-              {params.map((x, i) => {
-                return (
-                  <tr key={i}>
-                    <td>
-                      <strong>{x.name}</strong>
-                    </td>
-                    <td>{x.location}</td>
-                    <td>{x.description}</td>
-                    <td>{x.required ? "✔" : "x"}</td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </Table>
-        </li>
-        <br />
-        <li>
-          <strong>Responses:</strong>
-          <br />
-          <Table striped bordered hover>
-            <thead>
-              <tr>
-                <th>Response</th>
-                <th>Description</th>
-              </tr>
-            </thead>
-            <tbody>
-              {responses.map((x, i) => {
-                return (
-                  <tr key={i}>
-                    <td>
-                      <strong>{x.res}</strong>
-                    </td>
-                    <td>{x.description}</td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </Table>
-        </li>
-        <li></li>
-      </ul>
-    </>
   );
 }
