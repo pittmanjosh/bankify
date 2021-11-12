@@ -1,6 +1,6 @@
 import { Container, Nav, Navbar } from "react-bootstrap";
 import { BrowserRouter as Router, Link } from "react-router-dom";
-import { logout } from "../adapters/firebase";
+import { logout } from "../adapters/dal";
 import ctx from "../context";
 import { useContext } from "react";
 import useUser from "../hooks/useUser";

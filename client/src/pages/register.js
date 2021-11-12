@@ -6,7 +6,7 @@ import {
   FloatingLabel,
   Form,
 } from "react-bootstrap";
-import { register, loginGoogle } from "../adapters/firebase";
+import { register, loginGoogle } from "../adapters/dal";
 import useInput from "../hooks/useInput";
 import ctx from "../context";
 import { useContext } from "react";

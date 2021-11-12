@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react";
-import { authentication } from "../adapters/firebase";
+import { authentication } from "../adapters/dal";
 
 const UserContext = createContext()
 
