@@ -10,7 +10,7 @@ export default function Docs() {
         <Card.Body>
           <Card.Title>/api</Card.Title>
           <p>Description provides services based on data from Firebase Auth middleware</p>
-          <Path title="Get" description="Retrieves user info from MongoDB based on uid provided by Firebase Auth middleware" params={[{name:"uid", location: "req",description:"index value submitted as \"_id to MongoDB",required:true}]}></Path>
+          <Path title="Get" description="Retrieves user info from MongoDB based on uid provided by Firebase Auth middleware" params={[{name:"uid", location: "req",description:"index value submitted as \"_id to MongoDB",required:true}]} responses={[]}></Path>
         </Card.Body>
         <Card.Footer></Card.Footer>
       </Card>
@@ -18,13 +18,13 @@ export default function Docs() {
   );
 }
 
-function Path({title,description,params}) {
+function Path({title,description,params,responses}) {
   return (
     <>
       <Card.Title>{title}</Card.Title>
       <ul style={{ listStyle: "none" }}>
-        <li>{`description: ${description}`}</li>
-        <li>Parameters: <br/>
+        <li><strong>Description:</strong>{"  "}{description}</li>
+        <li><strong>Parameters:</strong> <br/>
           <Table striped bordered hover>
             <thead>
               <tr>
@@ -45,6 +45,26 @@ function Path({title,description,params}) {
               })}
             </tbody>
           </Table>
+          <br/>
+          <Table striped bordered hover>
+            <thead>
+              <tr>
+                <th>Response</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              {responses.map((x,i)=>{
+                <tr key={i}>
+                  <td><strong>{x.res}</strong></td>
+                  <td>{x.description}</td>
+                </tr>
+              })}
+            </tbody>
+          </Table>
+        </li>
+        <li>
+
         </li>
       </ul>
     </>
