@@ -13,34 +13,6 @@ Router.use(function timeLog(req, res, next) {
   next();
 });
 
-const swaggerOptions = {
-  swaggerDefinition: {
-    info : {
-      title: "Bankify API",
-      version: "1.0.0",
-    }
-  },
-  apis: ["api.js"]
-};
-
-const swaggerDocs = SwaggerJsDoc(swaggerOptions);
-
-Router.use('/docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
-
-
-Router.use(auth);
-Router.use(express.urlencoded({extended:true}));
-/**
- * @swagger
- * /api:
- *  get:
- *    description: Get individual user data 
- *    responses:  
- *      200:
- *        description: Success
- *      400: 
- *        description: Failure
- */
 Router.route("/")
   .get(function (req, res) {
     // return user balance

@@ -10,6 +10,7 @@ import Login from "../pages/login";
 import Dashboard from "../pages/dashboard";
 import Home from "../pages/home";
 import AllData from "../pages/alldata";
+import Docs from "../pages/doc";
 
 export default function Content() {
   const { user } = useContext(ctx);
@@ -17,6 +18,9 @@ export default function Content() {
     <Switch>
       <Container className="content-container" fluid>
         <Row className="justify-content-center">
+          <Route exact pathe="/api-docs">
+            <Docs/>
+          </Route>
           <Route exact path="/register">
             {user ? <Redirect to="/dashboard" /> : <Register />}
           </Route>
