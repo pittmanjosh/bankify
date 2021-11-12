@@ -11,7 +11,7 @@ export default function Docs() {
         location: "req",
         description: 'index value submitted as "_id to MongoDB',
         required: true,
-      }
+      },
     ],
     responses: [
       {
@@ -21,8 +21,8 @@ export default function Docs() {
       {
         value: 200,
         description: "Error",
-      }
-    ]
+      },
+    ],
   };
 
   return (
@@ -38,8 +38,10 @@ export default function Docs() {
               Description provides services based on data from Firebase Auth
               middleware
             </li>
+            <li>
+              <Path {...get} />
+            </li>
           </ul>
-          <Path {...get} />
         </Card.Body>
         <Card.Footer></Card.Footer>
       </Card>
@@ -71,14 +73,16 @@ function Path({ title, description, params, responses }) {
             </thead>
             <tbody>
               {params.map((x, i) => {
-                <tr key={i}>
-                  <td>
-                    <strong>{x.name}</strong>
-                  </td>
-                  <td>{x.location}</td>
-                  <td>{x.description}</td>
-                  <td>{x.required ? "✔" : "x"}</td>
-                </tr>;
+                return (
+                  <tr key={i}>
+                    <td>
+                      <strong>{x.name}</strong>
+                    </td>
+                    <td>{x.location}</td>
+                    <td>{x.description}</td>
+                    <td>{x.required ? "✔" : "x"}</td>
+                  </tr>
+                );
               })}
             </tbody>
           </Table>
