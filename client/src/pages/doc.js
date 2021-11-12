@@ -15,11 +15,11 @@ export default function Docs() {
     ],
     responses: [
       {
-        value: 200,
+        status: 200,
         description: "Success",
       },
       {
-        value: 200,
+        status: 200,
         description: "Error",
       },
     ],
@@ -37,74 +37,84 @@ export default function Docs() {
             <li>
               Provides services based on data from Firebase Auth middleware
             </li>
-            <li>
-              <Card.Title>{get.title}</Card.Title>
-              <ul style={{ listStyle: "none" }}>
-                <li>
-                  <strong>Description:</strong>
-                  {"  "}
-                  {get.description}
-                </li>
-                <br />
-                <li>
-                  <strong>Parameters:</strong> <br />
-                  <Table striped bordered hover>
-                    <thead>
-                      <tr>
-                        <th>name</th>
-                        <th>location</th>
-                        <th>description</th>
-                        <th>required</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {get.params.map((x, i) => {
-                        return (
-                          <tr key={i}>
-                            <td>
-                              <strong>{x.name}</strong>
-                            </td>
-                            <td>{x.location}</td>
-                            <td>{x.description}</td>
-                            <td>{x.required ? "✔" : "x"}</td>
-                          </tr>
-                        );
-                      })}
-                    </tbody>
-                  </Table>
-                </li>
-                <br />
-                <li>
-                  <strong>Responses:</strong>
-                  <br />
-                  <Table striped bordered hover>
-                    <thead>
-                      <tr>
-                        <th>Response</th>
-                        <th>Description</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {get.responses.map((x, i) => {
-                        return (
-                          <tr key={i}>
-                            <td>
-                              <strong>{x.res}</strong>
-                            </td>
-                            <td>{x.description}</td>
-                          </tr>
-                        );
-                      })}
-                    </tbody>
-                  </Table>
-                </li>
-                <li></li>
-              </ul>
-            </li>
+            <br />
+            <Path {...get}/>
           </ul>
         </Card.Body>
         <Card.Footer></Card.Footer>
       </Card>
     </Col>
+  );
+}
+
+function Path(prop) {
+  return (
+    <>
+      <li>
+        <Card.Title>{prop.title}</Card.Title>
+        <ul style={{ listStyle: "none" }}>
+          <li>
+            <strong>Description:</strong>
+            {"  "}
+            {prop.description}
+          </li>
+          <br />
+          <li>
+            <strong>Parameters:</strong> <br />
+            <Table striped bordered hover>
+              <thead>
+                <tr>
+                  <th>name</th>
+                  <th>location</th>
+                  <th>description</th>
+                  <th>required</th>
+                </tr>
+              </thead>
+              <tbody>
+                {prop.params.map((x, i) => {
+                  return (
+                    <tr key={i}>
+                      <td>
+                        <strong>{x.name}</strong>
+                      </td>
+                      <td>{x.location}</td>
+                      <td>{x.description}</td>
+                      <td>{x.required ? "✔" : "x"}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </Table>
+          </li>
+          <br />
+          <li>
+            <strong>Responses:</strong>
+            <br />
+            <Table striped bordered hover>
+              <thead>
+                <tr>
+                  <th>Response</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                {prop.responses.map((x, i) => {
+                  return (
+                    <tr key={i}>
+                      <td>
+                        <strong>{x.status}</strong>
+                      </td>
+                      <td>{x.description}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </Table>
+          </li>
+          <li></li>
+        </ul>
+      </li>
+      <br/>     
+    </>
   );
 }
