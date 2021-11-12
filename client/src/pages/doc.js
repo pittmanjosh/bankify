@@ -19,7 +19,7 @@ export default function Docs() {
         description: "Success",
       },
       {
-        status: 200,
+        status: 400,
         description: "Error",
       },
     ],
@@ -55,7 +55,7 @@ function Path(prop) {
         <ul style={{ listStyle: "none" }}>
           <li>
             <strong>Description:</strong>
-            {"  "}
+            <br/>
             {prop.description}
           </li>
           <br />
