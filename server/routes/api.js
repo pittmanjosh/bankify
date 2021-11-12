@@ -2,8 +2,6 @@ const express = require("express");
 const auth = require("../../middleware/auth");
 const Router = express.Router();
 const dbo = require("../db.js");
-const SwaggerJsDoc = require("swagger-jsdoc");
-const swaggerUI = require("swagger-ui-express");
 
 Router.use(function timeLog(req, res, next) {
   console.log(
@@ -12,6 +10,9 @@ Router.use(function timeLog(req, res, next) {
   );
   next();
 });
+
+Router.use(auth);
+Router.use(express.urlencoded({extended:true}));
 
 Router.route("/")
   .get(function (req, res) {
