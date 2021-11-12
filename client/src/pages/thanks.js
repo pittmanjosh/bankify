@@ -5,7 +5,6 @@ import ctx from "../context";
 
 
 export default function Thanks() {
-  const {setNewUser} = useContext(ctx);
   return (
     <Col sm={8} lg={7} xl={6}>
     <Card >

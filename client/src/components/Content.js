@@ -10,7 +10,6 @@ import Login from "../pages/login";
 import Dashboard from "../pages/dashboard";
 import Home from "../pages/home";
 import AllData from "../pages/alldata";
-import Thanks from "../pages/thanks";
 
 export default function Content() {
   const { user } = useContext(ctx);
