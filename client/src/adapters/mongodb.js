@@ -17,7 +17,7 @@ export function createUser(user, createAlert, name, picture ) {
   };
 
   fetch("/api", requestOptions)
-    .then(()=>createAlert("Thanks for signing up with Bankify!","success",`Welcome ${name.toUpperCase()}!`))
+    .then(()=>createAlert("Thanks for signing up with Bankify!","success","Welcome to Bankify!"))
     .catch((error) => createAlert(error,"danger","User Not Created"));
 }
 
