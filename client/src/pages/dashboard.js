@@ -87,7 +87,7 @@ function DashboardPanel(props) {
 
   return (
     <div className={`panel-${title.toLowerCase()}`}>
-      <Card.Title>{title}</Card.Title>
+      <Card.Title>{`${title} Balance`}</Card.Title>
       <br />
       <div className="input-group mb-3">
         <span className="input-group-text">$</span>
