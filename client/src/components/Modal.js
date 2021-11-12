@@ -9,11 +9,11 @@ export default function TransactionModal(props) {
   const [alertMsg,setAlertMsg] = useState('')
   const { transaction, account, show, close, state } = props;
   const [ accountState, setAccountState ] = state;
-  const {user} = useContext(ctx);
+  const {user,createAlert} = useContext(ctx);
 
   const id = `${account}-${transaction}`.toLowerCase();
 
-  const createAlert = (msg)=>{
+  const modalAlert = (msg)=>{
     setAlertMsg(msg);
   }
   const resetAlert = ()=>{
@@ -38,7 +38,9 @@ export default function TransactionModal(props) {
         newTotal = withdraw(amount);
       }
       updateBalance(user,targetAccount,newTotal);
+      setAmount('');
       setAccountState(newTotal);
+      createAlert("Transaction complete","success");
       close();
     }
   }
@@ -48,13 +50,13 @@ export default function TransactionModal(props) {
     var proposedAmount = Number(amount);
 
     if (!Number.isInteger(proposedAmount)) {
-      createAlert("Must enter a whole number");
+      modalAlert("Must enter a whole number");
       setAmount('');
       return false;
     }
 
     if (proposedAmount <= 0 || proposedAmount > 1000000) {
-      createAlert("Must be an amount between $1 and $1 million");
+      modalAlert("Must be an amount between $1 and $1 million");
       setAmount('');
       return false;
     }
@@ -63,7 +65,7 @@ export default function TransactionModal(props) {
       return true
     }
 
-    createAlert(`Withdraw may not exceed existing balance of $${accountState}`);
+    modalAlert(`Withdraw may not exceed existing balance of $${accountState}`);
     setAmount(accountState);
     return false
   }
