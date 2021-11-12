@@ -100,12 +100,14 @@ function Path({ title, description, params, responses }) {
             </thead>
             <tbody>
               {responses.map((x, i) => {
-                <tr key={i}>
-                  <td>
-                    <strong>{x.res}</strong>
-                  </td>
-                  <td>{x.description}</td>
-                </tr>;
+                return (
+                  <tr key={i}>
+                    <td>
+                      <strong>{x.res}</strong>
+                    </td>
+                    <td>{x.description}</td>
+                  </tr>
+                );
               })}
             </tbody>
           </Table>
