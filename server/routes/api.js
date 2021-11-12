@@ -16,7 +16,7 @@ Router.use(function timeLog(req, res, next) {
 const swaggerOptions = {
   swaggerDefinition: {
     info : {
-      title: "Bankify",
+      title: "Bankify API",
       version: "1.0.0",
     }
   },
@@ -32,7 +32,7 @@ Router.use(auth);
 Router.use(express.urlencoded({extended:true}));
 /**
  * @swagger
- * /:
+ * /api:
  *  get:
  *    description: Get individual user data 
  *    responses:  
