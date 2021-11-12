@@ -23,7 +23,6 @@ export function createUser(user, createAlert, name, picture ) {
       } else {
         createAlert("Thanks for signing up with Bankify!","success","Welcome to Bankify!");
       }
-      console.log("createUser",x);
     })
     .catch((error) => createAlert(error,"danger","User Not Created"));
 }
