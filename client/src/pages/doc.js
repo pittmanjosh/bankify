@@ -13,7 +13,15 @@ export default function Docs() {
         required: true,
       },
     ],
-    responses: [],
+    responses: [
+      {
+        value:200,
+        description: "Success"
+      },
+      {
+        value:200,
+        description: "Error"
+      }]
   };
 
   return (
