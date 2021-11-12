@@ -1,5 +1,13 @@
 import currentAuth from "../auth/firebaseAuth";
-import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signOut, signInWithEmailAndPassword, signInWithPopup, updateProfile } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  GoogleAuthProvider,
+  onAuthStateChanged,
+  signOut,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  updateProfile,
+} from "firebase/auth";
 import { createUser, findUser } from "./mongodb";
 
 const auth = currentAuth();
@@ -26,20 +34,13 @@ export function loginGoogle(createAlert) {
     .then((result) => {
       return result.user;
     })
-    .then(user=>{
+    .then((user) => {
       let currentUser = findUser(user);
-      return {fbUser: user, currentUser};
+      return { fbUser: user, currentUser };
     })
-    .then(({fbUser,currentUser})=>{
+    .then(({ fbUser, currentUser }) => {
       if (!currentUser) {
-        createUser(fbUser)
-          .then(()=>{
-            createAlert("Thanks for choosing Bankify","success","Registration Complete")
-          })
-          .catch(()=>{
-            createAlert("Welcome back to Bankify", "success", "Successful Login!");
-          })
-          
+        createUser(fbUser,createAlert);
       } else {
         createAlert("Welcome back to Bankify", "success", "Successful Login!");
       }
@@ -60,17 +61,10 @@ export function register(name, email, pwd, createAlert) {
         displayName: name,
         profileURL: picture,
       })
-        .catch((x) => createAlert(x.message, "danger", "Name not filed!"));
-
-      createUser(user,name,picture)
-        .then(()=>{
-          createAlert("Thanks for choosing Bankify!","success","BANKIFY")
-        })
-        .catch((x)=>{
-          console.log(x);
-        })
+        
+      createUser(user, createAlert, name, picture); 
     })
-    .catch((x) => createAlert(x.message, "danger", "Registration Failed!"));
+    .catch((x) => createAlert(x.message, "danger", "Registration Failed!"))
 }
 
 export function logout(createAlert) {
@@ -78,7 +72,7 @@ export function logout(createAlert) {
     .then(() => {
       if (createAlert) {
         createAlert("Come back soon!", "secondary");
-      } 
+      }
     })
     .catch((x) => {
       if (createAlert) createAlert(x.message, "danger");
