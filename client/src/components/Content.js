@@ -18,7 +18,7 @@ export default function Content() {
     <Switch>
       <Container className="content-container" fluid>
         <Row className="justify-content-center">
-          <Route exact pathe="/api-docs">
+          <Route exact path="/api-docs">
             <Docs/>
           </Route>
           <Route exact path="/register">

@@ -1,9 +1,5 @@
-import { Button, Card, Col, FloatingLabel, Form } from "react-bootstrap";
-import { register } from "../adapters/dal";
-import useInput from "../hooks/useInput";
-import Input from "../components/Input";
-import { useContext } from "react";
-import ctx from "../context";
+import { Card, Col } from "react-bootstrap";
+
 
 export default function Docs() {
   
