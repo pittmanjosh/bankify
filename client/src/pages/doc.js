@@ -1,6 +1,20 @@
 import { Card, Col, Table } from "react-bootstrap";
 
 export default function Docs() {
+  const get = {
+    title: "Get",
+    description: "Retrieves user info from MongoDB based on uid provided by Firebase Auth middleware",
+    params: [
+      {
+        name: "uid",
+        location: "req",
+        description: 'index value submitted as "_id to MongoDB',
+        required: true,
+      },
+    ],
+    responses: []
+  }
+
   return (
     <Col sm={8} lg={7} xl={6}>
       <Card>
@@ -13,19 +27,7 @@ export default function Docs() {
             Description provides services based on data from Firebase Auth
             middleware
           </p>
-          <Path
-            title="Get"
-            description="Retrieves user info from MongoDB based on uid provided by Firebase Auth middleware"
-            params={[
-              {
-                name: "uid",
-                location: "req",
-                description: 'index value submitted as "_id to MongoDB',
-                required: true,
-              },
-            ]}
-            responses={[]}
-          ></Path>
+          <Path {...get}/>
         </Card.Body>
         <Card.Footer></Card.Footer>
       </Card>
