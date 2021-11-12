@@ -11,17 +11,18 @@ export default function Docs() {
         location: "req",
         description: 'index value submitted as "_id to MongoDB',
         required: true,
-      },
+      }
     ],
     responses: [
       {
-        value:200,
-        description: "Success"
+        value: 200,
+        description: "Success",
       },
       {
-        value:200,
-        description: "Error"
-      }]
+        value: 200,
+        description: "Error",
+      }
+    ]
   };
 
   return (
@@ -32,10 +33,12 @@ export default function Docs() {
         </Card.Header>
         <Card.Body>
           <Card.Title>/api</Card.Title>
-          <p>
-            Description provides services based on data from Firebase Auth
-            middleware
-          </p>
+          <ul style={{ listStyle: "none" }}>
+            <li>
+              Description provides services based on data from Firebase Auth
+              middleware
+            </li>
+          </ul>
           <Path {...get} />
         </Card.Body>
         <Card.Footer></Card.Footer>
@@ -50,13 +53,9 @@ function Path({ title, description, params, responses }) {
       <Card.Title>{title}</Card.Title>
       <ul style={{ listStyle: "none" }}>
         <li>
-          <ul style={{ listStyle: "none" }}>
-            <li>
-              <strong>Description:</strong>
-              {"  "}
-              {description}
-            </li>
-          </ul>
+          <strong>Description:</strong>
+          {"  "}
+          {description}
         </li>
         <br />
         <li>
