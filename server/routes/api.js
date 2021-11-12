@@ -32,7 +32,7 @@ Router.use(auth);
 Router.use(express.urlencoded({extended:true}));
 /**
  * @swagger
- * /books:
+ * /:
  *  get:
  *    description: Get individual user data 
  *    responses:  
