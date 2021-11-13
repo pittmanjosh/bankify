@@ -67,7 +67,7 @@ export default function Docs() {
     ],
   };
 
-  const post = {
+  const put = {
     title: "Put",
     description:
       "Finds user based on their auth provided \"_id\" and updates the user's checking or savings balance to the provided balance",
