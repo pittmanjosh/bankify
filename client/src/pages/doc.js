@@ -9,7 +9,7 @@ export default function Docs() {
       {
         name: "uid",
         location: "req",
-        description: 'index value submitted as "_id to MongoDB',
+        description: 'index value submitted as "_id" to MongoDB',
         required: true,
       },
     ],
@@ -20,7 +20,85 @@ export default function Docs() {
       },
       {
         status: 400,
-        description: "Error",
+        description: "Failure",
+      },
+    ],
+  };
+
+  const post = {
+    title: "Post",
+    description:
+      "Creates new MongoDB user based with the name, email, uid, and photoURL provided by Firebase Auth middleware. For non-Google registration, name and photoURL are provided by req.body instead of req.",
+    params: [
+      {
+        name: "uid",
+        location: "req",
+        description: 'index value submitted as "_id" to MongoDB',
+        required: true,
+      },
+      {
+        name: "name",
+        location: "req or req.body",
+        description: 'name of user associated with the account',
+        required: false,
+      },
+      {
+        name: "email",
+        location: "req",
+        description: 'email of user associated with the account',
+        required: false,
+      },
+      {
+        name: "photoURL",
+        location: "req or req.body",
+        description: 'photo to be associated with the account',
+        required: false,
+      }
+    ],
+    responses: [
+      {
+        status: 200,
+        description: "Success",
+      },
+      {
+        status: 400,
+        description: "Failure",
+      },
+    ],
+  };
+
+  const post = {
+    title: "Put",
+    description:
+      "Finds user based on their auth provided \"_id\" and updates the user's checking or savings balance to the provided balance",
+    params: [
+      {
+        name: "uid",
+        location: "req",
+        description: 'index value submitted as "_id" to MongoDB',
+        required: true,
+      },
+      {
+        name: "account",
+        location: "req.body",
+        description: 'name of the account to be updated',
+        required: true,
+      },
+      {
+        name: "amount",
+        location: "req.body",
+        description: 'updated balance of the provided account',
+        required: true,
+      }
+    ],
+    responses: [
+      {
+        status: 200,
+        description: "Success",
+      },
+      {
+        status: 400,
+        description: "Failure",
       },
     ],
   };
