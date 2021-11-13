@@ -117,6 +117,8 @@ export default function Docs() {
             </li>
             <br />
             <Path {...get}/>
+            <Path {...post}/>
+            <Path {...put}/>
           </ul>
         </Card.Body>
         <Card.Footer></Card.Footer>
