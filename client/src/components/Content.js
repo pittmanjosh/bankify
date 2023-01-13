@@ -16,7 +16,7 @@ export default function Content() {
   const { user } = useContext(ctx);
   return (
     <Switch>
-      <Container className="content-container overflow-scroll">
+      <Container className="content-container">
         <Row className="justify-content-center">
           <Route exact path="/api-docs">
             <Docs />

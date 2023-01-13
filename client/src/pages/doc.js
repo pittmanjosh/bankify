@@ -39,21 +39,21 @@ export default function Docs() {
       {
         name: "name",
         location: "req or req.body",
-        description: 'name of user associated with the account',
+        description: "name of user associated with the account",
         required: false,
       },
       {
         name: "email",
         location: "req",
-        description: 'email of user associated with the account',
+        description: "email of user associated with the account",
         required: false,
       },
       {
         name: "photoURL",
         location: "req or req.body",
-        description: 'photo to be associated with the account',
+        description: "photo to be associated with the account",
         required: false,
-      }
+      },
     ],
     responses: [
       {
@@ -70,7 +70,7 @@ export default function Docs() {
   const put = {
     title: "Put",
     description:
-      "Finds user based on their auth provided \"_id\" and updates the user's checking or savings balance to the provided balance",
+      'Finds user based on their auth provided "_id" and updates the user\'s checking or savings balance to the provided balance',
     params: [
       {
         name: "uid",
@@ -81,15 +81,15 @@ export default function Docs() {
       {
         name: "account",
         location: "req.body",
-        description: 'name of the account to be updated',
+        description: "name of the account to be updated",
         required: true,
       },
       {
         name: "amount",
         location: "req.body",
-        description: 'updated balance of the provided account',
+        description: "updated balance of the provided account",
         required: true,
-      }
+      },
     ],
     responses: [
       {
@@ -104,7 +104,7 @@ export default function Docs() {
   };
 
   return (
-    <Col sm={8} lg={7} xl={6}>
+    <Col sm={8} lg={7} xl={6} className="overflow-scroll">
       <Card>
         <Card.Header>
           <h2>API Documentation</h2>
@@ -116,9 +116,9 @@ export default function Docs() {
               Provides services based on data from Firebase Auth middleware
             </li>
             <br />
-            <Path {...get}/>
-            <Path {...post}/>
-            <Path {...put}/>
+            <Path {...get} />
+            <Path {...post} />
+            <Path {...put} />
           </ul>
         </Card.Body>
         <Card.Footer></Card.Footer>
@@ -135,7 +135,7 @@ function Path(prop) {
         <ul style={{ listStyle: "none" }}>
           <li>
             <strong>Description:</strong>
-            <br/>
+            <br />
             {prop.description}
           </li>
           <br />
@@ -194,7 +194,7 @@ function Path(prop) {
           <li></li>
         </ul>
       </li>
-      <br/>     
+      <br />
     </>
   );
 }
