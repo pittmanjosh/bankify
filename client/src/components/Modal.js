@@ -3,9 +3,10 @@ import Alert from "./Alert";
 import { Form, Modal, Button } from "react-bootstrap";
 import { updateBalance } from "../adapters/mongodb";
 import ctx from "../context";
+import useInput from "../hooks/useInput";
 
 export default function TransactionModal(props) {
-  const [amount, setAmount] = useState("");
+  const { value, onChange } = useInput("");
   const [alertMsg, setAlertMsg] = useState("");
   const { transaction, account, show, close, state } = props;
   const [accountState, setAccountState] = state;
@@ -18,9 +19,6 @@ export default function TransactionModal(props) {
   };
   const resetAlert = () => {
     setAlertMsg("");
-  };
-  const handleChange = (e) => {
-    setAmount(e.target.value);
   };
 
   const handleSubmit = (e) => {
@@ -87,8 +85,8 @@ export default function TransactionModal(props) {
           <input
             id={id}
             className="form-control mb-3"
-            value={amount}
-            onChange={handleChange}
+            value={value}
+            onChange={onChange}
             required
           />
         </div>
