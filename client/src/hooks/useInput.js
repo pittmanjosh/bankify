@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import { useState } from "react";
 
 export default function useInput(init) {
   const [value, setValue] = useState(init);
@@ -11,5 +11,6 @@ export default function useInput(init) {
     value,
     onChange: handleChange,
     clear: () => setValue(init),
+    setValue,
   };
 }

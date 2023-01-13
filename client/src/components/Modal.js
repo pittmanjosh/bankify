@@ -6,7 +6,7 @@ import ctx from "../context";
 import useInput from "../hooks/useInput";
 
 export default function TransactionModal(props) {
-  const { value, onChange } = useInput("");
+  const { value, onChange, clear, setValue } = useInput("");
   const [alertMsg, setAlertMsg] = useState("");
   const { transaction, account, show, close, state } = props;
   const [accountState, setAccountState] = state;
@@ -30,12 +30,12 @@ export default function TransactionModal(props) {
       const isDeposit = transaction === "Deposit";
       let newTotal;
       if (isDeposit) {
-        newTotal = deposit(amount);
+        newTotal = deposit(value);
       } else {
-        newTotal = withdraw(amount);
+        newTotal = withdraw(value);
       }
       updateBalance(user, targetAccount, newTotal);
-      setAmount("");
+      clear();
       setAccountState(newTotal);
       createAlert("Transaction complete", "success");
       close();
@@ -44,17 +44,17 @@ export default function TransactionModal(props) {
 
   const validate = () => {
     var currentBalance = Number(accountState);
-    var proposedAmount = Number(amount);
+    var proposedAmount = Number(value);
 
     if (!Number.isInteger(proposedAmount)) {
       modalAlert("Must enter a whole number");
-      setAmount("");
+      clear();
       return false;
     }
 
     if (proposedAmount <= 0 || proposedAmount > 1000000) {
       modalAlert("Must be an amount between $1 and $1 million");
-      setAmount("");
+      clear();
       return false;
     }
 
@@ -63,7 +63,7 @@ export default function TransactionModal(props) {
     }
 
     modalAlert(`Withdraw may not exceed existing balance of $${accountState}`);
-    setAmount(accountState);
+    setValue(accountState);
     return false;
   };
 
@@ -76,26 +76,8 @@ export default function TransactionModal(props) {
     return String(result);
   };
 
-  const Input = () => {
-    return (
-      <>
-        <Form.Label>{`${transaction} Amount`}</Form.Label>
-        <div className="input-group mb-3">
-          <span className="input-group-text mb-3">$</span>
-          <input
-            id={id}
-            className="form-control mb-3"
-            value={value}
-            onChange={onChange}
-            required
-          />
-        </div>
-      </>
-    );
-  };
-
   const closeModal = () => {
-    setAmount("");
+    clear();
     close();
     resetAlert();
   };
@@ -108,7 +90,17 @@ export default function TransactionModal(props) {
       <Form onSubmit={handleSubmit}>
         <Modal.Body>
           <Alert msg={alertMsg} reset={resetAlert} />
-          <Input />
+          <Form.Label>{`${transaction} Amount`}</Form.Label>
+          <div className="input-group mb-3">
+            <span className="input-group-text mb-3">$</span>
+            <input
+              id={id}
+              className="form-control mb-3"
+              value={value}
+              onChange={onChange}
+              required
+            />
+          </div>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={closeModal}>
