@@ -104,12 +104,12 @@ export default function Docs() {
   };
 
   return (
-    <Col sm={8} lg={7} xl={6} className="overflow-scroll">
+    <Col sm={8} lg={7} xl={6}>
       <Card>
         <Card.Header>
           <h2>API Documentation</h2>
         </Card.Header>
-        <Card.Body>
+        <Card.Body className="overflow-scroll">
           <Card.Title>/api</Card.Title>
           <ul style={{ listStyle: "none" }}>
             <li>
