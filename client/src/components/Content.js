@@ -16,10 +16,10 @@ export default function Content() {
   const { user } = useContext(ctx);
   return (
     <Switch>
-      <Container className="content-container" fluid>
+      <Container className="content-container overflow-scroll">
         <Row className="justify-content-center">
           <Route exact path="/api-docs">
-            <Docs/>
+            <Docs />
           </Route>
           <Route exact path="/register">
             {user ? <Redirect to="/dashboard" /> : <Register />}
