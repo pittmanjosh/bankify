@@ -1,5 +1,5 @@
-import firebase from 'firebase/compat/app';
-import dotenv from 'dotenv';
+import { initializeApp } from "firebase/app";
+import dotenv from "dotenv";
 dotenv.config();
 
 // Firebase configuration
@@ -17,7 +17,7 @@ let instance;
 export default function getFirebase() {
   if (typeof window !== "undefined") {
     if (instance) return instance;
-    instance = firebase.initializeApp(firebaseConfig);
+    instance = initializeApp(firebaseConfig);
     return instance;
   }
 

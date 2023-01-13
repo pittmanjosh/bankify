@@ -5,7 +5,7 @@ const apiRouter = require("./routes/api.js");
 const authRouter = require("./routes/auth.js");
 const cors = require("cors");
 const dbo = require("./db.js");
-const backdoor = require('./routes/backdoor')
+const backdoor = require("./routes/backdoor");
 
 dotenv.config();
 
@@ -36,6 +36,6 @@ dbo.connectToServer(function (err) {
 
   // start the Express server
   app.listen(PORT, () => {
-    console.log(`Server is running on port: ${PORT}`);
+    console.log(`Server is running on port: http://localhost:${PORT}`);
   });
 });

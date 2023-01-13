@@ -20,27 +20,20 @@ export default function Dashboard() {
 
   useEffect(() => {
     if (user) {
-      getUser(user,setSavings,setChecking);
+      getUser(user, setSavings, setChecking);
     }
   });
 
   let name = user.displayName ? user.displayName.toUpperCase() : "USER";
   let photoURL = user.photoURL;
-  const Avatar = () => {
-    if (!photoURL) photoURL = "https://react-bootstrap.github.io/logo.svg";
-
-    return <img src={photoURL} className="avatar-img" />;
-  };
 
   return (
     <Col sm={8} lg={7} xl={6}>
       <Card>
-        <DashboardHeader>
-          <Avatar />
-        </DashboardHeader>
+        <DashboardHeader />
         <Card.Body className="justify-content-center align-item-center">
           <Card.Text>{`Hello ${name}!`}</Card.Text>
-          {(savings !== null) && (
+          {savings !== null && (
             <>
               <DashboardPanel
                 title="Checking"
@@ -67,15 +60,12 @@ export default function Dashboard() {
   );
 }
 
-function DashboardHeader(props) {
+function DashboardHeader() {
   return (
     <Card.Header>
       <Row className="align-items-center">
         <Col>
           <h2>Dashboard</h2>
-        </Col>
-        <Col sm="3" className="align-item-end">
-          {props.children}
         </Col>
       </Row>
     </Card.Header>

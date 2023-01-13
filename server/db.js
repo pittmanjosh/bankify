@@ -1,9 +1,10 @@
-const { MongoClient } = require("mongodb");
-const dotenv = require('dotenv');
+const { MongoClient, ServerApiVersion } = require("mongodb");
+const dotenv = require("dotenv");
 dotenv.config();
 const client = new MongoClient(process.env.REACT_APP_MONGO, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+  serverApi: ServerApiVersion.v1,
 });
 
 let dbConnection;

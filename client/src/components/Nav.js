@@ -1,5 +1,5 @@
 import { Container, Nav, Navbar } from "react-bootstrap";
-import { BrowserRouter as Router, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { logout } from "../adapters/dal";
 import ctx from "../context";
 import { useContext } from "react";
@@ -30,20 +30,29 @@ function UserDependentLinks() {
   const { createAlert } = useContext(ctx);
   const user = useUser();
 
-  const AllDataLink = ()=>(
-    <Link to="/alldata" className="nav-link" >
+  const AllDataLink = () => (
+    <Link to="/alldata" className="nav-link">
       All Data
-    </Link>);
+    </Link>
+  );
+
+  const ApiDocs = () => (
+    <Link to="/api-docs" className="nav-link">
+      Api Docs
+    </Link>
+  );
+
   const MyLinks = user ? (
     <>
-      <Link to="/dashboard" className="nav-link" >
+      <Link to="/dashboard" className="nav-link">
         Dashboard
       </Link>
-      <AllDataLink/>
-      <Link 
-        to="/" 
-        className="nav-link" 
-        onClick={()=>{
+      <AllDataLink />
+      <ApiDocs />
+      <Link
+        to="/"
+        className="nav-link"
+        onClick={() => {
           logout(createAlert);
         }}
       >
@@ -59,6 +68,7 @@ function UserDependentLinks() {
         Register
       </Link>
       <AllDataLink />
+      <ApiDocs />
     </>
   );
 
