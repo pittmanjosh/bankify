@@ -52,20 +52,12 @@ export default function AllData() {
         </thead>
         <tbody>
           {data.map((user, i) => {
-            const redactedEmail = user?.email
-              ?.substring(0, 2)
-              .concat("********@***.***");
-            const redactedName = user?.name
-              ?.substring(0, 2)
-              .concat("*** ***")
-              .concat(user.name.substring(user.name.length - 2));
-
             return (
               <tr key={i}>
                 <td>{i + 1}</td>
                 <td>{user._id || ""} </td>
-                <td>{redactedName || ""}</td>
-                <td>{redactedEmail || ""}</td>
+                <td>{user.name || ""}</td>
+                <td>{user.email || ""}</td>
                 <td>{`$${String(user.checking)}.00`}</td>
                 <td>{`$${String(user.savings)}.00`} </td>
               </tr>

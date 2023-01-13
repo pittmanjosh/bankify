@@ -1,6 +1,7 @@
 const express = require("express");
 const Router = express.Router();
 const dbo = require("../db.js");
+const maskData = require("../utils/maskData.js");
 
 Router.route("/").get((req, res) => {
   // Read, userInfo for all data
@@ -14,7 +15,7 @@ Router.route("/").get((req, res) => {
         if (err) {
           res.status(400).send("Error fetching listings!");
         } else {
-          res.send(result);
+          res.send(maskData(result));
         }
       });
   })();
